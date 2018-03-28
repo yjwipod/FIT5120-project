@@ -1,0 +1,220 @@
+{extend name="layout/base" }
+{block name="style"}
+<style>
+    @charset "utf-8";
+    .nolsy{ list-style:none;}
+
+    .br_lf{ border-left:1px solid #e5e5e5;}
+    .br_rg{ border-right:1px solid #e5e5e5;}
+    .br_bt{ border-bottom:1px solid #e5e5e5;}
+    .br_tp{border-top: 1px solid #e5e5e5;}
+
+    .br_lf_g{border-left:2px solid #058CEB;}
+    .br_rg_g{ border-right:2px solid #058CEB;}
+    .br_bt_g{ border-bottom:2px solid #058CEB;}
+    .br_tp_g{border-top: 2px solid #058CEB;}
+
+    .br_lf_w{border-left:2px solid #fff;}
+    .br_rg_w{ border-right:2px solid #fff;}
+    .br_bt_w{ border-bottom:2px solid #fff;}
+    .br_tp_w{border-top: 2px solid #fff;}
+
+    .no_br{border:0;}
+    .no_bold{font-weight:normal;}
+
+    .bg_orange{ background: #ffa200;}
+    .bg_green{background:#058CEB;}
+    .bg_grey{background:#f1f1f1;}
+
+    .font_black{color:#333;}
+    .font_orange{color:#ffa200;}
+    .font_green{color:#0e90d2;}
+    .font_grey{color:#959595;}
+    .font_white{color:#fff;}
+
+    .font_bold{font-weight: bold;}
+    .font_normal{ font-weight: normal;}
+</style>
+
+{/block}
+{block name="content-body"}
+
+<div class="detail">
+    <div class="am-g am-g-fixed">
+        <div class="am-u-lg-9 br_tp_g am-padding-horizontal-xs">
+
+            <div class="am-container am-padding-horizonta-sm br_bt br_lf br_rg">
+
+                <div class="am-container am-padding-horizontal-0">
+                    <ol class="am-breadcrumb br_bt am-margin-bottom-0">
+                        <li><a href="#" class="">Health Center</a></li>
+                        <li><a href="#" class="">Member manage</a></li>
+                    </ol>
+                </div>
+
+                <div class="am-container am-padding-horizontal-sm am-padding-vertical-sm">
+                    <div class="am-u-lg-2 am-list-thumb am-padding-horizontal-0">
+                        <a href="#" class="">
+                            <img src="/assets/image/pic_2.jpg" class="am-img-responsive am-hide-sm-only" alt="">
+                        </a>
+                    </div>
+                    <div class=" am-u-lg-10 am-list-main ">
+                        <h2 class="font_black no_bold br_bt am-padding-bottom-xs am-margin-bottom-0">User Name：{:$user_info.user_name}
+                            <span class="am-text-sm am-margin-left-sm"><a href="{:url('index/index/logout')}" class="font_orange">Logout</a></span>
+                        </h2>
+                        <ul class="am-avg-lg-2 am-avg-sm-2 am-padding-top-xs">
+                            <!--<li class="font_green am-padding-vertical-sm">账户余额：<a>￥0.00元</a></li>-->
+                            <!--<li class="font_green am-padding-vertical-sm">宝宝成长积分：<a>0</a></li>-->
+                            <li class="font_green am-padding-vertical-xs">Point：<a>0</a></li>
+                            <li class="font_green am-padding-vertical-xs">Last Login：<a><?php echo date("Y-m-d H:i:s",$user_info['login_time']);?></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="am-container am-padding-horizonta-sm br_bt br_lf br_rg br_tp_g am-margin-top">
+                <div data-am-widget="titlebar" class="am-titlebar am-titlebar-multi am-margin-top-0 br_bt am-no-layout">
+                    <h1 class="am-titlebar-title" style="color:#0e90d2">My Trip
+                        <!--<span class="am-text-sm am-margin-left-sm"><a href="soft/pdf.rar" style="color:#ffa200;">阅读软件下载</a></span>-->
+                    </h1>
+                </div>
+                <div class="am-container am-margin-top-sm">
+                    <table class="am-table am-table-bordered am-table-striped">
+                        <thead>
+                        <tr class="am-primary">
+                            <th class="am-text-center">Start Time</th>
+                            <th class="am-text-center">Tirp line</th>
+                            <th class="am-text-center">End time</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!--<div class="am-container am-padding-horizonta-sm br_bt br_lf br_rg br_tp_g am-margin-top">-->
+                <!--<div data-am-widget="titlebar" class="am-titlebar am-titlebar-multi am-margin-top-0 br_bt am-no-layout">-->
+                    <!--<h1 class="am-titlebar-title" style="color:#0e90d2">个体报告-->
+                        <!--<span class="am-text-sm am-margin-left-sm"><a href="report2.php" style="color:#ffa200;">查看报告</a></span>-->
+                    <!--</h1>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="am-container am-padding-horizonta-sm br_bt br_lf br_rg br_tp_g am-margin-top">-->
+                <!--<div data-am-widget="titlebar" class="am-titlebar am-titlebar-multi am-margin-top-0 br_bt am-no-layout">-->
+                    <!--<h1 class="am-titlebar-title" style="color:#0e90d2">我的提问</h1>-->
+                <!--</div>-->
+                <!--<div class="am-container am-margin-top-sm am-scrollable-horizontal">-->
+                    <!--<div class="am-container">-->
+                        <!--<ul class="am-pagination am-pagination-centered">-->
+
+                            <!--<form name="selectPageForm" action="/user.php" method="get">-->
+
+
+                                <!--<div id="pager" class="pagebar">-->
+                                    <!--<span class="f_l f6" style="margin-right:10px;">总计 <b>0</b>  个记录</span>-->
+
+                                <!--</div>-->
+
+
+                            <!--</form>-->
+                            <!--<script type="Text/Javascript" language="JavaScript">-->
+                                <!--&lt;!&ndash;-->
+
+                                <!--function selectPage(sel)-->
+                                <!--{-->
+                                    <!--sel.form.submit();-->
+                                <!--}-->
+
+                                <!--//&ndash;&gt;-->
+                            <!--</script>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+
+            <!--<div class="am-container am-padding-horizonta-sm br_bt br_lf br_rg br_tp_g am-margin-top">-->
+                <!--<div data-am-widget="titlebar" class="am-titlebar am-titlebar-multi am-margin-top-0 br_bt am-no-layout">-->
+                    <!--<h1 class="am-titlebar-title" style="color:#0e90d2">购买记录</h1>-->
+                <!--</div>-->
+                <!--<div class="am-container am-margin-top-sm am-scrollable-horizontal">-->
+                    <!--<table class="am-table am-table-bordered am-table-striped">-->
+                        <!--<tbody>-->
+                        <!--<tr>-->
+                            <!--<td class="am-text-left am-text-nowrap"><a href="#">购买记录</a></td>-->
+                            <!--<td class="am-text-center am-primary am-text-nowrap" style="width:220px;">2015/6/24</td>-->
+                        <!--</tr>-->
+                        <!--</tbody>-->
+                    <!--</table>-->
+                <!--</div>-->
+            <!--</div>-->
+
+
+            <!--<div class="am-container am-padding-horizonta-sm br_bt br_lf br_rg br_tp_g am-margin-top">-->
+                <!--<div data-am-widget="titlebar" class="am-titlebar am-titlebar-multi am-margin-top-0 br_bt am-no-layout">-->
+                    <!--<h1 class="am-titlebar-title" style="color:#0e90d2">自测工具</h1>-->
+                <!--</div>-->
+                <!--<div class="am-container am-margin-vertical-sm am-scrollable-horizontal">-->
+                    <!--<div class="am-u-lg-2 am-u-sm-2 am-padding-horizontal-xs"><button type="button" class="am-btn am-btn-primary am-btn-xl  am-btn-block" onclick="location.href='user.php?act=mycheck_1';">健康自测</button></div>-->
+                    <!--<div class="am-u-lg-2 am-u-sm-2 am-padding-horizontal-xs"><button type="button" class="am-btn am-btn-primary am-btn-xl am-btn-block" onclick="location.href='user.php?act=mycheck_3';">身高测试</button></div>-->
+                    <!--<div class="am-u-lg-2 am-u-sm-2 am-padding-horizontal-xs"><button type="button" class="am-btn am-btn-primary am-btn-xl am-btn-block" onclick="location.href='user.php?act=mycheck_4';">血型测试</button></div>-->
+                    <!--<div class="am-u-lg-2 am-u-sm-2 am-padding-horizontal-xs"><button type="button" class="am-btn am-btn-primary am-btn-xl am-btn-block" onclick="location.href='user.php?act=mycheck_5';">免疫测试</button></div>-->
+                    <!--<div class="am-u-lg-2 am-u-sm-2 am-padding-horizontal-xs"><button type="button" class="am-btn am-btn-primary am-btn-xl am-btn-block" onclick="location.href='user.php?act=mycheck_6';">自信测试</button></div>-->
+                    <!--<div class="am-u-lg-2 am-u-sm-2 am-padding-horizontal-xs"><button type="button" class="am-btn am-btn-primary am-btn-xl am-btn-block" onclick="location.href='user.php?act=mycheck_8';">预防接种</button></div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="am-container am-padding-horizonta-sm br_bt br_lf br_rg br_tp_g am-margin-top">-->
+                <!--<div data-am-widget="titlebar" class="am-titlebar am-titlebar-multi am-margin-top-0 br_bt am-no-layout">-->
+                    <!--<h1 class="am-titlebar-title" style="color:#0e90d2">评测记录</h1>-->
+                <!--</div>-->
+                <!--<div class="am-container am-margin-top-sm am-scrollable-horizontal">-->
+                    <!--<table class="am-table am-table-bordered am-table-striped ">-->
+                        <!--<thead class="am-text-nowrap">-->
+                        <!--<tr class="am-primary">-->
+                            <!--<th class="am-text-center">自测项目</th>-->
+                            <!--<th class="am-text-center">自测结果</th>-->
+                            <!--<th class="am-text-center">自测日期</th>-->
+                        <!--</tr>-->
+                        <!--</thead>-->
+                        <!--<tbody>-->
+                        <!--</tbody>-->
+                    <!--</table>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+
+
+        <div class="am-u-lg-3 am-padding-right-0">
+            <div class="am-container br_lf br_rg br_bt br_tp_g am-text-center am-padding-sm">
+
+                <h2 class="font_green am-margin-bottom-xs">Manage Control</h2>
+                <p class="am-margin-vertical-xs"><a href="{:url('index/index/user')}">Home </a></p>
+                <!--<p class="am-margin-vertical-xs"><a href="user.php?act=profile">我的资料</a></p>-->
+                <p class="am-margin-vertical-xs"><a href="{:url('index/index/logout')}">Logout</a></p>
+
+                <!--<h2 class="font_green am-margin-bottom-xs am-margin-top-sm">行程管理</h2>-->
+                <!--<p class="am-margin-vertical-xs"><a href="user.php?act=order_list">我的行程</a></p>-->
+
+                <!--<h2 class="font_green am-margin-bottom-xs am-margin-top-sm">预约管理</h2>-->
+                <!--<p class="am-margin-vertical-xs"><a href="user.php?act=mybooking">我的预约</a></p>-->
+
+                <!--<h2 class="font_green am-margin-bottom-xs am-margin-top-sm">报告管理</h2>-->
+                <!--<p class="am-margin-vertical-xs"><a href="user.php?act=myreport">我的报告</a></p>-->
+
+                <!--<h2 class="font_green am-margin-bottom-xs am-margin-top-sm">其它管理</h2>-->
+                <!--<p class="am-margin-vertical-xs"><a href="user.php?act=mycheck">我的评测</a></p>-->
+                <!--<p class="am-margin-vertical-xs"><a href="user.php?act=myqs">P值趋势</a></p>-->
+                <!--<p class="am-margin-vertical-xs"><a href="user.php?act=tkk">童康卡</a></p>-->
+                <!--<p class="am-margin-vertical-xs"><a href="user.php?act=help">帮助中心</a></p>-->
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script type="text/javascript">
+
+</script>
+{/block}
