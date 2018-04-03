@@ -10,7 +10,7 @@ return [
     'logout' => 'index/index/logout',
     '[user]'     => [
         ':id'   => ['index/user/index', ['method' => 'get'], ['id' => '\d+']],
-        'getpoints' => ['index/user/getpoints', ['method' => 'post']],
+//        'getpoints' => ['index/user/getpoints', ['method' => 'post']],
 //        ':name' => ['index/hello', ['method' => 'post']],
     ],
 //    '__pattern__' => [

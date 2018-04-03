@@ -1,32 +1,68 @@
-<header class="am-topbar am-topbar-fixed-top">
-    <div class="am-container">
-        <h1 class="am-topbar-brand">
-            <a href="/"><img src=""  title="logo" width="168" height="36"/></a>
-        </h1>
-        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-default am-show-sm-only" data-am-collapse="{target: '#collapse-head'}"><span class="am-sr-only">导航切换</span><span
-                class="am-icon-bars"></span></button>
-        <div class="am-collapse am-topbar-collapse" id="collapse-head">
-            <ul class="am-nav am-nav-pills am-topbar-nav am-fr">
-                <li {if condition="$action eq 'index'"} class="am-active" {/if} >
-                    <a href="{:url('/')}" ><i class="am-icon-home am-icon-sm"></i> Home</a>
+<!--<header class="am-topbar am-topbar-fixed-top" style="background-color: #2c3e50!important;">-->
+    <!--<div class="am-container">-->
+        <!--<h1 class="am-topbar-brand">-->
+            <!--<a href="/"><img src=""  title="logo" width="168" height="36"/></a>-->
+        <!--</h1>-->
+        <!--<button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-default am-show-sm-only" data-am-collapse="{target: '#collapse-head'}"><span class="am-sr-only">导航切换</span><span-->
+                <!--class="am-icon-bars"></span></button>-->
+        <!--<div class="am-collapse am-topbar-collapse" id="collapse-head">-->
+            <!--<ul class="am-nav am-nav-pills am-topbar-nav am-fr">-->
+                <!--<li {if condition="$action eq 'index'"} class="am-active" {/if} >-->
+                    <!--<a href="{:url('/')}" ><i class="am-icon-home am-icon-sm"></i> Home</a>-->
+                <!--</li>-->
+                <!--<li {if condition="$action eq 'health'"} class="am-active" {/if} >-->
+                    <!--<a href="{$site_info.health_url}" > <i class="am-icon-heartbeat am-icon-sm"></i> Health</a>-->
+                <!--</li>-->
+                <!--<li {if condition="$action eq 'go_trip'"} class="am-active" {/if} >-->
+                    <!--<a href="{$site_info.go_trip_url}"><i class="am-icon-cab am-icon-sm"></i> Trip</a>-->
+                <!--</li>-->
+
+                <!--<?php   if($user_id == 0){?>-->
+                <!--<li {if condition="$action eq 'login'"} class="am-active" {/if} >-->
+                    <!--<a href="{$site_info.login_url}" target="new"  ><i class="am-icon-sign-in am-icon-sm"></i> Login</a>-->
+                <!--</li>-->
+                <!--<li {if condition="$action eq 'reg'"} class="am-active" {/if} >-->
+                    <!--<a href="{$site_info.reg_url}" target="new"   ><i class="am-icon-flag am-icon-sm"></i> Regist</a>-->
+                <!--</li>-->
+                <!--<?php }else{ ?>-->
+                <!--<li {if condition="$action eq 'user'"} class="am-active" {/if}> <a href="{:url('/user/'.$user_id)}" target="new"  > Welcome {:$user_info.user_name} </a></li>-->
+                <!--<li ><a href="{$site_info.logout_url}"   ><i class="am-icon-sign-out am-icon-sm"></i> Logout</a> </li>-->
+                <!--<?php } ?>-->
+            <!--</ul>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</header>-->
+
+<header class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase navbar-shrink">
+    <div class="container" id="mainNav" style="padding-top: 0px;padding-bottom: 0px">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top" style="font-size: 1.5em;">Start Bootstrap</a>
+        <div class="collapse navbar-collapse" id="" >
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mx-0 mx-lg-1">
+                    <a href="{:url('/')}" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger {if condition="$action eq 'index'"} active {/if}" ><i class="am-icon-home am-icon-sm"></i> Home</a>
                 </li>
-                <li {if condition="$action eq 'health'"} class="am-active" {/if} >
-                    <a href="{$site_info.health_url}" > <i class="am-icon-heartbeat am-icon-sm"></i> Health</a>
+                <li class="nav-item mx-0 mx-lg-1">
+                    <a href="{$site_info.health_url}" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger {if condition="$action eq 'health'"} active {/if}" ><i class="am-icon-heartbeat am-icon-sm"></i> Health</a>
                 </li>
-                <li {if condition="$action eq 'go_trip'"} class="am-active" {/if} >
-                    <a href="{$site_info.go_trip_url}"><i class="am-icon-cab am-icon-sm"></i> Trip</a>
+                <li class="nav-item mx-0 mx-lg-1">
+                    <a  href="{$site_info.go_trip_url}" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger {if condition="$action eq 'go_trip'"} active {/if}" ><i class="am-icon-cab am-icon-sm"></i> Trip</a>
                 </li>
 
                 <?php   if($user_id == 0){?>
-                <li {if condition="$action eq 'login'"} class="am-active" {/if} >
-                    <a href="{$site_info.login_url}" target="new"  ><i class="am-icon-sign-in am-icon-sm"></i> Login</a>
+                <li class="nav-item mx-0 mx-lg-1">
+                    <a  href="{$site_info.login_url}" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger {if condition="$action eq 'login'"} active {/if}" ><i class="am-icon-sign-in am-icon-sm"></i> Login</a>
                 </li>
-                <li {if condition="$action eq 'reg'"} class="am-active" {/if} >
-                    <a href="{$site_info.reg_url}" target="new"   ><i class="am-icon-flag am-icon-sm"></i> Regist</a>
+
+                <li class="nav-item mx-0 mx-lg-1">
+                    <a  href="{$site_info.reg_url}" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger {if condition="$action eq 'reg'"} active {/if}" ><i class="am-icon-flag am-icon-sm"></i> Regist</a>
                 </li>
                 <?php }else{ ?>
-                <li {if condition="$action eq 'user'"} class="am-active" {/if}> <a href="{:url('/user/'.$user_id)}" target="new"  > Welcome {:$user_info.user_name} </a></li>
-                <li ><a href="{$site_info.logout_url}"   ><i class="am-icon-sign-out am-icon-sm"></i> Logout</a> </li>
+                <li class="nav-item mx-0 mx-lg-1">
+                    <a  href="{:url('/user/'.$user_id)}" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger {if condition="$action eq 'user'"} active {/if}" > Welcome {:$user_info.user_name}</a>
+                </li>
+                <li class="nav-item mx-0 mx-lg-1">
+                    <a  href="{$site_info.logout_url}" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger " ><i class="am-icon-sign-out am-icon-sm"></i>Logout</a>
+                </li>
                 <?php } ?>
             </ul>
         </div>
