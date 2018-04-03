@@ -171,7 +171,7 @@
       var map, places, infoWindow;
       var markers = [];
       var autocomplete;
-      var countryRestrict = {'country': 'us'};
+      var countryRestrict = {'country': 'au'};
       var MARKER_PATH = 'https://developers.google.com/maps/documentation/javascript/images/marker_green';
       var hostnameRegexp = new RegExp('^https?://.+?/');
 
@@ -232,8 +232,8 @@
 
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          zoom: countries['us'].zoom,
-          center: countries['us'].center,
+          zoom: countries['au'].zoom,
+          center: countries['au'].center,
           mapTypeControl: false,
           panControl: false,
           zoomControl: false,
@@ -285,6 +285,7 @@
           if (status === google.maps.places.PlacesServiceStatus.OK) {
             clearResults();
             clearMarkers();
+            console.log(results);
             // Create a marker for each hotel found, and
             // assign a letter of the alphabetic to each marker icon.
             for (var i = 0; i < results.length; i++) {
@@ -435,7 +436,6 @@
         }
       }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmWImUFRbDUKK9a-t6Vm7BI3mO5ymrwcA&libraries=places&callback=initMap"
-        async defer></script>
+     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJ1a6pBb8VCtQ80jZcPOoaDvEFZ8VXD-s&libraries=places&callback=initMap" async defer></script>
   </body>
 </html>
