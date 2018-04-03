@@ -1,4 +1,4 @@
-<?php /*a:5:{s:79:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\index\login.html";i:1522296242;s:79:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\base.html";i:1522267898;s:80:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\toper.html";i:1522499084;s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\header.html";i:1522295922;s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\footer.html";i:1522503756;}*/ ?>
+<?php /*a:5:{s:79:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\index\login.html";i:1522745554;s:79:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\base.html";i:1522267898;s:80:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\toper.html";i:1522499084;s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\header.html";i:1522745516;s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\footer.html";i:1522744040;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -165,7 +165,7 @@
                     <a href="<?php echo htmlentities($site_info['reg_url']); ?>" target="new"   ><i class="am-icon-flag am-icon-sm"></i> Regist</a>
                 </li>
                 <?php }else{ ?>
-                <li <?php if($action == 'user'): ?> class="am-active" <?php endif; ?>> <a href="<?php echo url('index/index/user',['id'=>$user_id]); ?>" target="new"  > Welcome <?php echo $user_info['user_name']; ?> </a></li>
+                <li <?php if($action == 'user'): ?> class="am-active" <?php endif; ?>> <a href="<?php echo url('/user/'.$user_id); ?>" target="new"  > Welcome <?php echo $user_info['user_name']; ?> </a></li>
                 <li ><a href="<?php echo htmlentities($site_info['logout_url']); ?>"   ><i class="am-icon-sign-out am-icon-sm"></i> Logout</a> </li>
                 <?php } ?>
             </ul>
@@ -198,7 +198,7 @@
                     <a id="registerBtn" class="mt-btn mt-btn-block">Login</a>
                 </div>
                 <div class="item">
-                    No Account？ <a href="<?php echo url('/index/index/reg'); ?>">Go regist</a>
+                    No Account？ <a href="<?php echo url('/reg'); ?>">Go regist</a>
                 </div>
             </div>
         </div>
@@ -211,7 +211,22 @@
         Copyright 2018
     </p>
 </footer>
+<style>
+* {
+    margin: 0;
+}
+html, body {
+    height: 100%;
+}
 
+.detail {
+    min-height: 100%;
+    margin: 5px auto -60px; /* -60pxthe bottom margin is the negative value of the footer's height */
+}
+footer, .footer {
+    height: 60px; /* '.push' must be the same height as 'footer' */
+}
+</style>
 <script type="text/javascript" src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.ie8polyfill.js"></script>
 <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
 <script type="text/javascript" src="/assets/js/layer/layer.js"></script>

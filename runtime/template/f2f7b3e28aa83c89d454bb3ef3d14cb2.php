@@ -1,4 +1,4 @@
-<?php /*a:5:{s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\index\go_trip.html";i:1522500390;s:79:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\base.html";i:1522267898;s:80:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\toper.html";i:1522499084;s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\header.html";i:1522295922;s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\footer.html";i:1522503756;}*/ ?>
+<?php /*a:5:{s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\index\go_trip.html";i:1522743542;s:79:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\base.html";i:1522267898;s:80:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\toper.html";i:1522499084;s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\header.html";i:1522295922;s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\footer.html";i:1522744040;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -118,8 +118,8 @@
     }
     #listing {
         /*position: absolute;*/
-        width: 430px;
-        height: 470px;
+        width: 276px;
+        height: 600px;
         overflow: auto;
         /*right: 93px;*/
         /*top: 87px;*/
@@ -169,7 +169,7 @@
     }
     #resultsTable {
         border-collapse: collapse;
-        width: 430px;
+        width: 276px;
     }
     #rating {
         font-size: 13px;
@@ -184,6 +184,9 @@
     }
     .iw_table_icon {
         text-align: right;
+    }
+    .am-form-label{
+    width: 115px; font-size: 14px;padding: 0px;float: left; line-height: 30px;
     }
 </style>
 
@@ -228,11 +231,12 @@
 </header>
 
 
-<div style="width: 100%">
-    <div style="float: left ;width: 432px" >
+<div class="detail">
+<div style="width: 100%;margin-top: 10px;">
+    <div style="float: left ;width: 20%" >
         <div class="am-form-group">
-            <label for="doc-ipt-3" class="am-u-sm-3 am-form-label" style="width: 136px;">Find Place in:</label>
-            <div class="am-u-sm-5" style="float: left;width: 296px;">
+            <label for="doc-ipt-3" class="am-form-label" style="">Find Place in:</label>
+            <div class="am-u-sm-5" style="float: left;width: 151px;padding: 0px">
                 <input id="autocomplete" placeholder="Enter a keyword" type="text" />
             </div>
         </div>
@@ -260,7 +264,7 @@
             </select>
         </div>
     </div>
-    <div style=" float: left;width: 1100px">
+    <div style=" float: left;width: 80%;margin-bottom: 10px;">
         <div id="map" style="width: 1090px; height: 648px" ></div>
     </div>
     <div style="clear: both"></div>
@@ -289,6 +293,7 @@
         </table>
     </div>
 </div>
+</div>
 
 
 <footer class="footer">
@@ -296,7 +301,22 @@
         Copyright 2018
     </p>
 </footer>
+<style>
+* {
+    margin: 0;
+}
+html, body {
+    height: 100%;
+}
 
+.detail {
+    min-height: 100%;
+    margin: 5px auto -60px; /* -60pxthe bottom margin is the negative value of the footer's height */
+}
+footer, .footer {
+    height: 60px; /* '.push' must be the same height as 'footer' */
+}
+</style>
 <script type="text/javascript" src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.ie8polyfill.js"></script>
 <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
 <script type="text/javascript" src="/assets/js/layer/layer.js"></script>

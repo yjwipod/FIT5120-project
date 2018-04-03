@@ -1,4 +1,4 @@
-<?php /*a:5:{s:78:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\index\user.html";i:1522522140;s:79:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\base.html";i:1522267898;s:80:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\toper.html";i:1522499084;s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\header.html";i:1522295922;s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\footer.html";i:1522503756;}*/ ?>
+<?php /*a:5:{s:78:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\index\user.html";i:1522745601;s:79:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\base.html";i:1522267898;s:80:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\toper.html";i:1522499084;s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\header.html";i:1522745516;s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\footer.html";i:1522744040;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -167,7 +167,7 @@
                     <a href="<?php echo htmlentities($site_info['reg_url']); ?>" target="new"   ><i class="am-icon-flag am-icon-sm"></i> Regist</a>
                 </li>
                 <?php }else{ ?>
-                <li <?php if($action == 'user'): ?> class="am-active" <?php endif; ?>> <a href="<?php echo url('index/index/user',['id'=>$user_id]); ?>" target="new"  > Welcome <?php echo $user_info['user_name']; ?> </a></li>
+                <li <?php if($action == 'user'): ?> class="am-active" <?php endif; ?>> <a href="<?php echo url('/user/'.$user_id); ?>" target="new"  > Welcome <?php echo $user_info['user_name']; ?> </a></li>
                 <li ><a href="<?php echo htmlentities($site_info['logout_url']); ?>"   ><i class="am-icon-sign-out am-icon-sm"></i> Logout</a> </li>
                 <?php } ?>
             </ul>
@@ -202,7 +202,7 @@
                     </div>
                     <div class=" am-u-lg-10 am-list-main ">
                         <h2 class="font_black no_bold br_bt am-padding-bottom-xs am-margin-bottom-0">User Name：<?php echo $user_info['user_name']; ?>
-                            <span class="am-text-sm am-margin-left-sm" style="float: right;"><a href="<?php echo url('index/index/logout'); ?>" class="font_orange">Logout</a></span>
+                            <span class="am-text-sm am-margin-left-sm" style="float: right;"><a href="<?php echo url('/logout'); ?>" class="font_orange">Logout</a></span>
                         </h2>
                         <ul class="am-avg-lg-2 am-avg-sm-2 am-padding-top-xs">
                             <li class="font_green am-padding-vertical-sm">Email：<a><?php echo $user_info['email']; ?></a></li>
@@ -242,8 +242,8 @@
             <div class="am-container br_lf br_rg br_bt br_tp_g am-text-center am-padding-sm">
 
                 <h2 class="font_green am-margin-bottom-xs">Manage Control</h2>
-                <p class="am-margin-vertical-xs"><a href="<?php echo url('index/index/user'); ?>">Home </a></p>
-                <p class="am-margin-vertical-xs"><a href="<?php echo url('index/index/logout'); ?>">Logout</a></p>
+                <p class="am-margin-vertical-xs"><a href="<?php echo url('/user/'.$user_id); ?>">Home </a></p>
+                <p class="am-margin-vertical-xs"><a href="<?php echo url('/logout'); ?>">Logout</a></p>
 
 
             </div>
@@ -257,7 +257,22 @@
         Copyright 2018
     </p>
 </footer>
+<style>
+* {
+    margin: 0;
+}
+html, body {
+    height: 100%;
+}
 
+.detail {
+    min-height: 100%;
+    margin: 5px auto -60px; /* -60pxthe bottom margin is the negative value of the footer's height */
+}
+footer, .footer {
+    height: 60px; /* '.push' must be the same height as 'footer' */
+}
+</style>
 <script type="text/javascript" src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.ie8polyfill.js"></script>
 <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
 <script type="text/javascript" src="/assets/js/layer/layer.js"></script>

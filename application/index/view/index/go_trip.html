@@ -20,8 +20,8 @@
     }
     #listing {
         /*position: absolute;*/
-        width: 430px;
-        height: 470px;
+        width: 276px;
+        height: 600px;
         overflow: auto;
         /*right: 93px;*/
         /*top: 87px;*/
@@ -71,7 +71,7 @@
     }
     #resultsTable {
         border-collapse: collapse;
-        width: 430px;
+        width: 276px;
     }
     #rating {
         font-size: 13px;
@@ -87,14 +87,18 @@
     .iw_table_icon {
         text-align: right;
     }
+    .am-form-label{
+    width: 115px; font-size: 14px;padding: 0px;float: left; line-height: 30px;
+    }
 </style>
 {/block}
 {block name="content-body"}
-<div style="width: 100%">
-    <div style="float: left ;width: 432px" >
+<div class="detail">
+<div style="width: 100%;margin-top: 10px;">
+    <div style="float: left ;width: 20%" >
         <div class="am-form-group">
-            <label for="doc-ipt-3" class="am-u-sm-3 am-form-label" style="width: 136px;">Find Place in:</label>
-            <div class="am-u-sm-5" style="float: left;width: 296px;">
+            <label for="doc-ipt-3" class="am-form-label" style="">Find Place in:</label>
+            <div class="am-u-sm-5" style="float: left;width: 151px;padding: 0px">
                 <input id="autocomplete" placeholder="Enter a keyword" type="text" />
             </div>
         </div>
@@ -122,7 +126,7 @@
             </select>
         </div>
     </div>
-    <div style=" float: left;width: 1100px">
+    <div style=" float: left;width: 80%;margin-bottom: 10px;">
         <div id="map" style="width: 1090px; height: 648px" ></div>
     </div>
     <div style="clear: both"></div>
@@ -150,6 +154,7 @@
             </tr>
         </table>
     </div>
+</div>
 </div>
 {/block}
 {block name="script"}

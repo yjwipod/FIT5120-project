@@ -1,4 +1,4 @@
-<?php /*a:4:{s:80:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\index\health.html";i:1522639917;s:86:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\base_health.html";i:1522503776;s:80:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\toper.html";i:1522499084;s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\header.html";i:1522295922;}*/ ?>
+<?php /*a:4:{s:80:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\index\health.html";i:1522748901;s:86:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\base_health.html";i:1522744050;s:80:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\toper.html";i:1522499084;s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\header.html";i:1522745516;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -227,7 +227,7 @@
                     <a href="<?php echo htmlentities($site_info['reg_url']); ?>" target="new"   ><i class="am-icon-flag am-icon-sm"></i> Regist</a>
                 </li>
                 <?php }else{ ?>
-                <li <?php if($action == 'user'): ?> class="am-active" <?php endif; ?>> <a href="<?php echo url('index/index/user',['id'=>$user_id]); ?>" target="new"  > Welcome <?php echo $user_info['user_name']; ?> </a></li>
+                <li <?php if($action == 'user'): ?> class="am-active" <?php endif; ?>> <a href="<?php echo url('/user/'.$user_id); ?>" target="new"  > Welcome <?php echo $user_info['user_name']; ?> </a></li>
                 <li ><a href="<?php echo htmlentities($site_info['logout_url']); ?>"   ><i class="am-icon-sign-out am-icon-sm"></i> Logout</a> </li>
                 <?php } ?>
             </ul>
@@ -236,6 +236,7 @@
 </header>
 
 
+<div class="detail">
 <div class="box-wrapper">
     <div class="wrapper">
         <!--<div class="box" id="b1"></div>-->
@@ -264,6 +265,7 @@
 </div>
 
 <input id="times" value="10" type="hidden" />
+</div>
 
 
 <footer class="footer">
@@ -272,31 +274,38 @@
     </p>
 </footer>
 <script type="text/javascript" src="/assets/js/layer/layer.js"></script>
+<style>
+* {
+    margin: 0;
+}
+html, body {
+    height: 100%;
+}
+
+.detail {
+    min-height: 100%;
+    margin: 0 auto -60px; /* -60pxthe bottom margin is the negative value of the footer's height */
+}
+footer, .footer {
+    height: 60px; /* '.push' must be the same height as 'footer' */
+}
+</style>
 
 </body>
 
 
+
 <script type="text/javascript">
-    $(".box").click(function(){
-        checkIsRight();
-        if($('#times').val() <= 0){
-            layer.msg('Use out of times');
-            return false;
-        }
-    });
-    function checkIsRight(){
-        var str1 = 0 ;
-         $(".wrapper").find('div').each(function(i, v) {
-             var str = $(this).css('top').split("px") ;
-             str1 = str1+ parseInt(str[0]);
-        });
-         if(str1 == 2500){
-             layer.msg('Congratulations on the right operation');
-             return false;
-         }
-        console.log(str1);
-    }
-	
+    getPoints();
+    // $(".box").click(function(){
+    //
+    //     checkIsRight();
+    //     if($('#times').val() <= 0){
+    //         layer.msg('Use out of times');
+    //         return false;
+    //     }
+    // });
+
   var colors = ["#da9b9b", "#b5e4f3", "#6dc3de", "#c5c5e2", "#c2efbc"];
   $(".line-box .box").each(function(i, v) {
     var div = $(this)
@@ -314,10 +323,12 @@
       width
     function start(event) {
       console.log(indexArray.length);
-	  checkIsRight();
+      checkLogin();
+
       if (indexArray.length >= 10) {
          layer.msg('Use out of times');
-                return false;
+
+          return false;
       }
 	  
       indexArray.push(false)
@@ -353,6 +364,7 @@
     }
 
     function stop(event) {
+        checkIsRight();
       console.log("stop")
       $(document).unbind("mousemove", move);
       //$(event.target.id).unbind("mouseup", stop);
@@ -418,129 +430,45 @@
     })(v)
   })
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-    <!-- var colors = ["#da9b9b", "#b5e4f3", "#6dc3de", "#c5c5e2", "#c2efbc"]; -->
-    <!-- $(".line-box .box").each(function(i, v) { -->
-        <!-- var div = $(this); -->
-        <!-- div.css("background-color", colors[i]) -->
-    <!-- }); -->
-    <!-- var drag = function(obj) { -->
-        <!-- obj.bind("mousedown", start); -->
-        <!-- var boxPoints = {}, -->
-            <!-- transform ="", -->
-            <!-- height, -->
-            <!-- width; -->
-        <!-- function start(event) { -->
-            <!-- //判断是否超出次数 -->
-            <!-- if($('#times').val() <= 0){ -->
-                <!-- layer.msg('Use out of times'); -->
-                <!-- return false; -->
-            <!-- } -->
-            <!-- $('#note').val(1); -->
-            <!-- if (event.button == 0) { -->
-                <!-- var that = $(event.target.id), -->
-                    <!-- id = event.target.id, -->
-                    <!-- top = event.target.offsetTop, -->
-                    <!-- left = event.target.offsetLeft, -->
-                    <!-- item = {}; -->
-                <!-- item.x = left; -->
-                <!-- item.y = top; -->
-                <!-- boxPoints[id] = item; -->
-                <!-- transform = event.target.style.transform; -->
-                <!-- width = event.target.offsetWidth; -->
-                <!-- height = event.target.offsetHeight; -->
-                <!-- event.target.style.opacity = '0.5'; -->
-                <!-- gapX = event.clientX - obj[0].offsetLeft; -->
-                <!-- gapY = event.clientY - obj[0].offsetTop; -->
-                <!-- $(document).bind("mousemove", move); -->
-                <!-- $(obj).bind("mouseup", stop); -->
+  function checkLogin(){
+      var user_id = "<?php echo $user_id; ?>";
+      if(user_id == 0 ){
+          layer.msg('Please login !');
+          return false;
+      }
+  }
 
-            <!-- } -->
-            <!-- return false; -->
-        <!-- } -->
+   function checkIsRight(){
+       var str1 = 0 ;
+       $(".wrapper").find('div').each(function(i, v) {
+            var str = $(this).css('top').split("px") ;
+            str1 = str1+ parseInt(str[0]);
+       });
+       if(str1 >= 2500){
+            layer.msg('Congratulations on the right operation');
+            // setTimeout(function(),2000);
 
-        <!-- function move(event) { -->
-            <!-- obj.css({ -->
-                <!-- "left": (event.clientX - gapX) + "px", -->
-                <!-- "top": (event.clientY - gapY) + "px" -->
-            <!-- }); -->
-            <!-- return false; -->
-        <!-- } -->
+            return false;
+       }
+       console.log(str1);
+   }
 
-        <!-- function stop(event) { -->
-
-            <!-- $(document).unbind("mousemove", move); -->
-            <!-- $(document).unbind("mouseup", stop); -->
-            <!-- event.target.style.opacity = '1'; -->
-            <!-- var id = event.target.id, -->
-                <!-- point = lineBoxPoint[id], -->
-                <!-- point1 = boxPoints[id]; -->
-            <!-- if (point) { -->
-                <!-- if($("#note").val() == 1){ -->
-                    <!-- var times = $('#times').val(); -->
-                    <!-- $("#times").val(times-1); -->
-                    <!-- $(".tims").text(times-1); -->
-                    <!-- $("#note").val(0); -->
-                <!-- } -->
-                <!-- if (event.clientX > point.x && event.clientX < point.x + width && event.clientY > point.y && event.clientY < point.y + height) { -->
-                    <!-- //alert(111);//放对位置 -->
-                    <!-- $(this).css({ -->
-                        <!-- "left": point.x + "px", -->
-                        <!-- "top": point.y + "px", -->
-                        <!-- "transform": "rotate(0)" -->
-                    <!-- }); -->
-
-                    <!-- return false -->
-                <!-- } -->
-            <!-- } -->
-            <!-- $(this).css({ -->
-                <!-- "left": point1.x + "px", -->
-                <!-- "top": point1.y + "px", -->
-            <!-- }); -->
-
-            <!-- return false -->
-        <!-- } -->
-    <!-- }; -->
-    <!-- var lineBoxPoint = {}; -->
-    <!-- $(".line-box .box").each(function(i, v) { -->
-        <!-- var that = $(v), -->
-            <!-- id = that.data("id"), -->
-            <!-- top = that.offset().top, -->
-            <!-- left = that.offset().left, -->
-            <!-- item = {}; -->
-        <!-- item.x = left; -->
-        <!-- item.y = top; -->
-        <!-- lineBoxPoint[id] = item -->
-    <!-- }); -->
-
-    <!-- $(".wrapper .box").each(function(i, v) { -->
-        <!-- (function(dom) { -->
-            <!-- drag($(dom)); -->
-        <!-- })(v) -->
-    <!-- }) -->
+   function  getPoints() {
+         // $.post("<?php echo url('/user/getpoints'); ?>",{points:11},function(result){
+         //      console.log(result);
+         // });
+         $.ajax({
+              type: "post",
+              url: "<?php echo url('/user/getpoints'); ?>",
+              data: {points:11},
+              cache:false,
+              async:true,
+              dataType: "json",
+              success: function (result) {
+                    console.log(result);
+              }
+         });
+   }
 </script>
 
 </html>
