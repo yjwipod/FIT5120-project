@@ -1,19 +1,26 @@
 <!DOCTYPE html>
-<html>
-<head lang="en">
+<html lang="en">
+<head>
     {include file="layout/toper" /}
     {block name="style"}{/block}
 </head>
-
 {block name="body"}
-<body>
-{block name="header"}
-{include file="layout/header" /}
-{/block}
-{block name="content-body"}{/block}
-{block name="footer"}
-{include file="layout/footer" /}
-{/block}
+<body >
+
+<div id="container">
+    {block name="header"}
+    {include file="layout/header" /}
+    {/block}
+    <main>
+        {block name="content-body"}{/block}
+    </main>
+    {block name="footer"}
+    {include file="layout/footer" /}
+    {/block}
+
+
+</div>
+
 </body>
 {/block}
 {block name="script"}{/block}
