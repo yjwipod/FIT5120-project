@@ -4,6 +4,8 @@ namespace app\index\controller;
 
 
 use core\db\manage\model\MemberUserModel;
+use joshtronic\GooglePlaces;
+use SKAgarwal\GoogleApi\PlacesApi;
 use think\captcha\Captcha;
 use think\Db;
 use think\facade\Cookie;
@@ -31,6 +33,16 @@ class Index extends Base
 //        print_r($aa);
         return $this->fetch();
     }
+
+    public function test(){
+
+
+        $googlePlaces = new PlacesApi('AIzaSyAJ1a6pBb8VCtQ80jZcPOoaDvEFZ8VXD-s');
+        $response = $googlePlaces->placeAutocomplete('kid park');
+        echo "<pre>";
+        print_r($response);
+    }
+
 
     public function go_trip(){
 
@@ -98,13 +110,12 @@ class Index extends Base
     public function health(){
         $res = [];
         $one = Db::name("foodspic")->limit(1)->order('rand()')->find();
-        $one['top'] = 100+rand(10,250);
+        $one['top'] = 180+rand(10,200);
         $res[] = $one;
-        for ($i= 1 ;$i <= 4 ; $i++){
+        for ($i= 1 ;$i <= 3 ; $i++){
             $res[$i] = $this->getDiffData($res);
         }
-//        echo "<pre>";
-//        print_r($res);
+
         $this->assign('list',$res);
         return $this->fetch();
     }
@@ -118,7 +129,7 @@ class Index extends Base
                 $matchid[] = $vo['matchid'];
             }
             $rs =  Db::name("foodspic")->limit(1)->where('matchid','not in' , $matchid)->order('rand()')->find();
-            $rs['top'] = 100+rand(10,250);
+            $rs['top'] = 180+rand(10,200);
             return $rs ;
         }
     }

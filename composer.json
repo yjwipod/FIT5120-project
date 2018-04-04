@@ -18,7 +18,8 @@
     "topthink/think-migration": "2.0.3",
     "newday-me/think-cms-framework": "1.0.0",
     "upyun/sdk": "3.3.0",
-    "yahooweather/weather": "dev-master"
+    "yahooweather/weather": "dev-master",
+    "skagarwal/google-places-api": "^1.2"
   },
   "minimum-stability": "RC",
   "extra": {

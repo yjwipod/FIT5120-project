@@ -1,87 +1,137 @@
 {extend name="layout/base" }
 {block name="style"}
-<link href="/assets/css/trip.css" rel="stylesheet">
+<style>
+    /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+    #map {
+        height: 80%;
+    }
+    /* Optional: Makes the sample page fill the window. */
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    table {
+        font-size: 12px;
+    }
+    #map {
+        width: 950px;
+    }
+    #listing {
+        /*position: absolute;*/
+        width: 276px;
+        height: 600px;
+        overflow: auto;
+        /*right: 93px;*/
+        /*top: 87px;*/
+        /*cursor: pointer;*/
+        overflow-x: hidden;
+    }
+    #findhotels {
+        position: absolute;
+        text-align: right;
+        width: 100px;
+        font-size: 14px;
+        padding: 4px;
+        z-index: 5;
+        background-color: #fff;
+    }
+    #locationField {
+        position: absolute;
+        width: 190px;
+        height: 25px;
+        left: 108px;
+        /*top: 0px;*/
+        z-index: 5;
+        background-color: #fff;
+    }
+    #controls {
+        position: absolute;
+        left: 300px;
+        width: 140px;
+        /*top: 0px;*/
+        z-index: 5;
+        background-color: #fff;
+    }
+    #autocomplete {
+        width: 100%;
+    }
+    #country {
+        width: 100%;
+    }
+    .placeIcon {
+        width: 34px;
+        height: 34px;
+        margin: 4px;
+    }
+    .hotelIcon {
+        width: 24px;
+        height: 24px;
+    }
+    #resultsTable {
+        border-collapse: collapse;
+        width: 276px;
+    }
+    #rating {
+        font-size: 13px;
+        font-family: Arial Unicode MS;
+    }
+    .iw_table_row {
+        height: 18px;
+    }
+    .iw_attribute_name {
+        font-weight: bold;
+        text-align: right;
+    }
+    .iw_table_icon {
+        text-align: right;
+    }
+    .am-form-label{
+    width: 115px; font-size: 14px;padding: 0px;float: left; line-height: 30px;
+    }
+</style>
 {/block}
 {block name="content-body"}
-
 <div class="detail">
-    <div class="am-g am-g-fixed detail_bg" >
-            <div class="map_l" style="width: 70%;position:relative;">
-            <div id="map" style="width: 100%; height: 648px" ></div>
-
-
-            <div class="am-form-group am-form-icon" style="position:absolute; z-index:99999999; left:10px; top:10px">
-                 <i class="am-icon-search"></i>
-                 <input  id="autocomplete" type="text" class="am-form-field" placeholder="Enter a keyword">
+<div style="width: 100%;margin-top: 10px;">
+    <div style="float: left ;width: 20%" >
+        <div class="am-form-group">
+            <label for="doc-ipt-3" class="am-form-label" style="">Find Place in:</label>
+            <div class="am-u-sm-5" style="float: left;width: 151px;padding: 0px">
+                <input id="autocomplete" placeholder="Enter a keyword" type="text" />
             </div>
-
-            </div>
-            <div class="map_r" style="width: 30%">
-                 <div style="padding: 0 15px;">
-                      <div class="am-form-group">
-                          <label for="doc-ipt-3" class="am-form-label" style="">Park Information:</label>
-                      </div>
-                      <div id="listing">
-                           <table id="resultsTable">
-                                <tbody id="results"></tbody>
-                           </table>
-                      </div>
-                      <div id="controls" style="display: none">
-                            <select id="country">
-                                    <option value="all">All</option>
-                                    <option value="au" selected>Australia</option>
-                                    <option value="br">Brazil</option>
-                                    <option value="ca">Canada</option>
-                                    <option value="fr">France</option>
-                                    <option value="de">Germany</option>
-                                    <option value="mx">Mexico</option>
-                                    <option value="nz">New Zealand</option>
-                                    <option value="it">Italy</option>
-                                    <option value="za">South Africa</option>
-                                    <option value="es">Spain</option>
-                                    <option value="pt">Portugal</option>
-                                    <option value="us" >U.S.A.</option>
-                                    <option value="uk">United Kingdom</option>
-                                </select>
-                      </div>
-
-
-                 </div>
-                      <div class="time_weather">
-                          <table class="am-table am-table-bordered am-table-radius am-table-striped" style="margin-bottom:0px;">
-                          <thead>
-                                <tr>
-                                    <th>Time</th>
-                                    <th>Weather</th>
-                                </tr>
-                          </thead>
-                          <tbody>
-                          <tr>
-                                <td>13.00-14.00</td>
-                                <td>Sunny</td>
-                          </tr>
-                          <tr>
-                                <td>13.00-14.00</td>
-                                <td>Sunny</td>
-                           </tr>
-                            <tr>
-                                <td>13.00-14.00</td>
-                                <td>Sunny</td>
-                           </tr>
-                            <tr>
-                                <td>13.00-14.00</td>
-                                <td>Sunny</td>
-                           </tr>
-                          </tbody>
-                          </table>
-                      </div>
-
-            </div>
-            <div style="clear: both"></div>
+        </div>
+        <div id="listing">
+            <table id="resultsTable">
+                <tbody id="results"></tbody>
+            </table>
+        </div>
+        <div id="controls" style="display: none">
+            <select id="country">
+                <option value="all">All</option>
+                <option value="au" selected>Australia</option>
+                <option value="br">Brazil</option>
+                <option value="ca">Canada</option>
+                <option value="fr">France</option>
+                <option value="de">Germany</option>
+                <option value="mx">Mexico</option>
+                <option value="nz">New Zealand</option>
+                <option value="it">Italy</option>
+                <option value="za">South Africa</option>
+                <option value="es">Spain</option>
+                <option value="pt">Portugal</option>
+                <option value="us" >U.S.A.</option>
+                <option value="uk">United Kingdom</option>
+            </select>
+        </div>
     </div>
+    <div style=" float: left;width: 80%;margin-bottom: 10px;">
+        <div id="map" style="width: 1090px; height: 648px" ></div>
+    </div>
+    <div style="clear: both"></div>
+
 </div>
-
-
 
 <div style="display: none">
     <div id="info-content">
@@ -105,8 +155,7 @@
         </table>
     </div>
 </div>
-
-
+</div>
 {/block}
 {block name="script"}
 <script>

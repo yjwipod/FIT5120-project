@@ -1,4 +1,4 @@
-<?php /*a:5:{s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\index\go_trip.html";i:1522743542;s:79:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\base.html";i:1522267898;s:80:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\toper.html";i:1522499084;s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\header.html";i:1522295922;s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\footer.html";i:1522744040;}*/ ?>
+<?php /*a:5:{s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\index\go_trip.html";i:1522835035;s:79:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\base.html";i:1522821598;s:80:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\toper.html";i:1522822083;s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\header.html";i:1522820695;s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\footer.html";i:1522815622;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -11,200 +11,28 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="renderer" content="webkit">
 <meta http-equiv="Cache-Control" content="no-siteapp"/>
-<link rel="stylesheet" href="http://www.61tk.com/themes/default/css/amazeui.css"/>
+<link href="/assets/css/amazeui.css" rel="stylesheet">
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-<style>
-    ::-webkit-scrollbar {
-        width: 2px;
-        height: 2px;
-        background-color: #F5F5F5;
-    }
+<link href="/assets/css/base.css" rel="stylesheet">
 
-    ::-webkit-scrollbar-track {
-        -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.3);
-        border-radius: 2px;
-        background-color: #F5F5F5;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, .3);
-        background-color: #555;
-    }
-
-    #collapse-head a i {
-        font-size: 1.2rem;
-    }
-
-    .get {
-        background: #1E5B94;
-        color: #fff;
-        text-align: center;
-        padding: 100px 0;
-    }
-
-    .get iframe {
-        width: 90px;
-        height: 20px;
-    }
-
-    .get-title {
-        font-size: 200%;
-        border: 2px solid #fff;
-        padding: 20px;
-        display: inline-block;
-    }
-
-    .detail {
-        background: #fff;
-        padding: 5px;
-    }
-
-    .detail-h2 {
-        text-align: center;
-        font-size: 150%;
-        margin: 80px 0;
-    }
-
-    .detail-h3 {
-        color: #1f8dd6;
-    }
-
-    .detail-p {
-        color: #7f8c8d;
-    }
-
-    .detail-mb {
-        margin-bottom: 30px;
-    }
-
-    .footer p {
-        color: #7f8c8d;
-        margin: 0;
-        padding: 15px 0;
-        text-align: center;
-        background: #2d3e50;
-    }
-
-    .index-btn {
-        color: #fff;
-        border-radius: 5px;
-        margin-right: 30px;
-        border: 1px solid #eee;
-    }
-
-    .index-btn:hover {
-        color: #0e90d2;
-    }
-</style>
     
-<style>
-    /* Always set the map height explicitly to define the size of the div
-        * element that contains the map. */
-    #map {
-        height: 80%;
-    }
-    /* Optional: Makes the sample page fill the window. */
-    html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
-    table {
-        font-size: 12px;
-    }
-    #map {
-        width: 950px;
-    }
-    #listing {
-        /*position: absolute;*/
-        width: 276px;
-        height: 600px;
-        overflow: auto;
-        /*right: 93px;*/
-        /*top: 87px;*/
-        /*cursor: pointer;*/
-        overflow-x: hidden;
-    }
-    #findhotels {
-        position: absolute;
-        text-align: right;
-        width: 100px;
-        font-size: 14px;
-        padding: 4px;
-        z-index: 5;
-        background-color: #fff;
-    }
-    #locationField {
-        position: absolute;
-        width: 190px;
-        height: 25px;
-        left: 108px;
-        /*top: 0px;*/
-        z-index: 5;
-        background-color: #fff;
-    }
-    #controls {
-        position: absolute;
-        left: 300px;
-        width: 140px;
-        /*top: 0px;*/
-        z-index: 5;
-        background-color: #fff;
-    }
-    #autocomplete {
-        width: 100%;
-    }
-    #country {
-        width: 100%;
-    }
-    .placeIcon {
-        width: 34px;
-        height: 34px;
-        margin: 4px;
-    }
-    .hotelIcon {
-        width: 24px;
-        height: 24px;
-    }
-    #resultsTable {
-        border-collapse: collapse;
-        width: 276px;
-    }
-    #rating {
-        font-size: 13px;
-        font-family: Arial Unicode MS;
-    }
-    .iw_table_row {
-        height: 18px;
-    }
-    .iw_attribute_name {
-        font-weight: bold;
-        text-align: right;
-    }
-    .iw_table_icon {
-        text-align: right;
-    }
-    .am-form-label{
-    width: 115px; font-size: 14px;padding: 0px;float: left; line-height: 30px;
-    }
-</style>
+<link href="/assets/css/trip.css" rel="stylesheet">
 
 </head>
 
 
 <body>
 
-<header class="am-topbar am-topbar-fixed-top">
-    <div class="am-container">
+<header class="am-topbar am-topbar-fixed-top header_css"  >
+    <div class="am-container" >
         <h1 class="am-topbar-brand">
-            <a href="/"><img src=""  title="logo" width="168" height="36"/></a>
+            <a href="/">LOGO</a>
         </h1>
         <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-default am-show-sm-only" data-am-collapse="{target: '#collapse-head'}"><span class="am-sr-only">导航切换</span><span
                 class="am-icon-bars"></span></button>
         <div class="am-collapse am-topbar-collapse" id="collapse-head">
             <ul class="am-nav am-nav-pills am-topbar-nav am-fr">
-                <li <?php if($action == 'index'): ?> class="am-active" <?php endif; ?> >
+                <li style="margin: 10px;" <?php if($action == 'index'): ?> class="am-active" <?php endif; ?> >
                     <a href="<?php echo url('/'); ?>" ><i class="am-icon-home am-icon-sm"></i> Home</a>
                 </li>
                 <li <?php if($action == 'health'): ?> class="am-active" <?php endif; ?> >
@@ -222,7 +50,7 @@
                     <a href="<?php echo htmlentities($site_info['reg_url']); ?>" target="new"   ><i class="am-icon-flag am-icon-sm"></i> Regist</a>
                 </li>
                 <?php }else{ ?>
-                <li <?php if($action == 'user'): ?> class="am-active" <?php endif; ?>> <a href="<?php echo url('index/index/user',['id'=>$user_id]); ?>" target="new"  > Welcome <?php echo $user_info['user_name']; ?> </a></li>
+                <li <?php if($action == 'user'): ?> class="am-active" <?php endif; ?>> <a href="<?php echo url('/user/'.$user_id); ?>" target="new"  > Welcome <?php echo $user_info['user_name']; ?> </a></li>
                 <li ><a href="<?php echo htmlentities($site_info['logout_url']); ?>"   ><i class="am-icon-sign-out am-icon-sm"></i> Logout</a> </li>
                 <?php } ?>
             </ul>
@@ -231,45 +59,85 @@
 </header>
 
 
-<div class="detail">
-<div style="width: 100%;margin-top: 10px;">
-    <div style="float: left ;width: 20%" >
-        <div class="am-form-group">
-            <label for="doc-ipt-3" class="am-form-label" style="">Find Place in:</label>
-            <div class="am-u-sm-5" style="float: left;width: 151px;padding: 0px">
-                <input id="autocomplete" placeholder="Enter a keyword" type="text" />
-            </div>
-        </div>
-        <div id="listing">
-            <table id="resultsTable">
-                <tbody id="results"></tbody>
-            </table>
-        </div>
-        <div id="controls" style="display: none">
-            <select id="country">
-                <option value="all">All</option>
-                <option value="au" selected>Australia</option>
-                <option value="br">Brazil</option>
-                <option value="ca">Canada</option>
-                <option value="fr">France</option>
-                <option value="de">Germany</option>
-                <option value="mx">Mexico</option>
-                <option value="nz">New Zealand</option>
-                <option value="it">Italy</option>
-                <option value="za">South Africa</option>
-                <option value="es">Spain</option>
-                <option value="pt">Portugal</option>
-                <option value="us" >U.S.A.</option>
-                <option value="uk">United Kingdom</option>
-            </select>
-        </div>
-    </div>
-    <div style=" float: left;width: 80%;margin-bottom: 10px;">
-        <div id="map" style="width: 1090px; height: 648px" ></div>
-    </div>
-    <div style="clear: both"></div>
 
+<div class="detail">
+    <div class="am-g am-g-fixed detail_bg" >
+            <div class="map_l" style="width: 70%;position:relative;">
+            <div id="map" style="width: 100%; height: 648px" ></div>
+
+
+            <div class="am-form-group am-form-icon" style="position:absolute; z-index:99999999; left:10px; top:10px">
+                 <i class="am-icon-search"></i>
+                 <input  id="autocomplete" type="text" class="am-form-field" placeholder="Enter a keyword">
+            </div>
+
+            </div>
+            <div class="map_r" style="width: 30%">
+                 <div style="padding: 0 15px;">
+                      <div class="am-form-group">
+                          <label for="doc-ipt-3" class="am-form-label" style="">Park Information:</label>
+                      </div>
+                      <div id="listing">
+                           <table id="resultsTable">
+                                <tbody id="results"></tbody>
+                           </table>
+                      </div>
+                      <div id="controls" style="display: none">
+                            <select id="country">
+                                    <option value="all">All</option>
+                                    <option value="au" selected>Australia</option>
+                                    <option value="br">Brazil</option>
+                                    <option value="ca">Canada</option>
+                                    <option value="fr">France</option>
+                                    <option value="de">Germany</option>
+                                    <option value="mx">Mexico</option>
+                                    <option value="nz">New Zealand</option>
+                                    <option value="it">Italy</option>
+                                    <option value="za">South Africa</option>
+                                    <option value="es">Spain</option>
+                                    <option value="pt">Portugal</option>
+                                    <option value="us" >U.S.A.</option>
+                                    <option value="uk">United Kingdom</option>
+                                </select>
+                      </div>
+
+
+                 </div>
+                      <div class="time_weather">
+                          <table class="am-table am-table-bordered am-table-radius am-table-striped" style="margin-bottom:0px;">
+                          <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Weather</th>
+                                </tr>
+                          </thead>
+                          <tbody>
+                          <tr>
+                                <td>13.00-14.00</td>
+                                <td>Sunny</td>
+                          </tr>
+                          <tr>
+                                <td>13.00-14.00</td>
+                                <td>Sunny</td>
+                           </tr>
+                            <tr>
+                                <td>13.00-14.00</td>
+                                <td>Sunny</td>
+                           </tr>
+                            <tr>
+                                <td>13.00-14.00</td>
+                                <td>Sunny</td>
+                           </tr>
+                          </tbody>
+                          </table>
+                      </div>
+
+            </div>
+            <div style="clear: both"></div>
+    </div>
 </div>
+
+
 
 <div style="display: none">
     <div id="info-content">
@@ -293,30 +161,17 @@
         </table>
     </div>
 </div>
-</div>
+
+
 
 
 <footer class="footer">
     <p>
-        Copyright 2018
+        Copyright © Your Website 2018
     </p>
 </footer>
-<style>
-* {
-    margin: 0;
-}
-html, body {
-    height: 100%;
-}
 
-.detail {
-    min-height: 100%;
-    margin: 5px auto -60px; /* -60pxthe bottom margin is the negative value of the footer's height */
-}
-footer, .footer {
-    height: 60px; /* '.push' must be the same height as 'footer' */
-}
-</style>
+
 <script type="text/javascript" src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.ie8polyfill.js"></script>
 <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
 <script type="text/javascript" src="/assets/js/layer/layer.js"></script>
