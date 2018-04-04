@@ -1,4 +1,4 @@
-<?php /*a:5:{s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\index\go_trip.html";i:1522835035;s:79:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\base.html";i:1522821598;s:80:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\toper.html";i:1522822083;s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\header.html";i:1522820695;s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\footer.html";i:1522815622;}*/ ?>
+<?php /*a:5:{s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\index\go_trip.html";i:1522835548;s:79:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\base.html";i:1522821598;s:80:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\toper.html";i:1522822083;s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\header.html";i:1522820695;s:81:"D:\phpStudy\PHPTutorial\WWW\childHealth\application/index/view\layout\footer.html";i:1522815622;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head lang="en">

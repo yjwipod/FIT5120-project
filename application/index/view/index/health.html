@@ -1,79 +1,7 @@
-<<<<<<< HEAD
 {extend name="layout/base" }
-=======
-.line-wrapper{extend name="layout/base_health" }
->>>>>>> 99499cf3456af6c12e59eb0c7b91e65a44f014b6
 {block name="style"}
 <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<<<<<<< HEAD
 <link href="/assets/css/health.css" rel="stylesheet">
-=======
-<style type="text/css">
-    * {
-        margin: 0;
-        padding: 0;
-    }
-
-    .box-wrapper {
-        height: 500px;
-        width: 100%;
-        /* background-color: #e69e9e; */
-    }
-
-    .wrapper {
-        margin: 0 auto;
-        width: 480px;
-        height: 100px;
-        /* position: relative; */
-    }
-
-    .wrapper .box {
-        width: 100px;
-        height: 100px;
-        text-align: center;
-        line-height: 100px;
-        font-size: 20px;
-        position: absolute;
-    }
-
-    .wrapper .box:hover {
-        z-index: 10;
-        transform: rotate(0);
-    }
-
-    .line-wrapper {
-        height: 155px;
-    }
-
-    .line-box {
-        margin: 0 auto;
-        width: 510px;
-    }
-
-    .line-box .box {
-        width: 100px;
-        height: 100px;
-        float: left;
-    }
-
-    .line-box .box .box {
-        transform: rotate(0deg) !important;
-    }
-
-    #b1 {
-        left: 60%;
-        top: 50px;
-        transform: rotate(48deg);
-        background-color: #ecc5c5;
-    }
-
-    #b2 {
-        left: 38%;
-        top: 50px;
-        transform: rotate(20deg);
-        background-color: #da9b9b;
-    }
->>>>>>> 99499cf3456af6c12e59eb0c7b91e65a44f014b6
 
 {/block}
 {block name="content-body"}
@@ -128,9 +56,9 @@
 
   var colors = ["#da9b9b", "#b5e4f3", "#6dc3de", "#c5c5e2", "#c2efbc"];
   $(".line-box .box").each(function(i, v) {
-    var div = $(this);
+    var div = $(this)
     div.css("background-color", colors[i])
-  });
+  })
   var selection = {},
     total = 10,
     index = 0, // 记录次数
@@ -149,15 +77,11 @@
          layer.msg('Use out of times');
           return false;
       }
-<<<<<<< HEAD
 
-=======
->>>>>>> 99499cf3456af6c12e59eb0c7b91e65a44f014b6
       indexArray.push(false);
       if (event.button == 0) {
 
         var that = $(event.target.id),
-<<<<<<< HEAD
           id = event.target.id,
           top = event.target.offsetTop,
           left = event.target.offsetLeft,
@@ -169,29 +93,11 @@
         width = event.target.offsetWidth;
         height = event.target.offsetHeight;
         event.target.style.opacity = '0.5';
-=======
-            id = event.target.id,
-            top = event.target.offsetTop,
-            left = event.target.offsetLeft,
-            item = {};
 
-         item.x = left;
-         item.y = top;
-         boxPoints[id] = item;
-         transform = event.target.style.transform;
-         width = event.target.offsetWidth;
-         height = event.target.offsetHeight;
-         event.target.style.opacity = '0.5';
->>>>>>> 99499cf3456af6c12e59eb0c7b91e65a44f014b6
-
-         gapX = event.clientX - obj[0].offsetLeft;
-         gapY = event.clientY - obj[0].offsetTop;
-
-          var user_id = "{:$user_id}";
-          if(user_id != 0 ){
-            $(document).bind("mousemove", move);
-          }
-          $(obj).bind("mouseup", stop);
+        gapX = event.clientX - obj[0].offsetLeft;
+        gapY = event.clientY - obj[0].offsetTop;
+        $(document).bind("mousemove", move);
+        $(obj).bind("mouseup", stop);
 
       }
       return false;
@@ -221,11 +127,7 @@
         cpTop = cpPoint.y,
         cpRight = lineBoxPoint[$(".line-box .box").eq($(".line-box .box").length - 1).data("id")].x + width,
         lastIndex = indexArray.length-1;
-<<<<<<< HEAD
 
-=======
-                    
->>>>>>> 99499cf3456af6c12e59eb0c7b91e65a44f014b6
       if (point) {
           console.log(event.target.id);
           console.log("event.clientX:"+event.clientX+ "pointx:"+point.x );
@@ -251,29 +153,17 @@
           indexArray.splice(lastIndex,1);
         }
       }
-<<<<<<< HEAD
 	  // console.log('===');
 	  // console.log(indexArray.length);
 	  // console.log('===');
 	  // $(".tims").text(total - indexArray.length);
-=======
-	  console.log('===');
-	  console.log(index);
-	  console.log(indexArray);
-	  console.log('===');
-	  $(".tims").text(total - indexArray.length) ;
->>>>>>> 99499cf3456af6c12e59eb0c7b91e65a44f014b6
       $(this).css({
         "left": point1.x + "px",
         "top": point1.y + "px"
       });
       return false;
     }
-<<<<<<< HEAD
   }
-=======
-  };
->>>>>>> 99499cf3456af6c12e59eb0c7b91e65a44f014b6
   var lineBoxPoint = {};
   $(".line-box .box").each(function(i, v) {
     var that = $(v),
@@ -284,17 +174,13 @@
     item.x = left;
     item.y = top;
     lineBoxPoint[id] = item;
-  });
+  })
   $(".wrapper .box").each(function(i, v) {
     (function(dom) {
       drag($(dom));
     })(v)
   });
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> 99499cf3456af6c12e59eb0c7b91e65a44f014b6
   function checkLogin(){
       var user_id = "{:$user_id}";
       if(user_id == 0 ){
@@ -327,7 +213,7 @@
          // });
          $.ajax({
               type: "post",
-              url: "{:url('index/user/getpoints')}",
+              url: "{:url('/user/getpoints')}",
               data: {points:11},
               cache:false,
               async:true,
