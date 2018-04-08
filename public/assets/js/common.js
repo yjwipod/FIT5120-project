@@ -25,7 +25,7 @@ var Tools = {
                     if (data.status && 1 == data.status) {
                         layer.msg(data.msg);
                         setTimeout(function () {
-                            window.location.href = g;
+                            window.location.href = g+data.user_id;
                         }, 500);
                     } else {
                         // alert(data.msg);

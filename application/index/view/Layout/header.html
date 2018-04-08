@@ -11,22 +11,22 @@
                     <a href="{:url('/')}" ><i class="am-icon-home am-icon-sm"></i> Home</a>
                 </li>
                 <li {if condition="$action eq 'health'"} class="am-active" {/if} >
-                    <a href="{$site_info.health_url}" > <i class="am-icon-heartbeat am-icon-sm"></i> Health</a>
+                    <a href="{$site_info.health_url}" > <i class="am-icon-heartbeat am-icon-sm"></i> Food Ranking</a>
                 </li>
                 <li {if condition="$action eq 'go_trip'"} class="am-active" {/if} >
-                    <a href="{$site_info.go_trip_url}"><i class="am-icon-cab am-icon-sm"></i> Trip</a>
+                    <a href="{$site_info.go_trip_url}"><i class="am-icon-search am-icon-sm"></i> Park Finding</a>
                 </li>
 
                 <?php   if($user_id == 0){?>
                 <li {if condition="$action eq 'login'"} class="am-active" {/if} >
-                    <a href="{$site_info.login_url}" target="new"  ><i class="am-icon-sign-in am-icon-sm"></i> Login</a>
+                    <a href="{$site_info.login_url}" target="new"  ><i class="am-icon-sign-in am-icon-sm"></i> Log in</a>
                 </li>
                 <li {if condition="$action eq 'reg'"} class="am-active" {/if} >
-                    <a href="{$site_info.reg_url}" target="new"   ><i class="am-icon-flag am-icon-sm"></i> Regist</a>
+                    <a href="{$site_info.reg_url}" target="new"   ><i class="am-icon-flag am-icon-sm"></i> Register</a>
                 </li>
                 <?php }else{ ?>
                 <li {if condition="$action eq 'user'"} class="am-active" {/if}> <a href="{:url('/user/'.$user_id)}" target="new"  > Welcome {:$user_info.user_name} </a></li>
-                <li ><a href="{$site_info.logout_url}"   ><i class="am-icon-sign-out am-icon-sm"></i> Logout</a> </li>
+                <li ><a href="{$site_info.logout_url}"   ><i class="am-icon-sign-out am-icon-sm"></i> Log out</a> </li>
                 <?php } ?>
             </ul>
         </div>

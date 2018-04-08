@@ -34,7 +34,7 @@ var memberLogin = {
         }
 
 
-        Tools.Ajax('POST','/login','login_form','/user');
+        Tools.Ajax('POST','/login','login_form','/user/');
     }
 };
 
@@ -82,7 +82,7 @@ var userRegister = {
             layer.msg(this.verifyTip);
             return false;
         }
-        Tools.Ajax('POST','/reg','reg_form','/user');
+        Tools.Ajax('POST','/reg','reg_form','/user/');
     }
 };
 

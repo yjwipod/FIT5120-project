@@ -4,7 +4,7 @@
 }
 
 .box-wrapper {
-    height: 347px;
+    height: 312px;
     width: 100%;
     /* background-color: #e69e9e; */
 }
@@ -39,7 +39,7 @@
     width: 545px;
 }
 
-.line-box p{
+.line-box p {
     text-align: center;
 }
 
@@ -95,17 +95,98 @@
     background-color: #c5c5e2;
 }
 
-.box{ margin: 10px;}
+.box {
+    margin: 10px;
+}
 
-.line-box li{
+.line-box li {
     float: left;
     list-style-type: none;
 }
 
-.detail_bg{border:solid 1px #000000;padding-top: 10px; background: #99d5ca}
-#tips{height: 70px;border:solid 1px #000000;background: #ffdba9;margin:0 15px 10px 15px  ;}
-#tips p{text-align: center;line-height: 70px;}
-.game_zoom{margin:0 15px ;}
+.detail_bg {
+    border: solid 1px #000000;
+    padding-top: 10px;
+    background: #99d5ca
+}
+
+#tips {
+    height: 70px;
+    border: solid 1px #000000;
+    background: #ffdba9;
+    margin: 0 15px 10px 15px;
+}
+
+#tips p {
+    text-align: center;
+    line-height: 70px;
+}
+
+.game_zoom {
+    margin: 0 15px;
+}
+
+.foodImg {
+    width: 150px;
+    height: 150px;
+    padding: .5em;
+    position: absolute;
+    margin: 10px 10px 10px 0;
+    z-index: 100
+}
+
+.foodRankingTarget {
+}
+
+.correctdiv {
+    top: 0;
+    font-size: 30px;
+    color: #90ee90;
+    font-weight: bold;
+    visibility: hidden
+}
+
+.foodRankingPlayground {
+    width: 100%;
+    /*height: 900px;*/
+    height: 740px;
+    /*background: #faebd7*/
+}
+
+#images li {
+    float: left;
+    background: #fff;
+    border: 1px solid #ccc;
+    margin: 10px;
+    width: 162px;
+    padding: 5px;
+    overflow: hidden
+}
+
+#images li div {
+    overflow: hidden
+}
+
+.tableDrop {
+    position: relative;
+    margin: auto;
+    /*top: 500px;*/
+    top: 396px;
+    text-align: center;
+    z-index: 1
+}
+
+.tableDropSlotRow {
+    vertical-align: middle;
+    height: 175px
+}
+
+.tableDropSlot {
+    width: 190px;
+    height: 132px;
+    top: 5px;
+    background: url(../../assets/image/plate11.png) no-repeat
+}
 
 
 

@@ -1,0 +1,33 @@
+@charset "utf-8";
+.nolsy{ list-style:none;}
+
+.br_lf{ border-left:1px solid #e5e5e5;}
+.br_rg{ border-right:1px solid #e5e5e5;}
+.br_bt{ border-bottom:1px solid #e5e5e5;}
+.br_tp{border-top: 1px solid #e5e5e5;}
+
+.br_lf_g{border-left:2px solid #058CEB;}
+.br_rg_g{ border-right:2px solid #058CEB;}
+.br_bt_g{ border-bottom:2px solid #058CEB;}
+.br_tp_g{border-top: 2px solid #058CEB;}
+
+.br_lf_w{border-left:2px solid #fff;}
+.br_rg_w{ border-right:2px solid #fff;}
+.br_bt_w{ border-bottom:2px solid #fff;}
+.br_tp_w{border-top: 2px solid #fff;}
+
+.no_br{border:0;}
+.no_bold{font-weight:normal;}
+
+.bg_orange{ background: #ffa200;}
+.bg_green{background:#058CEB;}
+.bg_grey{background:#f1f1f1;}
+
+.font_black{color:#333;}
+.font_orange{color:#ffa200;}
+.font_green{color:#0e90d2;}
+.font_grey{color:#959595;}
+.font_white{color:#fff;}
+
+.font_bold{font-weight: bold;}
+.font_normal{ font-weight: normal;}
