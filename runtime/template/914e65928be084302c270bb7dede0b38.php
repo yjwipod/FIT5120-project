@@ -1,4 +1,4 @@
-<?php /*a:5:{s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\index\health.html";i:1523041066;s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\base.html";i:1522856435;s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\toper.html";i:1522856435;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\header.html";i:1522867119;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1522856435;}*/ ?>
+<?php /*a:5:{s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\index\health.html";i:1523343301;s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\base.html";i:1522856435;s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\toper.html";i:1522856435;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\header.html";i:1522867119;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1522856435;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -72,31 +72,31 @@
 
     <div class="am-g am-g-fixed detail_bg" >
         <div  id='tips' >
-            <p >游戏简介</p>
+            <p >Game Dec</p>
         </div>
         <div class="game_zoom" >
-            <div id="foodRankingPlayground" , class="foodRankingPlayground">
+            <div id="foodRankingPlayground"  class="foodRankingPlayground">
 
                 <?php if(is_array($list) || $list instanceof \think\Collection || $list instanceof \think\Paginator): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
                 <div id="<?php echo $healthyLevel[$vo['healthyLevel']]; ?>" class="foodImg" data-dec = "<?php echo $vo['description']; ?>" >
-                    <img alt="AudioJungle" src="<?php echo $vo['picpath']; ?>"/>
+                    <img style="width: 130px;"  alt="AudioJungle" src="<?php echo $vo['picpath']; ?>"/>
                 </div>
                 <?php endforeach; endif; else: echo "" ;endif; ?>
 
                 <!--<div id="imgHest" class="foodImg">-->
-                    <!--<img alt="AudioJungle" src="http://www.fit-kidz.tk/images/demo/apple11.png"/>-->
+                <!--<img alt="AudioJungle" src="http://www.fit-kidz.tk/images/demo/apple11.png"/>-->
                 <!--</div>-->
                 <!--<div id="imgHeal" class="foodImg">-->
-                    <!--<img alt="AudioJungle" src="http://www.fit-kidz.tk/images/demo/Salmon11.png"/>-->
+                <!--<img alt="AudioJungle" src="http://www.fit-kidz.tk/images/demo/Salmon11.png"/>-->
                 <!--</div>-->
                 <!--<div id="imgNorm" class="foodImg">-->
                 <!--<img alt="AudioJungle" src="http://www.fit-kidz.tk/images/demo/biscuit11.png"/>-->
                 <!--</div>-->
                 <!--<div id="imgUnh" class="foodImg">-->
-                    <!--<img alt="AudioJungle" src="http://www.fit-kidz.tk/images/demo/cocacola11.png"/>-->
+                <!--<img alt="AudioJungle" src="http://www.fit-kidz.tk/images/demo/cocacola11.png"/>-->
                 <!--</div>-->
                 <!--<div id="imgUnhest" class="foodImg">-->
-                    <!--<img alt="AudioJungle" src="http://www.fit-kidz.tk/images/demo/burger11.png"/>-->
+                <!--<img alt="AudioJungle" src="http://www.fit-kidz.tk/images/demo/burger11.png"/>-->
                 <!--</div>-->
 
                 <table id="foodLevel" class="tableDrop">
@@ -143,8 +143,8 @@
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <div  id='w_tips' style="height: 50px; width:420px; border:solid 1px #000000;background: #b2d6ef;margin:15px auto  ; ">
-                                <p style="text-align: center;line-height: 50px;">错误显示</p>
+                            <div  id='w_tips' style="height: 90px; width:760px; border:solid 1px #000000;background: #b2d6ef;margin:15px auto  ; ">
+                                <p style="text-align: left;padding: 0px 10px;">wrong tips</p>
                             </div>
                         </td>
                     </tr>
@@ -154,7 +154,7 @@
         </div>
 
     </div>
-
+    <input id="note" value="0" type="hidden" />
 </div>
 
 
@@ -181,5 +181,9 @@
 <script src="/assets/js/health/bootstrap.js"></script>
 
 <script src="/assets/js/drag&drop.js"></script>
+<script>
+var user_id = "<?php echo $user_id; ?>";
+
+</script>
 
 </html>

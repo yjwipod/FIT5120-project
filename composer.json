@@ -19,7 +19,8 @@
     "newday-me/think-cms-framework": "1.0.0",
     "upyun/sdk": "3.3.0",
     "yahooweather/weather": "dev-master",
-    "skagarwal/google-places-api": "^1.2"
+    "skagarwal/google-places-api": "^1.2",
+    "phpmailer/phpmailer": "^6.0"
   },
   "minimum-stability": "RC",
   "extra": {

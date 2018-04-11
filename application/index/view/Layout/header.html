@@ -7,7 +7,7 @@
                 class="am-icon-bars"></span></button>
         <div class="am-collapse am-topbar-collapse" id="collapse-head">
             <ul class="am-nav am-nav-pills am-topbar-nav am-fr">
-                <li style="margin: 10px;" {if condition="$action eq 'index'"} class="am-active" {/if} >
+                <li style="margin: 10px;" {if condition="$action eq 'index' && $controller neq 'User' "} class="am-active" {/if} >
                     <a href="{:url('/')}" ><i class="am-icon-home am-icon-sm"></i> Home</a>
                 </li>
                 <li {if condition="$action eq 'health'"} class="am-active" {/if} >
@@ -25,7 +25,7 @@
                     <a href="{$site_info.reg_url}" target="new"   ><i class="am-icon-flag am-icon-sm"></i> Register</a>
                 </li>
                 <?php }else{ ?>
-                <li {if condition="$action eq 'user'"} class="am-active" {/if}> <a href="{:url('/user/'.$user_id)}" target="new"  > Welcome {:$user_info.user_name} </a></li>
+                <li {if condition="$action eq 'index' && $controller eq 'User' "} class="am-active" {/if}> <a href="{:url('/user/'.$user_id)}" target="new"  > Welcome {:$user_info.user_name} </a></li>
                 <li ><a href="{$site_info.logout_url}"   ><i class="am-icon-sign-out am-icon-sm"></i> Log out</a> </li>
                 <?php } ?>
             </ul>

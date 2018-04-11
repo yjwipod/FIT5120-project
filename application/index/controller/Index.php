@@ -3,6 +3,8 @@
 namespace app\index\controller;
 
 
+use app\index\service\CommonService;
+use cms\facade\Response;
 use core\db\index\model\PlanModel;
 use core\db\manage\model\MemberUserModel;
 use joshtronic\GooglePlaces;
@@ -11,7 +13,6 @@ use think\captcha\Captcha;
 use think\Db;
 use think\facade\Cookie;
 use think\facade\Session;
-use cms\facade\Response;
 use YahooWeather\Weather\AnonyControllerYahooWeather;
 
 class Index extends Base
@@ -60,8 +61,8 @@ class Index extends Base
     public function go_trip()
     {
         $this->assign('hastrip', 0);
-        $this->assign('ltime',   0);
-        $this->assign('trip_info', ['planId'=>'']);
+        $this->assign('ltime', 0);
+        $this->assign('trip_info', ['planId' => '']);
         $data['userId'] = $this->user_id;
         $data['status'] = 0;
         $data['date'] = date('Y-m-d', time());
@@ -72,7 +73,7 @@ class Index extends Base
             $time1 = strtotime($trip_info['date'] . ' ' . $trip_info['startTime'] . ":00");
             $time2 = time();
             $time3 = $time1 - $time2;
-            $this->assign('ltime',   $this->secToTime($time3));
+            $this->assign('ltime', $this->secToTime($time3));
             $this->assign('hastrip', 1);
             $this->assign('trip_info', $trip_info);
         }
@@ -145,6 +146,13 @@ class Index extends Base
 
     public function health()
     {
+        if ($this->user_id != 0) {
+            $rs = CommonService::getSingleton()->ranktime($this->user_id);
+            if ($rs == 3) {
+                $this->success('Jump to Test', 'index/user/foodRankTest');
+            }
+//            $this->ranktime($this->user_id);
+        }
         $res = [];
         $one = Db::name("food")->limit(1)->order('rand()')->find();
         $one['top'] = 180 + rand(10, 200);
@@ -154,20 +162,6 @@ class Index extends Base
         }
 
         $this->assign('list', $res);
-        return $this->fetch();
-    }
-
-    public function health2()
-    {
-//        $res = [];
-//        $one = Db::name("food")->limit(1)->order('rand()')->find();
-//        $one['top'] = 180+rand(10,200);
-//        $res[] = $one;
-//        for ($i= 1 ;$i <= 3 ; $i++){
-//            $res[$i] = $this->getDiffData($res);
-//        }
-//
-//        $this->assign('list',$res);
         return $this->fetch();
     }
 
@@ -189,9 +183,9 @@ class Index extends Base
     public function getWeather()
     {
         $data = $this->request->param();
-        $_data =AnonyControllerYahooWeather::Country($data['keyword'], $data['lang']);
+        $_data = AnonyControllerYahooWeather::Country($data['keyword'], $data['lang']);
         $text = nl2br($_data['description']);
-        $textArr = explode("<br />",$text);
+        $textArr = explode("<br />", $text);
         $cur_weather = htmlspecialchars($textArr[3]);
 
         return json(["data" => AnonyControllerYahooWeather::Country($data['keyword'], $data['lang']), 'num' => $data['num'], 'weather' => $cur_weather]);
@@ -252,4 +246,10 @@ class Index extends Base
         }
         return $result;
     }
+
+    public function home()
+    {
+        return $this->fetch();
+    }
+
 }

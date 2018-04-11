@@ -61,7 +61,7 @@
     //});
 
     $(document).ready(function () {
-        var i = 0;
+        var i = 0,num = 10;
 
         function checkCorrect() {
             // if ($("#hec").css("visibility") === "visible") {
@@ -69,8 +69,10 @@
                // window.location.reload();
             // };
             if (i === 4) {
-                alert("You have ranked the food level correctly, Congratulations! \nYou can try this again!")
-                window.location.reload();
+                alert("You have ranked the food level correctly, Congratulations! \nYou can try this again!");
+                layer.alert('Good JOb !!! ', {icon: 6});
+                setTimeout( window.location.href='/health' , 3000);
+                // window.location.reload();
 
             }
         }
@@ -82,10 +84,38 @@
             containment: "#foodRankingPlayground",
             scroll: false
         }));
+
+        if (user_id == 0) {
+            layer.msg('Please login !');
+            $('.foodImg').draggable('disable');
+            return false;
+        }else{
+            $('.foodImg').draggable({
+                start: function(event, ui){
+                    if(num == 0){
+                        layer.msg('Use out of times ');
+                        return false;
+                    }
+                    $("#note").val(0);
+                },
+                drag: function(event, ui) {  },
+                stop: function(event, ui) {
+                    num--;
+                    console.log(num);
+                    if( $("#note").val() != 1){
+                        // alert($(this).data('dec'));
+                        $("#w_tips").children('p').text($(this).data('dec'));
+                    }
+                }
+            });
+        }
+
+
         $("#slotHest").droppable({
             accept: "#imgHest",
+
             drop: function (event, ui) {
-                alert(22);
+                // alert(22);
                 // console.log(event);
                 // console.log(ui);
                 //$(this).css("background", "greenyellow");
@@ -97,13 +127,20 @@
                     e.preventDefault()
                 };
                 i++;
+                $("#note").val(1);
+                $("#w_tips").children('p').text('');
                 checkCorrect();
-                // alert(111);
+
             },
             out: function (event, ui) {
                 // alert(222);
                 // $(this).css("background", "transparent");
-            }
+            },
+            over:function (event,ui) {
+                // alert(333);
+            },
+
+
         });
 
         $("#slotHeal").droppable({
@@ -118,19 +155,23 @@
                     e.preventDefault()
                 };
                 i++;
+                $("#note").val(1);
+                $("#w_tips").children('p').text('');
                 checkCorrect();
             },
             out: function (event, ui) {
                 // alert(11);
                 // $(this).css("background", "transparent");
                 // $("#imgHeal").draggable({ revert: "valid" });
+            },
+            over:function (event,ui) {
+
             }
         });
 
         $("#slotNorm").droppable({
             accept: "#imgNorm",
             drop: function (event, ui) {
-                alert(44);
                 //$(this).css("background", "greenyellow");
                 $("#noc").css("visibility", "visible");
                 $("#imgNorm").draggable({ revert: "invalid" });
@@ -140,6 +181,8 @@
                     e.preventDefault()
                 };
                 i++;
+                $("#note").val(1);
+                $("#w_tips").children('p').text('');
                 checkCorrect();
             },
             out: function (event, ui) {
@@ -161,11 +204,16 @@
                     e.preventDefault()
                 };
                 i++;
+                $("#note").val(1);
+                $("#w_tips").children('p').text('');
                 checkCorrect();
             },
             out: function (event, ui) {
                 //$(this).css("background", "transparent");
                 $("#imgUnh").draggable({ revert: "valid" });
+            },
+            over:function (event,ui) {
+
             }
         });
 
@@ -182,11 +230,16 @@
                     e.preventDefault()
                 };
                 i++;
+                $("#note").val(1);
+                $("#w_tips").children('p').text('');
                 checkCorrect();
             },
             out: function (event, ui) {
                 //$(this).css("background", "transparent");
                 $("#imgUnhest").draggable({ revert: "valid" });
+            },
+            over:function (event,ui) {
+
             }
         });
     });

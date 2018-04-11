@@ -1,4 +1,4 @@
-<?php /*a:5:{s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\index\index.html";i:1523037529;s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\base.html";i:1522856435;s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\toper.html";i:1522856435;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\header.html";i:1522867119;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1522856435;}*/ ?>
+<?php /*a:4:{s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\index\index.html";i:1523428539;s:89:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\base_notfooter.html";i:1523428402;s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\toper.html";i:1522856435;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\header.html";i:1523434346;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -16,6 +16,9 @@
 <link href="/assets/css/base.css" rel="stylesheet">
 
     
+<style>
+    .am-with-topbar-fixed-top{ padding-top: 0px !important}
+</style>
 
 </head>
 
@@ -31,7 +34,7 @@
                 class="am-icon-bars"></span></button>
         <div class="am-collapse am-topbar-collapse" id="collapse-head">
             <ul class="am-nav am-nav-pills am-topbar-nav am-fr">
-                <li style="margin: 10px;" <?php if($action == 'index'): ?> class="am-active" <?php endif; ?> >
+                <li style="margin: 10px;" <?php if($action == 'index' && $controller != 'User'): ?> class="am-active" <?php endif; ?> >
                     <a href="<?php echo url('/'); ?>" ><i class="am-icon-home am-icon-sm"></i> Home</a>
                 </li>
                 <li <?php if($action == 'health'): ?> class="am-active" <?php endif; ?> >
@@ -49,7 +52,7 @@
                     <a href="<?php echo htmlentities($site_info['reg_url']); ?>" target="new"   ><i class="am-icon-flag am-icon-sm"></i> Register</a>
                 </li>
                 <?php }else{ ?>
-                <li <?php if($action == 'user'): ?> class="am-active" <?php endif; ?>> <a href="<?php echo url('/user/'.$user_id); ?>" target="new"  > Welcome <?php echo $user_info['user_name']; ?> </a></li>
+                <li <?php if($action == 'index' && $controller == 'User'): ?> class="am-active" <?php endif; ?>> <a href="<?php echo url('/user/'.$user_id); ?>" target="new"  > Welcome <?php echo $user_info['user_name']; ?> </a></li>
                 <li ><a href="<?php echo htmlentities($site_info['logout_url']); ?>"   ><i class="am-icon-sign-out am-icon-sm"></i> Log out</a> </li>
                 <?php } ?>
             </ul>
@@ -60,29 +63,30 @@
 
 
 <div class="detail" >
-    <div class="am-g am-container" style="text-align: center;padding: 10px 0">
-        <img src="/assets/image/muzi-003.jpg" width="80%;" />
-    </div>
+    <iframe src="<?php echo url('index/index/home'); ?>" width="100%" frameborder="0" scrolling="no" id="external-frame" onload="setIframeHeight(this)"></iframe>
+    <!--<div class="am-g am-container" style="text-align: center;padding: 10px 0">-->
+        <!--<img src="/assets/image/muzi-003.jpg" width="80%;" />-->
+    <!--</div>-->
 </div>
 
 
 
-<footer class="footer">
-    <p>
-        Copyright © Your Website 2018
-    </p>
-</footer>
-
-
-<script type="text/javascript" src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.ie8polyfill.js"></script>
-<script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="/assets/js/layer/layer.js"></script>
-<script type="text/javascript" src="/assets/js/action.js"></script>
-<script type="text/javascript" src="/assets/js/common.js"></script>
-<script type="text/javascript" src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.min.js"></script>
-
 </body>
 
 
+<script>
+    function setIframeHeight(iframe) {
+        if (iframe) {
+            var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+            if (iframeWin.document.body) {
+                iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+            }
+        }
+    };
+
+    window.onload = function () {
+        setIframeHeight(document.getElementById('external-frame'));
+    };
+</script>
 
 </html>

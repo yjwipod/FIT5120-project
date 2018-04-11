@@ -12,6 +12,7 @@ class Base extends Controller
 {
     public $user_id = 0;
     public $user_info = '';
+
     public function initialize()
     {
         $siteInfo = [
@@ -21,8 +22,8 @@ class Base extends Controller
             'health_url' => Url::build('index/index/health'),
             'login_url' => Url::build('index/index/login'),
             'reg_url' => Url::build('index/index/reg'),
-            'go_trip_url'=> Url::build('index/index/go_trip'),
-            'logout_url'=> Url::build('index/index/logout'),
+            'go_trip_url' => Url::build('index/index/go_trip'),
+            'logout_url' => Url::build('index/index/logout'),
         ];
         $this->user_id = Session::get('user_id') == "" ? "" : Session::get('user_id');
         $this->user_info = Session::get('user_info') == "" ? "" : Session::get('user_info');
@@ -32,6 +33,7 @@ class Base extends Controller
         $this->assign('user_info', $this->user_info);
         $this->assign('domain_url', Env::get('BASE_URL'));
         $this->assign('action', $this->request->action()); //存储用户信息
+
         $this->assign('controller', $this->request->controller()); //存储用户信息
     }
 
@@ -54,6 +56,8 @@ class Base extends Controller
 
         parent::beforeViewRender();
     }
+
+
 
 }
 

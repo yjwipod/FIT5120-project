@@ -1,4 +1,4 @@
-<?php /*a:5:{s:78:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\user\index.html";i:1523165002;s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\base.html";i:1522856435;s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\toper.html";i:1522856435;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\header.html";i:1522867119;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1522856435;}*/ ?>
+<?php /*a:5:{s:78:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\user\index.html";i:1523434998;s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\base.html";i:1522856435;s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\toper.html";i:1522856435;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\header.html";i:1523434346;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1522856435;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -32,7 +32,7 @@
                 class="am-icon-bars"></span></button>
         <div class="am-collapse am-topbar-collapse" id="collapse-head">
             <ul class="am-nav am-nav-pills am-topbar-nav am-fr">
-                <li style="margin: 10px;" <?php if($action == 'index'): ?> class="am-active" <?php endif; ?> >
+                <li style="margin: 10px;" <?php if($action == 'index' && $controller != 'User'): ?> class="am-active" <?php endif; ?> >
                     <a href="<?php echo url('/'); ?>" ><i class="am-icon-home am-icon-sm"></i> Home</a>
                 </li>
                 <li <?php if($action == 'health'): ?> class="am-active" <?php endif; ?> >
@@ -50,7 +50,7 @@
                     <a href="<?php echo htmlentities($site_info['reg_url']); ?>" target="new"   ><i class="am-icon-flag am-icon-sm"></i> Register</a>
                 </li>
                 <?php }else{ ?>
-                <li <?php if($action == 'user'): ?> class="am-active" <?php endif; ?>> <a href="<?php echo url('/user/'.$user_id); ?>" target="new"  > Welcome <?php echo $user_info['user_name']; ?> </a></li>
+                <li <?php if($action == 'index' && $controller == 'User'): ?> class="am-active" <?php endif; ?>> <a href="<?php echo url('/user/'.$user_id); ?>" target="new"  > Welcome <?php echo $user_info['user_name']; ?> </a></li>
                 <li ><a href="<?php echo htmlentities($site_info['logout_url']); ?>"   ><i class="am-icon-sign-out am-icon-sm"></i> Log out</a> </li>
                 <?php } ?>
             </ul>
@@ -90,7 +90,7 @@
                         <ul class="am-avg-lg-2 am-avg-sm-2 am-padding-top-xs">
                             <li class="font_green am-padding-vertical-sm">Email：<a><?php echo $user_info['email']; ?></a></li>
                             <li class="font_green am-padding-vertical-sm">Sex：<a><?php if($user_info['sex'] == 0): ?>男<?php else: ?>女 <?php endif; ?></a></li>
-                            <li class="font_green am-padding-vertical-xs">Point：<a>0</a></li>
+                            <li class="font_green am-padding-vertical-xs">Point：<a><?php echo $user_info['point']; ?></a></li>
                             <li class="font_green am-padding-vertical-xs">Last Login：<a><?php echo date("Y-m-d H:i:s",$user_info['login_time']);?></a></li>
                         </ul>
                     </div>
@@ -144,6 +144,7 @@
                 <?php if($user_id == 1): ?>
                     <p class="am-margin-vertical-xs"><a href="<?php echo url('/index/user/food_manage/'); ?>">Food </a></p>
                 <?php endif; ?>
+                <p class="am-margin-vertical-xs"><a href="<?php echo url('/index/user/point_logs/user_id/'.$user_id); ?>">Point Log </a></p>
                 <p class="am-margin-vertical-xs"><a href="<?php echo url('/logout'); ?>">Log out</a></p>
 
 

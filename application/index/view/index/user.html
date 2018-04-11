@@ -68,7 +68,7 @@
                         </h2>
                         <ul class="am-avg-lg-2 am-avg-sm-2 am-padding-top-xs">
                             <li class="font_green am-padding-vertical-sm">Email：<a>{:$user_info['email']}</a></li>
-                            <li class="font_green am-padding-vertical-sm">Sex：<a>{if condition="$user_info['sex'] eq 0"}男{else /}女 {/if}</a></li>
+                            <li class="font_green am-padding-vertical-sm">Sex：<a>{if condition="$user_info['sex'] eq 0"}Boy{else /}Girl {/if}</a></li>
                             <li class="font_green am-padding-vertical-xs">Point：<a>0</a></li>
                             <li class="font_green am-padding-vertical-xs">Last Login：<a><?php echo date("Y-m-d H:i:s",$user_info['login_time']);?></a></li>
                         </ul>
@@ -105,6 +105,7 @@
 
                 <h2 class="font_green am-margin-bottom-xs">Manage Control</h2>
                 <p class="am-margin-vertical-xs"><a href="{:url('/user/'.$user_id)}">Home </a></p>
+                <p class="am-margin-vertical-xs"><a href="{:url('/index/user/point_logs'.$user_id)}">Point Log </a></p>
                 <p class="am-margin-vertical-xs"><a href="{:url('/logout')}">Logout</a></p>
 
 
