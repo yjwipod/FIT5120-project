@@ -1,4 +1,4 @@
-<?php /*a:5:{s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\index\health.html";i:1523343301;s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\base.html";i:1522856435;s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\toper.html";i:1522856435;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\header.html";i:1523434346;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1522856435;}*/ ?>
+<?php /*a:5:{s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\index\health.html";i:1524161668;s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\base.html";i:1522856435;s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\toper.html";i:1522856435;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\header.html";i:1524151899;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1524074187;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -35,7 +35,7 @@
 <header class="am-topbar am-topbar-fixed-top header_css"  >
     <div class="am-container" >
         <h1 class="am-topbar-brand">
-            <a href="/">LOGO</a>
+            <a href="/"><img src="/assets/image/logo.png" width="71px"></a>
         </h1>
         <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-default am-show-sm-only" data-am-collapse="{target: '#collapse-head'}"><span class="am-sr-only">导航切换</span><span
                 class="am-icon-bars"></span></button>
@@ -47,9 +47,9 @@
                 <li <?php if($action == 'health'): ?> class="am-active" <?php endif; ?> >
                     <a href="<?php echo htmlentities($site_info['health_url']); ?>" > <i class="am-icon-heartbeat am-icon-sm"></i> Food Ranking</a>
                 </li>
-                <li <?php if($action == 'go_trip'): ?> class="am-active" <?php endif; ?> >
-                    <a href="<?php echo htmlentities($site_info['go_trip_url']); ?>"><i class="am-icon-search am-icon-sm"></i> Park Finding</a>
-                </li>
+                <!--<li <?php if($action == 'go_trip'): ?> class="am-active" <?php endif; ?> >-->
+                    <!--<a href="<?php echo htmlentities($site_info['go_trip_url']); ?>"><i class="am-icon-search am-icon-sm"></i> Park Finding</a>-->
+                <!--</li>-->
 
                 <?php   if($user_id == 0){?>
                 <li <?php if($action == 'login'): ?> class="am-active" <?php endif; ?> >
@@ -70,16 +70,41 @@
 
 <div class="detail">
 
+    <div class="am-g am-g-fixed " style="margin-bottom: 10px" >
+        <!--<a href="javascript:;" method="notice" data-src="/assets/image/tips.png" class="layui-btn">See the steps</a>-->
+        <a class="am-btn am-btn-warning layui-btn" method="notice" data-src="/assets/image/tips.png">
+            <i class="am-icon-share"></i>
+            See the steps
+        </a>
+    </div>
+
     <div class="am-g am-g-fixed detail_bg" >
+
         <div  id='tips' >
             <p >Game Dec</p>
         </div>
-        <div class="game_zoom" >
+        <div class="game_zoom" style="position:relative;">
+            <div class="am-form-group am-form-icon" style="position:absolute; z-index:10000; left:10px; top:100px">
+                <?php if(isset($round)){ if($round < 7){ ?>
+
+                <p>You can get points </p>
+                <p>in the next <span style="color: red"><?php echo $num; ?></span> Round(s) </p>
+
+                <?php }else{?>
+                <p>Just for Fun ! </p>
+                <?php } } ?>
+
+            </div>
+            <div class="am-form-group am-form-icon" style="position:absolute; z-index:10000; right:10px; top:100px">
+                <p>You can try </p>
+                <p><span class="times" style="color: red">10</span> times left</p>
+                <p>in this round</p>
+            </div>
             <div id="foodRankingPlayground"  class="foodRankingPlayground">
 
                 <?php if(is_array($list) || $list instanceof \think\Collection || $list instanceof \think\Paginator): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
                 <div id="<?php echo $healthyLevel[$vo['healthyLevel']]; ?>" class="foodImg" data-dec = "<?php echo $vo['description']; ?>" >
-                    <img style="width: 130px;"  alt="AudioJungle" src="<?php echo $vo['picpath']; ?>"/>
+                    <img  alt="AudioJungle" src="<?php echo $vo['picpath']; ?>"/>
                 </div>
                 <?php endforeach; endif; else: echo "" ;endif; ?>
 
@@ -172,6 +197,37 @@
 <script type="text/javascript" src="/assets/js/action.js"></script>
 <script type="text/javascript" src="/assets/js/common.js"></script>
 <script type="text/javascript" src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.min.js"></script>
+<script>
+    var demo = {
+        notice: function(){
+            // alert($(this).data('src'));
+            layer.open({
+                type: 1
+                ,title: false //不显示标题栏
+                ,closeBtn: false
+                ,area: '1200px;'
+                ,shade: 0.8
+                ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                ,resize: false
+                ,content: '<img src="'+$(this).data('src')+'" width="100%">'
+                ,btn: [ 'Close']
+                ,btnAlign: 'c'
+                ,moveType: 1 //拖拽模式，0或者1
+                ,success: function(layero){
+                    var btn = layero.find('.layui-layer-btn');
+
+                }
+            });
+        }
+
+    };
+
+    $('.layui-btn').on('click', function(){
+        var othis = $(this), method = othis.attr('method');
+        var demo1 = $('#demo1'), p = demo1.find('p').eq(othis.index());
+        demo[method] ? demo[method].call(this, othis) : new Function('that', p.html())(this);
+    });
+</script>
 
 </body>
 

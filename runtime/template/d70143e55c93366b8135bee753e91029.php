@@ -1,4 +1,4 @@
-<?php /*a:1:{s:70:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\thinkphp/tpl/dispatch_jump.tpl";i:1522134349;}*/ ?>
+<?php /*a:1:{s:70:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\thinkphp/tpl/dispatch_jump.tpl";i:1524241215;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -27,7 +27,7 @@
             <?php break;} ?>
         <p class="detail"></p>
         <p class="jump">
-            Page  auto <a id="href" href="<?php echo($url);?>">Jump</a> with： <b id="wait"><?php echo($wait);?></b> seconds
+            Page will  <a id="href" href="<?php echo($url);?>">jump</a> Util： <b id="wait"><?php echo($wait);?></b>
         </p>
     </div>
     <script type="text/javascript">

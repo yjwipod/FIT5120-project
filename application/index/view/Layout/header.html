@@ -1,7 +1,7 @@
 <header class="am-topbar am-topbar-fixed-top header_css"  >
     <div class="am-container" >
         <h1 class="am-topbar-brand">
-            <a href="/">LOGO</a>
+            <a href="/"><img src="/assets/image/logo.png" width="71px"></a>
         </h1>
         <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-default am-show-sm-only" data-am-collapse="{target: '#collapse-head'}"><span class="am-sr-only">导航切换</span><span
                 class="am-icon-bars"></span></button>
@@ -13,9 +13,9 @@
                 <li {if condition="$action eq 'health'"} class="am-active" {/if} >
                     <a href="{$site_info.health_url}" > <i class="am-icon-heartbeat am-icon-sm"></i> Food Ranking</a>
                 </li>
-                <li {if condition="$action eq 'go_trip'"} class="am-active" {/if} >
-                    <a href="{$site_info.go_trip_url}"><i class="am-icon-search am-icon-sm"></i> Park Finding</a>
-                </li>
+                <!--<li {if condition="$action eq 'go_trip'"} class="am-active" {/if} >-->
+                    <!--<a href="{$site_info.go_trip_url}"><i class="am-icon-search am-icon-sm"></i> Park Finding</a>-->
+                <!--</li>-->
 
                 <?php   if($user_id == 0){?>
                 <li {if condition="$action eq 'login'"} class="am-active" {/if} >

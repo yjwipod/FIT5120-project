@@ -1,4 +1,4 @@
-<?php /*a:4:{s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\index\index.html";i:1523428539;s:89:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\base_notfooter.html";i:1523428402;s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\toper.html";i:1522856435;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\header.html";i:1523434346;}*/ ?>
+<?php /*a:4:{s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\index\index.html";i:1523428539;s:89:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\base_notfooter.html";i:1523428402;s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\toper.html";i:1522856435;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\header.html";i:1524151899;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -28,7 +28,7 @@
 <header class="am-topbar am-topbar-fixed-top header_css"  >
     <div class="am-container" >
         <h1 class="am-topbar-brand">
-            <a href="/">LOGO</a>
+            <a href="/"><img src="/assets/image/logo.png" width="71px"></a>
         </h1>
         <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-default am-show-sm-only" data-am-collapse="{target: '#collapse-head'}"><span class="am-sr-only">导航切换</span><span
                 class="am-icon-bars"></span></button>
@@ -40,9 +40,9 @@
                 <li <?php if($action == 'health'): ?> class="am-active" <?php endif; ?> >
                     <a href="<?php echo htmlentities($site_info['health_url']); ?>" > <i class="am-icon-heartbeat am-icon-sm"></i> Food Ranking</a>
                 </li>
-                <li <?php if($action == 'go_trip'): ?> class="am-active" <?php endif; ?> >
-                    <a href="<?php echo htmlentities($site_info['go_trip_url']); ?>"><i class="am-icon-search am-icon-sm"></i> Park Finding</a>
-                </li>
+                <!--<li <?php if($action == 'go_trip'): ?> class="am-active" <?php endif; ?> >-->
+                    <!--<a href="<?php echo htmlentities($site_info['go_trip_url']); ?>"><i class="am-icon-search am-icon-sm"></i> Park Finding</a>-->
+                <!--</li>-->
 
                 <?php   if($user_id == 0){?>
                 <li <?php if($action == 'login'): ?> class="am-active" <?php endif; ?> >

@@ -1,4 +1,4 @@
-<?php /*a:2:{s:78:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\index\home.html";i:1523428750;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1522856435;}*/ ?>
+<?php /*a:2:{s:78:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\index\home.html";i:1524240182;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1524074187;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,14 +31,11 @@
 
 
 <!-- Header -->
-<header class="masthead bg-primary text-white text-center">
-    <div class="container">
-        <img class="img-fluid mb-5 d-block mx-auto" src="/assets/home/img/profile.png" alt="">
-        <h1 class="text-uppercase mb-0">Start Bootstrap</h1>
-        <hr class="star-light">
-        <h2 class="font-weight-light mb-0">Web Developer - Graphic Artist - User Experience Designer</h2>
-    </div>
-</header>
+    <style>
+        img { height: auto; width: auto\9; width:100%; }
+
+    </style>
+    <img style="max-width:100%;overflow:hidden;" src="/assets/image/profile.png" alt="">
 
 <!-- Portfolio Grid Section -->
 <section class="portfolio" id="portfolio">
@@ -47,7 +44,7 @@
         <hr class="star-dark mb-5">
         <div class="row">
             <div class="col-md-6 col-lg-4">
-                <a class="portfolio-item d-block mx-auto" href="#">
+                <a class="portfolio-item d-block mx-auto" href="<?php echo url('/introduction'); ?>">
                     <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
                         <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
                             <i class="fa fa-search-plus fa-3x"></i>
@@ -67,9 +64,9 @@
                 </a>
             </div>
             <div class="col-md-6 col-lg-4">
-                <a class="portfolio-item d-block mx-auto" href="<?php echo url('/trip'); ?>" target="_top">
+                <a class="portfolio-item d-block mx-auto" href="<?php echo url('/user/'.$user_id); ?>" target="_top">
                     <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
-                        <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
+                        <div class="portfolio-item-caption-content my-auto w-100 text-center text-wuserhite">
                             <i class="fa fa-search-plus fa-3x"></i>
                         </div>
                     </div>
@@ -112,6 +109,37 @@
 <script type="text/javascript" src="/assets/js/action.js"></script>
 <script type="text/javascript" src="/assets/js/common.js"></script>
 <script type="text/javascript" src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.min.js"></script>
+<script>
+    var demo = {
+        notice: function(){
+            // alert($(this).data('src'));
+            layer.open({
+                type: 1
+                ,title: false //不显示标题栏
+                ,closeBtn: false
+                ,area: '1200px;'
+                ,shade: 0.8
+                ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                ,resize: false
+                ,content: '<img src="'+$(this).data('src')+'" width="100%">'
+                ,btn: [ 'Close']
+                ,btnAlign: 'c'
+                ,moveType: 1 //拖拽模式，0或者1
+                ,success: function(layero){
+                    var btn = layero.find('.layui-layer-btn');
+
+                }
+            });
+        }
+
+    };
+
+    $('.layui-btn').on('click', function(){
+        var othis = $(this), method = othis.attr('method');
+        var demo1 = $('#demo1'), p = demo1.find('p').eq(othis.index());
+        demo[method] ? demo[method].call(this, othis) : new Function('that', p.html())(this);
+    });
+</script>
 
 
 <!-- Bootstrap core JavaScript -->

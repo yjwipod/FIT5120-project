@@ -1,4 +1,4 @@
-<?php /*a:5:{s:84:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\user\food_manage.html";i:1522960982;s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\base.html";i:1522856435;s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\toper.html";i:1522856435;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\header.html";i:1522867119;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1522856435;}*/ ?>
+<?php /*a:6:{s:84:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\user\food_manage.html";i:1524241129;s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\base.html";i:1522856435;s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\toper.html";i:1522856435;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\header.html";i:1524151899;s:82:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\user\rightmenu.html";i:1524241693;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1524074187;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -32,21 +32,21 @@
 <header class="am-topbar am-topbar-fixed-top header_css"  >
     <div class="am-container" >
         <h1 class="am-topbar-brand">
-            <a href="/">LOGO</a>
+            <a href="/"><img src="/assets/image/logo.png" width="71px"></a>
         </h1>
         <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-default am-show-sm-only" data-am-collapse="{target: '#collapse-head'}"><span class="am-sr-only">导航切换</span><span
                 class="am-icon-bars"></span></button>
         <div class="am-collapse am-topbar-collapse" id="collapse-head">
             <ul class="am-nav am-nav-pills am-topbar-nav am-fr">
-                <li style="margin: 10px;" <?php if($action == 'index'): ?> class="am-active" <?php endif; ?> >
+                <li style="margin: 10px;" <?php if($action == 'index' && $controller != 'User'): ?> class="am-active" <?php endif; ?> >
                     <a href="<?php echo url('/'); ?>" ><i class="am-icon-home am-icon-sm"></i> Home</a>
                 </li>
                 <li <?php if($action == 'health'): ?> class="am-active" <?php endif; ?> >
                     <a href="<?php echo htmlentities($site_info['health_url']); ?>" > <i class="am-icon-heartbeat am-icon-sm"></i> Food Ranking</a>
                 </li>
-                <li <?php if($action == 'go_trip'): ?> class="am-active" <?php endif; ?> >
-                    <a href="<?php echo htmlentities($site_info['go_trip_url']); ?>"><i class="am-icon-search am-icon-sm"></i> Park Finding</a>
-                </li>
+                <!--<li <?php if($action == 'go_trip'): ?> class="am-active" <?php endif; ?> >-->
+                    <!--<a href="<?php echo htmlentities($site_info['go_trip_url']); ?>"><i class="am-icon-search am-icon-sm"></i> Park Finding</a>-->
+                <!--</li>-->
 
                 <?php   if($user_id == 0){?>
                 <li <?php if($action == 'login'): ?> class="am-active" <?php endif; ?> >
@@ -56,7 +56,7 @@
                     <a href="<?php echo htmlentities($site_info['reg_url']); ?>" target="new"   ><i class="am-icon-flag am-icon-sm"></i> Register</a>
                 </li>
                 <?php }else{ ?>
-                <li <?php if($action == 'user'): ?> class="am-active" <?php endif; ?>> <a href="<?php echo url('/user/'.$user_id); ?>" target="new"  > Welcome <?php echo $user_info['user_name']; ?> </a></li>
+                <li <?php if($action == 'index' && $controller == 'User'): ?> class="am-active" <?php endif; ?>> <a href="<?php echo url('/user/'.$user_id); ?>" target="new"  > Welcome <?php echo $user_info['user_name']; ?> </a></li>
                 <li ><a href="<?php echo htmlentities($site_info['logout_url']); ?>"   ><i class="am-icon-sign-out am-icon-sm"></i> Log out</a> </li>
                 <?php } ?>
             </ul>
@@ -130,9 +130,14 @@
                             <tr>
                                 <td align="right" bgcolor="#FFFFFF" height="25">Food Pic：</td>
                                 <td align="left" bgcolor="#FFFFFF">
-                                    <input type="file" name="file" value="" size="25">
+                                    <!--<input type="file" name="file" value="" size="25" >-->
+
+                                    <input type="file"  name="file" id="attachment" style="display:none;width:268px; *height:22px;" onchange="jQuery('#path').val(jQuery('#attachment').val())" />
+                                    <input type="text" name="path" id="path" onfocus="jQuery('#attachment').click()" />
+                                    <input type="button" value="Upload" onclick="jQuery('#attachment').click()" />
+
                                     <input name="picpath" value="<?php echo htmlentities((isset($info['picpath']) && ($info['picpath'] !== '')?$info['picpath']:'')); ?>" type="hidden" />
-                                    (支持jpg、gif、png格式的图片)<br>
+                                    (Support JPG, GIF, png)<br>
                                 </td>
                             </tr>
                             <tr>
@@ -157,15 +162,16 @@
 
         <div class="am-u-lg-3 am-padding-right-0">
             <div class="am-container br_lf br_rg br_bt br_tp_g am-text-center am-padding-sm">
+                <div class="am-container br_lf br_rg br_bt br_tp_g am-text-center am-padding-sm">
 
-                <h2 class="font_green am-margin-bottom-xs">Manage Control</h2>
-                <p class="am-margin-vertical-xs"><a href="<?php echo url('/user/'.$user_id); ?>">Home </a></p>
-                <?php if($user_id == 1): ?>
-                <p class="am-margin-vertical-xs"><a href="<?php echo url('/index/user/foods/'); ?>">Food </a></p>
-                <?php endif; ?>
-                <p class="am-margin-vertical-xs"><a href="<?php echo url('/logout'); ?>">Log out</a></p>
-
-
+    <h2 class="font_green am-margin-bottom-xs">Manage Control</h2>
+    <p class="am-margin-vertical-xs"><a href="<?php echo url('/user/'.$user_id); ?>">Home </a></p>
+    <?php if($user_id == 1): ?>
+    <p class="am-margin-vertical-xs"><a href="<?php echo url('/index/user/foods/'); ?>">Food </a></p>
+    <?php endif; ?>
+    <p class="am-margin-vertical-xs"><a href="<?php echo url('/index/user/point_logs/user_id/'.$user_id); ?>">Point Log </a></p>
+    <p class="am-margin-vertical-xs"><a href="<?php echo url('/logout'); ?>">Log out</a></p>
+</div>
             </div>
         </div>
     </div>
@@ -185,6 +191,37 @@
 <script type="text/javascript" src="/assets/js/action.js"></script>
 <script type="text/javascript" src="/assets/js/common.js"></script>
 <script type="text/javascript" src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.min.js"></script>
+<script>
+    var demo = {
+        notice: function(){
+            // alert($(this).data('src'));
+            layer.open({
+                type: 1
+                ,title: false //不显示标题栏
+                ,closeBtn: false
+                ,area: '1200px;'
+                ,shade: 0.8
+                ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                ,resize: false
+                ,content: '<img src="'+$(this).data('src')+'" width="100%">'
+                ,btn: [ 'Close']
+                ,btnAlign: 'c'
+                ,moveType: 1 //拖拽模式，0或者1
+                ,success: function(layero){
+                    var btn = layero.find('.layui-layer-btn');
+
+                }
+            });
+        }
+
+    };
+
+    $('.layui-btn').on('click', function(){
+        var othis = $(this), method = othis.attr('method');
+        var demo1 = $('#demo1'), p = demo1.find('p').eq(othis.index());
+        demo[method] ? demo[method].call(this, othis) : new Function('that', p.html())(this);
+    });
+</script>
 
 </body>
 

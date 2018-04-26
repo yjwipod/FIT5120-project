@@ -5,6 +5,16 @@
 {block name="content-body"}
 
 <div class="detail">
+
+
+    <div class="am-g am-g-fixed " style="margin-bottom: 10px" >
+        <!--<a href="javascript:;" method="notice" data-src="/assets/image/tips.png" class="layui-btn">See the steps</a>-->
+        <a class="am-btn am-btn-warning layui-btn" method="notice" data-src="/assets/image/tips_2.png">
+            <i class="am-icon-share"></i>
+            See the steps
+        </a>
+    </div>
+
     <div class="am-g am-g-fixed detail_bg" >
             <div class="map_l" style="width: 70%;position:relative;">
             <div id="map" style="width: 100%; height: 648px" ></div>
@@ -80,10 +90,10 @@
             <div style="clear: both"></div>
         {if condition="$hastrip == 1"}
         <div >
-            <p style="text-align: center;font-size: 24px">You plan will cancled in {:$ltime}？</p>
+            <p style="text-align: center;font-size: 24px">You plan will cancel in {:$ltime}？</p>
             <div style="text-align: center">
                 <button type="button" data-status="2" data-planid="{:$trip_info.planId}" class="handle_plan am-btn am-btn-secondary am-radius">Finish Plan</button>
-                <button type="button" data-status="3" data-planid="{:$trip_info.planId}" class="handle_plan am-btn am-btn-danger am-radius">Cancle Plan</button>
+                <button type="button" data-status="3" data-planid="{:$trip_info.planId}" class="handle_plan am-btn am-btn-danger am-radius">Cancel Plan</button>
             </div>
         </div>
         {/if}
@@ -258,7 +268,9 @@
 
                             var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (j % 26));
                             // var markerIcon = MARKER_PATH + markerLetter + '.png';
-                            var markerIcon =  result.data.image;
+                            // var markerIcon =  result.data.image;
+                            var markerIcon =  "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+
                             // Use marker animation to drop the icons incrementally on the map.
                             markers[j] = new google.maps.Marker({
                                 position: results[j].geometry.location,
@@ -424,7 +436,7 @@
     // luckSkeen();
     function luckSkeen(){
 
-        layer.confirm('You have planned an exercise , please finish or cancle it frist？', {
+        layer.confirm('You have planned an exercise , please finish or cancel it frist？', {
             btn: ['重要','奇葩'] //按钮
         }, function(){
             layer.msg('的确很重要', {icon: 1});
@@ -452,7 +464,7 @@
         }
 
         if($("#hastrip").val() == 1 ){
-            layer.alert('You have planned an exercise ,please finish or cancle it first.', {icon: 6});
+            layer.alert('You have planned an exercise ,please finish or cancel it first.', {icon: 6});
             return false;
         }
         layer.confirm("Do you want to plan an exercise on  "+time+" ?", {

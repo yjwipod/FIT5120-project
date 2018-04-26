@@ -14,16 +14,41 @@
 {block name="content-body"}
 <div class="detail">
 
+    <div class="am-g am-g-fixed " style="margin-bottom: 10px" >
+        <!--<a href="javascript:;" method="notice" data-src="/assets/image/tips.png" class="layui-btn">See the steps</a>-->
+        <a class="am-btn am-btn-warning layui-btn" method="notice" data-src="/assets/image/tips.png">
+            <i class="am-icon-share"></i>
+            See the steps
+        </a>
+    </div>
+
     <div class="am-g am-g-fixed detail_bg" >
+
         <div  id='tips' >
             <p >Game Dec</p>
         </div>
-        <div class="game_zoom" >
+        <div class="game_zoom" style="position:relative;">
+            <div class="am-form-group am-form-icon" style="position:absolute; z-index:10000; left:10px; top:100px">
+                <?php if(isset($round)){ if($round < 7){ ?>
+
+                <p>You can get points </p>
+                <p>in the next <span style="color: red">{:$num}</span> Round(s) </p>
+
+                <?php }else{?>
+                <p>Just for Fun ! </p>
+                <?php } } ?>
+
+            </div>
+            <div class="am-form-group am-form-icon" style="position:absolute; z-index:10000; right:10px; top:100px">
+                <p>You can try </p>
+                <p><span class="times" style="color: red">10</span> times left</p>
+                <p>in this round</p>
+            </div>
             <div id="foodRankingPlayground"  class="foodRankingPlayground">
 
                 {volist name='list' id='vo'}
                 <div id="{:$healthyLevel[$vo['healthyLevel']]}" class="foodImg" data-dec = "{:$vo.description}" >
-                    <img style="width: 130px;"  alt="AudioJungle" src="{:$vo.picpath}"/>
+                    <img  alt="AudioJungle" src="{:$vo.picpath}"/>
                 </div>
                 {/volist}
 

@@ -34,6 +34,9 @@ class User extends Base
 
     public function index()
     {
+        if($this->request->param('id') == 0){
+            return redirect('/login');
+        }
         $list = PlanModel::getSingleton()->where(['userId' => Session::get('user_id')])->select();
 //        print_r(count($list));
         $this->assign('list', $list);
@@ -48,17 +51,35 @@ class User extends Base
         return $this->fetch();
     }
 
-    public function getpoints($points, $type)
+    public function getpoints($points, $type, $is_frist = 0)
     {
-
         $data['point'] = $points;
         $data['type'] = $type;
+        $data['is_frist'] = $is_frist;
         $data['userId'] = $this->user_id;
-        $data['time'] = time();
+        $data['createtime'] = time();
         if (PointLogModel::getSingleton()->save($data)) {
             MemberUserModel::getSingleton()->where(['id' => $this->user_id])->setInc('point', $points);
         }
 //        return json(['code' => '22']);
+    }
+
+    public function ajaxGetpoints()
+    {
+        if ($this->request->isAjax()) {
+
+            $data['point'] = $this->request->param('points');
+            $data['type'] = 0;
+            $data['is_frist'] = 0;
+            $data['userId'] = $this->user_id;
+            $data['createtime'] = time();
+            if (Cache::get('ranktime_' . $this->user_id) < 7) {
+                if (PointLogModel::getSingleton()->save($data)) {
+                    MemberUserModel::getSingleton()->where(['id' => $this->user_id])->setInc('point', $this->request->param('points'));
+                }
+            }
+
+        }
 
     }
 
@@ -68,7 +89,7 @@ class User extends Base
 //        $this->assign('list', $list);
 
         $menu_model = new FoodModel();
-        $lists = $menu_model::paginate(10);
+        $lists = $menu_model::paginate(13);
         $page = $lists->render();
         $this->assign('lists', $lists);
         $this->assign('page', $page);
@@ -271,7 +292,7 @@ class User extends Base
             $data = $this->request->param();
             $s_data['status'] = $data['status'];
             $map['planId'] = $data['planId'];
-            $map['createtime'] = time();
+            $s_data['createtime'] = time();
             $map['userId'] = $this->user_id;
             if (PlanModel::getSingleton()->save($s_data, $map)) {
                 if ($data['status'] == 2) {
@@ -295,6 +316,7 @@ class User extends Base
             $endtime = mktime(0, 0, 0, date('m'), date('d') + 1, date('Y')) - 1;
             $res = Db::table('user_eat')
                 ->where('userId', 'eq', $this->user_id)
+//                ->where('is_frist', 'eq', 1)
                 ->where(function ($query) use ($startime, $endtime) {
                     $query->where('createtime', ['<', $endtime], ['>', $startime], 'and');
                 })
@@ -303,11 +325,11 @@ class User extends Base
             $s_data['createtime'] = time();
             if (EatplanModel::getSingleton()->save($s_data)) {
                 $points = count(explode(',', $data['strid'])) == 1 ? 5 : 10;
-                Cache::rm('ranktime_' . $this->user_id);
+//                Cache::rm('ranktime_' . $this->user_id);
                 if (is_array($res) && !empty($res)) {
                     return json(['code' => 20, 'msg' => 'success', 'data' => '1']); //已有
                 } else {
-                    $this->getpoints($points, 0);
+                    $this->getpoints($points, 0, 1);
                     return json(['code' => 20, 'msg' => 'success', 'data' => '0']);
                 }
             } else {
@@ -319,9 +341,9 @@ class User extends Base
     public function foodRankTest()
     {
         $sign = 'ranktime_' . $this->user_id;
-        if (Cache::get($sign) != 6) {
-            return redirect(url('/health'));
-        }
+//        if (Cache::get($sign) != 6) {
+//            return redirect(url('/health'));
+//        }
 //        $foodlist = FoodModel::getSingleton()->where('healthyLevel','in', [3,4])->select();
 //        $this->assign('list',$foodlist);
 
@@ -379,7 +401,7 @@ class User extends Base
             //Content
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = 'Here is the subject';
-            $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+            $mail->Body = 'This is the HTML message body <b>in bold!</b>';
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
             $mail->send();

@@ -3,6 +3,7 @@ return [
     // 下载
     'download' => 'index/index/download',
     'health' => 'index/index/health',
+    'introduction' => 'index/index/introduction',
     'trip' => 'index/index/go_trip',
     'login' => 'index/index/login',
     'reg' => 'index/index/reg',

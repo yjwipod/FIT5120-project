@@ -1,4 +1,4 @@
-<?php /*a:5:{s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\index\go_trip.html";i:1523163967;s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\base.html";i:1522856435;s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\toper.html";i:1522856435;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\header.html";i:1522867119;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1522856435;}*/ ?>
+<?php /*a:5:{s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\index\go_trip.html";i:1524135225;s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\base.html";i:1522856435;s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\toper.html";i:1522856435;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\header.html";i:1524151899;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1524074187;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -26,21 +26,21 @@
 <header class="am-topbar am-topbar-fixed-top header_css"  >
     <div class="am-container" >
         <h1 class="am-topbar-brand">
-            <a href="/">LOGO</a>
+            <a href="/"><img src="/assets/image/logo.png" width="71px"></a>
         </h1>
         <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-default am-show-sm-only" data-am-collapse="{target: '#collapse-head'}"><span class="am-sr-only">导航切换</span><span
                 class="am-icon-bars"></span></button>
         <div class="am-collapse am-topbar-collapse" id="collapse-head">
             <ul class="am-nav am-nav-pills am-topbar-nav am-fr">
-                <li style="margin: 10px;" <?php if($action == 'index'): ?> class="am-active" <?php endif; ?> >
+                <li style="margin: 10px;" <?php if($action == 'index' && $controller != 'User'): ?> class="am-active" <?php endif; ?> >
                     <a href="<?php echo url('/'); ?>" ><i class="am-icon-home am-icon-sm"></i> Home</a>
                 </li>
                 <li <?php if($action == 'health'): ?> class="am-active" <?php endif; ?> >
                     <a href="<?php echo htmlentities($site_info['health_url']); ?>" > <i class="am-icon-heartbeat am-icon-sm"></i> Food Ranking</a>
                 </li>
-                <li <?php if($action == 'go_trip'): ?> class="am-active" <?php endif; ?> >
-                    <a href="<?php echo htmlentities($site_info['go_trip_url']); ?>"><i class="am-icon-search am-icon-sm"></i> Park Finding</a>
-                </li>
+                <!--<li <?php if($action == 'go_trip'): ?> class="am-active" <?php endif; ?> >-->
+                    <!--<a href="<?php echo htmlentities($site_info['go_trip_url']); ?>"><i class="am-icon-search am-icon-sm"></i> Park Finding</a>-->
+                <!--</li>-->
 
                 <?php   if($user_id == 0){?>
                 <li <?php if($action == 'login'): ?> class="am-active" <?php endif; ?> >
@@ -50,7 +50,7 @@
                     <a href="<?php echo htmlentities($site_info['reg_url']); ?>" target="new"   ><i class="am-icon-flag am-icon-sm"></i> Register</a>
                 </li>
                 <?php }else{ ?>
-                <li <?php if($action == 'user'): ?> class="am-active" <?php endif; ?>> <a href="<?php echo url('/user/'.$user_id); ?>" target="new"  > Welcome <?php echo $user_info['user_name']; ?> </a></li>
+                <li <?php if($action == 'index' && $controller == 'User'): ?> class="am-active" <?php endif; ?>> <a href="<?php echo url('/user/'.$user_id); ?>" target="new"  > Welcome <?php echo $user_info['user_name']; ?> </a></li>
                 <li ><a href="<?php echo htmlentities($site_info['logout_url']); ?>"   ><i class="am-icon-sign-out am-icon-sm"></i> Log out</a> </li>
                 <?php } ?>
             </ul>
@@ -61,6 +61,16 @@
 
 
 <div class="detail">
+
+
+    <div class="am-g am-g-fixed " style="margin-bottom: 10px" >
+        <!--<a href="javascript:;" method="notice" data-src="/assets/image/tips.png" class="layui-btn">See the steps</a>-->
+        <a class="am-btn am-btn-warning layui-btn" method="notice" data-src="/assets/image/tips_2.png">
+            <i class="am-icon-share"></i>
+            See the steps
+        </a>
+    </div>
+
     <div class="am-g am-g-fixed detail_bg" >
             <div class="map_l" style="width: 70%;position:relative;">
             <div id="map" style="width: 100%; height: 648px" ></div>
@@ -136,10 +146,10 @@
             <div style="clear: both"></div>
         <?php if($hastrip == 1): ?>
         <div >
-            <p style="text-align: center;font-size: 24px">You plan will cancled in <?php echo $ltime; ?>？</p>
+            <p style="text-align: center;font-size: 24px">You plan will cancel in <?php echo $ltime; ?>？</p>
             <div style="text-align: center">
                 <button type="button" data-status="2" data-planid="<?php echo $trip_info['planId']; ?>" class="handle_plan am-btn am-btn-secondary am-radius">Finish Plan</button>
-                <button type="button" data-status="3" data-planid="<?php echo $trip_info['planId']; ?>" class="handle_plan am-btn am-btn-danger am-radius">Cancle Plan</button>
+                <button type="button" data-status="3" data-planid="<?php echo $trip_info['planId']; ?>" class="handle_plan am-btn am-btn-danger am-radius">Cancel Plan</button>
             </div>
         </div>
         <?php endif; ?>
@@ -187,6 +197,37 @@
 <script type="text/javascript" src="/assets/js/action.js"></script>
 <script type="text/javascript" src="/assets/js/common.js"></script>
 <script type="text/javascript" src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.min.js"></script>
+<script>
+    var demo = {
+        notice: function(){
+            // alert($(this).data('src'));
+            layer.open({
+                type: 1
+                ,title: false //不显示标题栏
+                ,closeBtn: false
+                ,area: '1200px;'
+                ,shade: 0.8
+                ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                ,resize: false
+                ,content: '<img src="'+$(this).data('src')+'" width="100%">'
+                ,btn: [ 'Close']
+                ,btnAlign: 'c'
+                ,moveType: 1 //拖拽模式，0或者1
+                ,success: function(layero){
+                    var btn = layero.find('.layui-layer-btn');
+
+                }
+            });
+        }
+
+    };
+
+    $('.layui-btn').on('click', function(){
+        var othis = $(this), method = othis.attr('method');
+        var demo1 = $('#demo1'), p = demo1.find('p').eq(othis.index());
+        demo[method] ? demo[method].call(this, othis) : new Function('that', p.html())(this);
+    });
+</script>
 
 </body>
 
@@ -331,7 +372,9 @@
 
                             var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (j % 26));
                             // var markerIcon = MARKER_PATH + markerLetter + '.png';
-                            var markerIcon =  result.data.image;
+                            // var markerIcon =  result.data.image;
+                            var markerIcon =  "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+
                             // Use marker animation to drop the icons incrementally on the map.
                             markers[j] = new google.maps.Marker({
                                 position: results[j].geometry.location,
@@ -497,7 +540,7 @@
     // luckSkeen();
     function luckSkeen(){
 
-        layer.confirm('You have planned an exercise , please finish or cancle it frist？', {
+        layer.confirm('You have planned an exercise , please finish or cancel it frist？', {
             btn: ['重要','奇葩'] //按钮
         }, function(){
             layer.msg('的确很重要', {icon: 1});
@@ -525,7 +568,7 @@
         }
 
         if($("#hastrip").val() == 1 ){
-            layer.alert('You have planned an exercise ,please finish or cancle it first.', {icon: 6});
+            layer.alert('You have planned an exercise ,please finish or cancel it first.', {icon: 6});
             return false;
         }
         layer.confirm("Do you want to plan an exercise on  "+time+" ?", {

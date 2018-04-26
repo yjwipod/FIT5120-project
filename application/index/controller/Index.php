@@ -11,6 +11,7 @@ use joshtronic\GooglePlaces;
 use SKAgarwal\GoogleApi\PlacesApi;
 use think\captcha\Captcha;
 use think\Db;
+use think\facade\Cache;
 use think\facade\Cookie;
 use think\facade\Session;
 use YahooWeather\Weather\AnonyControllerYahooWeather;
@@ -146,13 +147,47 @@ class Index extends Base
 
     public function health()
     {
+//        Cache::rm('ranktime_' . $this->user_id);
+//        die;
         if ($this->user_id != 0) {
             $rs = CommonService::getSingleton()->ranktime($this->user_id);
             if ($rs == 3) {
-                $this->success('Jump to Test', 'index/user/foodRankTest');
+//
+//                $this->success('Jump to Test', 'index/user/foodRankTest');
+                return redirect('index/user/foodRankTest');
             }
 //            $this->ranktime($this->user_id);
+
+
+            switch (Cache::get('ranktime_' . $this->user_id)) {
+                case 1;
+                    $num = 6;
+                    break;
+                case 2;
+                    $num = 5;
+                    break;
+                case 3;
+                    $num = 4;
+                    break;
+                case 4;
+                    $num = 3;
+                    break;
+                case 5;
+                    $num = 2;
+                    break;
+                case 6;
+                    $num = 1;
+                    break;
+                default :
+                    $num = Cache::get('ranktime_' . $this->user_id);
+                    break;
+            }
+
+            $this->assign('num', $num);
+            $this->assign('round', Cache::get('ranktime_' . $this->user_id));
         }
+//        $this->assign('round', 111);
+
         $res = [];
         $one = Db::name("food")->limit(1)->order('rand()')->find();
         $one['top'] = 180 + rand(10, 200);
@@ -249,6 +284,11 @@ class Index extends Base
 
     public function home()
     {
+        return $this->fetch();
+    }
+
+    public function introduction(){
+
         return $this->fetch();
     }
 

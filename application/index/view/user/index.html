@@ -33,7 +33,7 @@
                         </h2>
                         <ul class="am-avg-lg-2 am-avg-sm-2 am-padding-top-xs">
                             <li class="font_green am-padding-vertical-sm">Email：<a>{:$user_info['email']}</a></li>
-                            <li class="font_green am-padding-vertical-sm">Sex：<a>{if condition="$user_info['sex'] eq 0"}男{else /}女 {/if}</a></li>
+                            <li class="font_green am-padding-vertical-sm">Sex：<a>{if condition="$user_info['sex'] eq 0"}Boy{else /}Girl {/if}</a></li>
                             <li class="font_green am-padding-vertical-xs">Point：<a>{:$user_info['point']}</a></li>
                             <li class="font_green am-padding-vertical-xs">Last Login：<a><?php echo date("Y-m-d H:i:s",$user_info['login_time']);?></a></li>
                         </ul>
@@ -41,7 +41,7 @@
                 </div>
             </div>
 
-            <div class="am-container am-padding-horizonta-sm br_bt br_lf br_rg br_tp_g am-margin-top">
+            <div class="am-container am-padding-horizonta-sm br_bt br_lf br_rg br_tp_g am-margin-top" style="display: none;">
                 <div data-am-widget="titlebar" class="am-titlebar am-titlebar-multi am-margin-top-0 br_bt am-no-layout">
                     <h1 class="am-titlebar-title" style="color:#0e90d2">My Trip
                     </h1>
@@ -71,9 +71,8 @@
                                             {switch vo.status}
                                             {case '0'}<span style="color: indianred">In Progress</span>{/case}
                                             {case 2}<span style="color: green">Finished</span>{/case}
-                                            {case 3}<span style="color: saddlebrown">Cancled</span>{/case}
+                                            {case 3}<span style="color: saddlebrown">Cancelled</span>{/case}
                                             {/switch}
-
                                         </td>
                                     </tr>
                                 {/volist}

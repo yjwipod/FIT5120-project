@@ -1,4 +1,4 @@
-<?php /*a:5:{s:78:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\user\index.html";i:1523434998;s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\base.html";i:1522856435;s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\toper.html";i:1522856435;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\header.html";i:1523434346;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1522856435;}*/ ?>
+<?php /*a:6:{s:78:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\user\index.html";i:1524152359;s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\base.html";i:1522856435;s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\toper.html";i:1522856435;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\header.html";i:1524151899;s:82:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\user\rightmenu.html";i:1523436089;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1524074187;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -26,7 +26,7 @@
 <header class="am-topbar am-topbar-fixed-top header_css"  >
     <div class="am-container" >
         <h1 class="am-topbar-brand">
-            <a href="/">LOGO</a>
+            <a href="/"><img src="/assets/image/logo.png" width="71px"></a>
         </h1>
         <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-default am-show-sm-only" data-am-collapse="{target: '#collapse-head'}"><span class="am-sr-only">导航切换</span><span
                 class="am-icon-bars"></span></button>
@@ -38,9 +38,9 @@
                 <li <?php if($action == 'health'): ?> class="am-active" <?php endif; ?> >
                     <a href="<?php echo htmlentities($site_info['health_url']); ?>" > <i class="am-icon-heartbeat am-icon-sm"></i> Food Ranking</a>
                 </li>
-                <li <?php if($action == 'go_trip'): ?> class="am-active" <?php endif; ?> >
-                    <a href="<?php echo htmlentities($site_info['go_trip_url']); ?>"><i class="am-icon-search am-icon-sm"></i> Park Finding</a>
-                </li>
+                <!--<li <?php if($action == 'go_trip'): ?> class="am-active" <?php endif; ?> >-->
+                    <!--<a href="<?php echo htmlentities($site_info['go_trip_url']); ?>"><i class="am-icon-search am-icon-sm"></i> Park Finding</a>-->
+                <!--</li>-->
 
                 <?php   if($user_id == 0){?>
                 <li <?php if($action == 'login'): ?> class="am-active" <?php endif; ?> >
@@ -89,7 +89,7 @@
                         </h2>
                         <ul class="am-avg-lg-2 am-avg-sm-2 am-padding-top-xs">
                             <li class="font_green am-padding-vertical-sm">Email：<a><?php echo $user_info['email']; ?></a></li>
-                            <li class="font_green am-padding-vertical-sm">Sex：<a><?php if($user_info['sex'] == 0): ?>男<?php else: ?>女 <?php endif; ?></a></li>
+                            <li class="font_green am-padding-vertical-sm">Sex：<a><?php if($user_info['sex'] == 0): ?>Boy<?php else: ?>Girl <?php endif; ?></a></li>
                             <li class="font_green am-padding-vertical-xs">Point：<a><?php echo $user_info['point']; ?></a></li>
                             <li class="font_green am-padding-vertical-xs">Last Login：<a><?php echo date("Y-m-d H:i:s",$user_info['login_time']);?></a></li>
                         </ul>
@@ -97,7 +97,7 @@
                 </div>
             </div>
 
-            <div class="am-container am-padding-horizonta-sm br_bt br_lf br_rg br_tp_g am-margin-top">
+            <div class="am-container am-padding-horizonta-sm br_bt br_lf br_rg br_tp_g am-margin-top" style="display: none;">
                 <div data-am-widget="titlebar" class="am-titlebar am-titlebar-multi am-margin-top-0 br_bt am-no-layout">
                     <h1 class="am-titlebar-title" style="color:#0e90d2">My Trip
                     </h1>
@@ -123,8 +123,7 @@
                                         <td class="am-text-center"><?php echo $vo['weather']; ?></td>
                                         <td class="am-text-center"><a href="<?php echo url('index/index/go_trip',['ky'=>$vo['parkName']]); ?>" target="_blank" ><?php echo $vo['parkName']; ?></a></td>
                                         <td class="am-text-center">
-                                            <?php switch($vo['status']): case "'0'": ?><span style="color: indianred">In Progress</span><?php break; case "2": ?><span style="color: green">Finished</span><?php break; case "3": ?><span style="color: saddlebrown">Cancled</span><?php break; endswitch; ?>
-
+                                            <?php switch($vo['status']): case "'0'": ?><span style="color: indianred">In Progress</span><?php break; case "2": ?><span style="color: green">Finished</span><?php break; case "3": ?><span style="color: saddlebrown">Cancelled</span><?php break; endswitch; ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; endif; else: echo "" ;endif; endif; ?>
@@ -139,16 +138,14 @@
         <div class="am-u-lg-3 am-padding-right-0">
             <div class="am-container br_lf br_rg br_bt br_tp_g am-text-center am-padding-sm">
 
-                <h2 class="font_green am-margin-bottom-xs">Manage Control</h2>
-                <p class="am-margin-vertical-xs"><a href="<?php echo url('/user/'.$user_id); ?>">Home </a></p>
-                <?php if($user_id == 1): ?>
-                    <p class="am-margin-vertical-xs"><a href="<?php echo url('/index/user/food_manage/'); ?>">Food </a></p>
-                <?php endif; ?>
-                <p class="am-margin-vertical-xs"><a href="<?php echo url('/index/user/point_logs/user_id/'.$user_id); ?>">Point Log </a></p>
-                <p class="am-margin-vertical-xs"><a href="<?php echo url('/logout'); ?>">Log out</a></p>
-
-
-            </div>
+    <h2 class="font_green am-margin-bottom-xs">Manage Control</h2>
+    <p class="am-margin-vertical-xs"><a href="<?php echo url('/user/'.$user_id); ?>">Home </a></p>
+    <?php if($user_id == 1): ?>
+    <p class="am-margin-vertical-xs"><a href="<?php echo url('/index/user/food_manage/'); ?>">Food </a></p>
+    <?php endif; ?>
+    <p class="am-margin-vertical-xs"><a href="<?php echo url('/index/user/point_logs/user_id/'.$user_id); ?>">Point Log </a></p>
+    <p class="am-margin-vertical-xs"><a href="<?php echo url('/logout'); ?>">Log out</a></p>
+</div>
         </div>
     </div>
 </div>
@@ -167,6 +164,37 @@
 <script type="text/javascript" src="/assets/js/action.js"></script>
 <script type="text/javascript" src="/assets/js/common.js"></script>
 <script type="text/javascript" src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.min.js"></script>
+<script>
+    var demo = {
+        notice: function(){
+            // alert($(this).data('src'));
+            layer.open({
+                type: 1
+                ,title: false //不显示标题栏
+                ,closeBtn: false
+                ,area: '1200px;'
+                ,shade: 0.8
+                ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                ,resize: false
+                ,content: '<img src="'+$(this).data('src')+'" width="100%">'
+                ,btn: [ 'Close']
+                ,btnAlign: 'c'
+                ,moveType: 1 //拖拽模式，0或者1
+                ,success: function(layero){
+                    var btn = layero.find('.layui-layer-btn');
+
+                }
+            });
+        }
+
+    };
+
+    $('.layui-btn').on('click', function(){
+        var othis = $(this), method = othis.attr('method');
+        var demo1 = $('#demo1'), p = demo1.find('p').eq(othis.index());
+        demo[method] ? demo[method].call(this, othis) : new Function('that', p.html())(this);
+    });
+</script>
 
 </body>
 

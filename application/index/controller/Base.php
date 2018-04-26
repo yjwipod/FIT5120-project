@@ -25,7 +25,7 @@ class Base extends Controller
             'go_trip_url' => Url::build('index/index/go_trip'),
             'logout_url' => Url::build('index/index/logout'),
         ];
-        $this->user_id = Session::get('user_id') == "" ? "" : Session::get('user_id');
+        $this->user_id = Session::get('user_id') == "" ? "0" : Session::get('user_id');
         $this->user_info = Session::get('user_info') == "" ? "" : Session::get('user_info');
         $this->assign('site_info', $siteInfo);
 //        echo $this->request->action();
