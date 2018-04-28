@@ -35,9 +35,6 @@ class CommonService extends Service
             $map['userId'] = $user_id;
             $map['is_frist'] = 1;
             $check_is_frist = PointLogModel::getSingleton()->where($map)->find();
-//            echo Cache::get($sign);
-//            print_r($check_is_frist);
-//            echo 11;
 
             if (Cache::get($sign) == 7 && empty($check_is_frist)) {
 
@@ -50,7 +47,7 @@ class CommonService extends Service
                 $num = 1;
                 Cache::set($sign, $num, 3600);
             } else {
-                $num = Cache::get($sign) + 1;
+                $num = intval(Cache::get($sign)) + 1;
                 Cache::set($sign, $num, 3600);
             }
             return 1;

@@ -20,7 +20,7 @@
             <p style="font-size: 18px ; font-weight: bold">Healthiest</p>
             <ul class="select_food">
                 {volist name='l_list' id='vo'}
-                <li  data-id="{:$vo.foodId}" class="item"><img src="/{:$vo.picpath}"/></li>
+                <li  data-id="{:$vo.foodId}" class="item" data-name="{:$vo.foodName}" ><img src="/{:$vo.picpath}"/></li>
                 {/volist}
                 <div class="clearfix"></div>
             </ul>
@@ -29,14 +29,14 @@
             <p style="font-size: 18px ; font-weight: bold">Healthy</p>
             <ul class="select_food" >
                 {volist name='y_list' id='vo'}
-                <li data-id="{:$vo.foodId}" class="item"><img src="/{:$vo.picpath}"/></li>
+                <li data-id="{:$vo.foodId}" class="item" data-name="{:$vo.foodName}"><img src="/{:$vo.picpath}"/></li>
                 {/volist}
                 <div class="clearfix"></div>
             </ul>
         </div>
         <div>
             <button type="button" id="select" class="am-btn am-btn-primary am-radius">OK</button>
-            <button type="button" class="am-btn  am-btn-warning  am-radius">Cancel</button>
+            <!--<button type="button" class="am-btn  am-btn-warning  am-radius">Cancel</button>-->
         </div>
     </div>
 </div>
@@ -44,6 +44,7 @@
 {/block}
 {block name="script"}
 <script>
+
     // $(".item").click(function(){
     //     var ids = [] ;
     //     $(".selected").each(function(i,v){
@@ -57,19 +58,22 @@
     // });
 
     $("#select").click(function(){
-        var ids = [],strid = ' ' ;
+        var ids = [],strid = ' ' ,foodname = ' ' ;
         $(".selected").each(function(i,v){
             // ids[i] = $(this).data('id');
             if(i == 0) {
                 strid = $(this).data('id');
+                foodname = $(this).data('name');
             }else{
                 strid =  $(this).data('id')+','+strid;
+                foodname =  $(this).data('name')+','+name;
             }
         });
-        // if(ids.length > 2){
-        //     layer.msg('Can not choose more than two');
-        //     return false;
-        // }
+
+        if($('li.selected').length == 0 ){
+            layer.msg('You did not choose any food you want.');
+            return false;
+        }
 
         $.post(
             "{:url('index/user/plan_eat')}",
@@ -78,12 +82,14 @@
                 // layer.msg(result.msg);
                 if(result.code == 20){
                     if(result.data == 0){
+                        $.post( "{:url('index/user/sendEmail')}",{foodname:foodname},function(){});
                         //There is an email will be sent to your parents
-                        layer.alert('There is an email will be sent to your parents', {icon: 6});
+                        layer.alert('The details of your choosing has sent to your parents by email.', {icon: 6});
                         // layer.alert('You got some points in this times ', {icon: 6});
                     }else{
                         layer.alert('Prefer Job ', {icon: 6});
                     }
+
                     setTimeout( window.location.href='/health' , 3000);
 
                     return false;

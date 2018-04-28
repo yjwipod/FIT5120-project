@@ -34,12 +34,15 @@ class User extends Base
 
     public function index()
     {
-        if($this->request->param('id') == 0){
+
+
+        if ($this->request->param('id') == 0) {
             return redirect('/login');
         }
         $list = PlanModel::getSingleton()->where(['userId' => Session::get('user_id')])->select();
 //        print_r(count($list));
         $this->assign('list', $list);
+        $this->assign('level', $this->getUserlevel(Session::get('user_info')['point']));
         return $this->fetch();
     }
 
@@ -347,10 +350,10 @@ class User extends Base
 //        $foodlist = FoodModel::getSingleton()->where('healthyLevel','in', [3,4])->select();
 //        $this->assign('list',$foodlist);
 
-        $y_foodlist = FoodModel::getSingleton()->where('healthyLevel', 'eq', 4)->select();
+        $y_foodlist = FoodModel::getSingleton()->where('healthyLevel', 'eq', 4)->limit(6)->select();
         $this->assign('y_list', $y_foodlist);
 
-        $l_foodlist = FoodModel::getSingleton()->where('healthyLevel', 'eq', 3)->select();
+        $l_foodlist = FoodModel::getSingleton()->where('healthyLevel', 'eq', 3)->limit(6)->select();
         $this->assign('l_list', $l_foodlist);
         return $this->fetch();
     }
@@ -372,23 +375,29 @@ class User extends Base
         return $this->fetch();
     }
 
-    public function sendEmail($user)
+    public function sendEmail()
     {
-        $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+
+        $foods = $this->request->param('foodname');
+        $user_info = Session::get('user_info');
+        if (empty($user_info)) {
+            return false;
+        }
+        $mail = new PHPMailer(true);                    // Passing `true` enables exceptions
         try {
             //Server settings
             $mail->SMTPDebug = 2;                                 // Enable verbose debug output
             $mail->isSMTP();                                      // Set mailer to use SMTP
-            $mail->Host = 'smtp.qq.com';  // Specify main and backup SMTP servers
+            $mail->Host = 'smtp-mail.outlook.com';  // Specify main and backup SMTP servers
             $mail->SMTPAuth = true;                               // Enable SMTP authentication
-            $mail->Username = '120025737@qq.com';                 // SMTP username
-            $mail->Password = 'Huang89814!!qy';                           // SMTP password
+            $mail->Username = 'kris7i@outlook.com';                 // SMTP username
+            $mail->Password = 'Huang89814';                           // SMTP password
             $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
             $mail->Port = 587;                                    // TCP port to connect to
 
             //Recipients
-            $mail->setFrom('120025737@qq.com', 'kris wong');
-            $mail->addAddress('kris7i@outlook.com', 'kris wong send');     // Add a recipient
+            $mail->setFrom('kris7i@outlook.com', 'kris wong');
+            $mail->addAddress($user_info['email'], $user_info['user_name']);     // Add a recipient
 //            $mail->addAddress('120025737@qq.com');               // Name is optional
 //            $mail->addReplyTo('120025737@qq.com', 'Information');
 //            $mail->addCC('120025737@qq.com');
@@ -400,8 +409,8 @@ class User extends Base
 
             //Content
             $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = 'Here is the subject';
-            $mail->Body = 'This is the HTML message body <b>in bold!</b>';
+            $mail->Subject = 'Fit Kidz Tips';
+            $mail->Body = 'Your child ' . $user_info['user_name'] . ' has chosen ' . $foods . ' for the next meal. Fit-kidz is always helping children to choose the healthiest food they want.';
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
             $mail->send();
@@ -409,6 +418,36 @@ class User extends Base
         } catch (Exception $e) {
             echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
         }
+    }
+
+    /**
+     * 获取用户等级
+     */
+    public function getUserlevel($points=100)
+    {
+        if(10 <= $points &&  $points < 90){
+            return ['level'=>1,'display'=>'1'];
+        }elseif(100 <= $points &&  $points < 190){
+            return ['level'=>2,'display'=>'2'];
+        }elseif(200 <= $points &&  $points < 290){
+            return ['level'=>3,'display'=>'3'];
+        }elseif(300 <= $points &&  $points < 390){
+            return ['level'=>4,'display'=>'4'];
+        }elseif(400 <= $points &&  $points < 490){
+            return ['level'=>5,'display'=>'5'];
+        }elseif(500 <= $points &&  $points < 590){
+            return ['level'=>6,'display'=>'6'];
+        }elseif(600 <= $points &&  $points < 690){
+            return ['level'=>7,'display'=>'7'];
+        }elseif(700 <= $points &&  $points < 790){
+            return ['level'=>8,'display'=>'8'];
+        }elseif(800 <= $points &&  $points < 890){
+            return ['level'=>9,'display'=>'9'];
+        }elseif(900 <= $points &&  $points < 990){
+            return ['level'=>10,'display'=>'10'];
+        }
+
+
     }
 
 }
