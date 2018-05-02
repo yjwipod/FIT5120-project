@@ -148,7 +148,7 @@ class Index extends Base
     public function health()
     {
 //        Cache::rm('ranktime_' . $this->user_id);
-//        die;
+////        die;
         if ($this->user_id != 0) {
              $rs = CommonService::getSingleton()->ranktime($this->user_id);
             if ($rs == 3) {

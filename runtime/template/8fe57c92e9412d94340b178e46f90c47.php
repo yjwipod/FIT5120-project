@@ -1,4 +1,4 @@
-<?php /*a:2:{s:78:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\index\home.html";i:1524240182;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1524074187;}*/ ?>
+<?php /*a:2:{s:78:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\index\home.html";i:1524240182;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1525246426;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 

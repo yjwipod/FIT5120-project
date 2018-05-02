@@ -65,7 +65,7 @@
             // alert(33);
             // window.location.reload();
             // };
-            if (i === 4) {
+            if (i === 4 && user_id != 0) {
                 var msg ='You have ranked the food level correctly and got 10 points! Congratulations!  \nYou can try this again!';
                 $.post("/index/user/ajaxGetpoints",{points:10},function(result){
                     // $.post( "/index/user/sendEmail",{msg:msg},function(){ });
@@ -98,11 +98,11 @@
             scroll: false
         }));
 
-        if (user_id == 0) {
-            layer.msg('Please login !');
-            $('.foodImg').draggable('disable');
-            return false;
-        } else {
+        // if (user_id == 0) {
+            // layer.msg('Please login !');
+            // $('.foodImg').draggable('disable');
+        //     return false;
+        // } else {
             $('.foodImg').draggable({
                 start: function (event, ui) {
                     if (num == 0) {
@@ -128,7 +128,7 @@
                     }
                 }
             });
-        }
+        // }
 
         // $("#foodLevel").on("dragover", function(event) {
         //     event.preventDefault();

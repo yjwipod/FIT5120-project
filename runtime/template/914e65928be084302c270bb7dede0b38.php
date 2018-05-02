@@ -1,4 +1,4 @@
-<?php /*a:5:{s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\index\health.html";i:1525068414;s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\base.html";i:1522856435;s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\toper.html";i:1522856435;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\header.html";i:1524151899;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1524074187;}*/ ?>
+<?php /*a:5:{s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\index\health.html";i:1525251764;s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\base.html";i:1525246426;s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\toper.html";i:1525246426;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\header.html";i:1525246426;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1525246426;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -85,15 +85,16 @@
         </div>
         <div class="game_zoom" style="position:relative;">
             <div class="am-form-group am-form-icon" style="position:absolute; z-index:10000; left:10px; top:100px">
-                <?php if(isset($round)){ if($round < 7){ ?>
+                <?php if(isset($round) && $user_id != 0 ){ if($round < 7){ ?>
 
                 <p>You can get points </p>
                 <p>in the next <span style="color: red"><?php echo $num; ?></span> Round(s) </p>
 
                 <?php }else{?>
                 <p>Just for Fun ! </p>
-                <?php } } ?>
-
+                <?php } }else{ ?>
+                <p>Just for Fun ! </p>
+                <?php } ?>
             </div>
             <div class="am-form-group am-form-icon" style="position:absolute; z-index:10000; right:10px; top:100px">
                 <p>You can try </p>
