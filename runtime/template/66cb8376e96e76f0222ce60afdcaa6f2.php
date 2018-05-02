@@ -1,4 +1,4 @@
-<?php /*a:5:{s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\index\login.html";i:1522765133;s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\base.html";i:1525246426;s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\toper.html";i:1525246426;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\header.html";i:1525246426;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1525246426;}*/ ?>
+<?php /*a:5:{s:62:"/www/wwwroot/ChildHealth/application/index/view/index/reg.html";i:1525253868;s:64:"/www/wwwroot/ChildHealth/application/index/view/layout/base.html";i:1525253868;s:65:"/www/wwwroot/ChildHealth/application/index/view/layout/toper.html";i:1525253868;s:66:"/www/wwwroot/ChildHealth/application/index/view/layout/header.html";i:1525253868;s:66:"/www/wwwroot/ChildHealth/application/index/view/layout/footer.html";i:1525253868;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -22,33 +22,48 @@
     .form-box {
         width: 300px;
         margin: 0 auto;
-        padding: 60px 0;
-        padding-bottom: 120px; }
+        padding: 30px 0;
+        padding-bottom: 120px;
+    }
+
     .form-box .item {
-        margin-top: 20px; }
+        margin-top: 20px;
+    }
+
     .form-box .item input {
         height: 40px;
         width: 100%;
         border: 1px solid #ccc;
-        text-indent: 10px; }
+        text-indent: 10px;
+    }
+
     .mt-btn {
         display: inline-block;
         background: #ff5402;
         color: #fff;
-        padding: 10px 20px; }
+        padding: 10px 20px;
+    }
+
     .mt-btn:hover {
-        color: #fff; }
+        color: #fff;
+    }
+
     .mt-btn-block {
         display: block;
-        text-align: center; }
+        text-align: center;
+    }
+
     .img-code {
         vertical-align: middle;
-        height: 41px; }
+        height: 41px;
+    }
+
     #imgcode {
         width: 160px;
         top: 1px;
         right: -5px;
-        position: relative; }
+        position: relative;
+    }
 </style>
 
 </head>
@@ -94,10 +109,10 @@
 
 
 <div class="detail">
-    <form action="chkLogin.html" id="login_form" name="reg_form" method="POST">
+    <form action="chkLogin.html" id="reg_form" name="reg_form" method="POST">
         <div class="register">
             <div class="form-box">
-                <h1 class="logo"> Login</h1>
+                <h1 class="logo"> Regist</h1>
                 <!-- <div class="item">
                     <input id="email" type="text" placeholder="邮箱">
                 </div> -->
@@ -105,18 +120,40 @@
                     <input id="account" name="account" type="text" placeholder="account">
                 </div>
                 <div class="item">
-                    <input id="password"  name="password"  type="password" placeholder="password">
+                    <input id="email" name="email" type="text" placeholder="email">
+                </div>
+
+                <div class="am-form-group" style="margin-top: 10px">
+
+                    <label class="am-radio-inline">
+                        <input type="radio" class="sex" name="sex" value="0" style="width:20px" checked="checked">Boy
+                    </label>
+                    <label class="am-radio-inline">
+                        <input type="radio"  class="sex" name="sex" value="1" style="width:20px">Girl
+                    </label>
                 </div>
 
                 <div class="item">
-                    <img class="img-code captcha"  src="<?php echo url('/index/index/verify'); ?>" alt="verify code" id="re_butid" onclick="re_verify()" />
-                    <input id="imgcode"  name="imgcode"  type="text" placeholder="enter verify code">
+                    <img id="avatar" src="/assets/image/timg.jpg" width="50px"/>
+                </div>
+
+                <div class="item">
+                    <input id="password" name="password" type="password" placeholder="password">
                 </div>
                 <div class="item">
-                    <a id="registerBtn" class="mt-btn mt-btn-block">Login</a>
+                    <input id="repassword" name="repassword" type="password" placeholder="comfirm_passwd">
+                </div>
+
+                <div class="item">
+                    <img class="img-code captcha" src="<?php echo url('/index/index/verify'); ?>" alt="verify code" id="re_butid"
+                         onclick="re_verify()"/>
+                    <input id="imgcode" name="imgcode" type="text" placeholder="enter verify code">
                 </div>
                 <div class="item">
-                    No Account？ <a href="<?php echo url('/reg'); ?>">Go regist</a>
+                    <a id="registerBtn" class="mt-btn mt-btn-block">Regist</a>
+                </div>
+                <div class="item">
+                    Had Account？ <a href="<?php echo url('/login'); ?>">GO Login</a>
                 </div>
             </div>
         </div>
@@ -173,16 +210,34 @@
 
 
 <script type="text/javascript">
-    function re_verify(){
-        $('.captcha').attr('src',"<?php echo url('/index/index/verify'); ?>&r="+Math.random());
+    function re_verify() {
+        $('.captcha').attr('src', "<?php echo url('/index/index/verify'); ?>&r=" + Math.random());
     }
 
-    $(document).ready(function(){
+    $(document).ready(function () {
 
-        $("#registerBtn").click(function(){
-            memberLogin.ajaxLogin();
+        $("#registerBtn").click(function () {
+            userRegister.saveInfo();
         });
 
+    });
+</script>
+<script>
+    $(function() {
+        $('#doc-form-file').on('change', function() {
+            var fileNames = '';
+            $.each(this.files, function() {
+                fileNames += '<span class="am-badge">' + this.name + '</span> ';
+            });
+            $('#file-list').html(fileNames);
+        });
+        $('.sex').click(function(){
+            if( $("input[name='sex']:checked").val() == 0 ){
+                $("#avatar").attr('src','/assets/image/timg.jpg');
+            }else{
+                $("#avatar").attr('src','/assets/image/ftimg.jpg');
+            }
+        });
     });
 </script>
 
