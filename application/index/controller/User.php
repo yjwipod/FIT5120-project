@@ -1,5 +1,4 @@
 <?php
-
 namespace app\index\controller;
 
 
@@ -34,7 +33,9 @@ class User extends Base
 
     public function index()
     {
-
+//        echo "<pre>";
+//        print_r(MemberUserModel::getSingleton()->where(['id'=>$this->user_id])->find());
+//        print_r(Session::get('user_info'));
 
         if ($this->request->param('id') == 0) {
             return redirect('/login');
@@ -42,7 +43,9 @@ class User extends Base
         $list = PlanModel::getSingleton()->where(['userId' => Session::get('user_id')])->select();
 //        print_r(count($list));
         $this->assign('list', $list);
+        
         $this->assign('level', $this->getUserlevel(Session::get('user_info')['point']));
+//        $this->assign('needpoints', $this->getUserlevel(Session::get('user_info')['point']));
         return $this->fetch();
     }
 
@@ -62,6 +65,7 @@ class User extends Base
         $data['userId'] = $this->user_id;
         $data['createtime'] = time();
         if (PointLogModel::getSingleton()->save($data)) {
+            Session::set('user_info', MemberUserModel::getSingleton()->where(['id'=>$this->user_id])->find());
             MemberUserModel::getSingleton()->where(['id' => $this->user_id])->setInc('point', $points);
         }
 //        return json(['code' => '22']);
@@ -78,6 +82,7 @@ class User extends Base
             $data['createtime'] = time();
             if (Cache::get('ranktime_' . $this->user_id) < 7) {
                 if (PointLogModel::getSingleton()->save($data)) {
+                    Session::set('user_info', MemberUserModel::getSingleton()->where(['id'=>$this->user_id])->find());
                     MemberUserModel::getSingleton()->where(['id' => $this->user_id])->setInc('point', $this->request->param('points'));
                 }
             }
@@ -350,10 +355,10 @@ class User extends Base
 //        $foodlist = FoodModel::getSingleton()->where('healthyLevel','in', [3,4])->select();
 //        $this->assign('list',$foodlist);
 
-        $y_foodlist = FoodModel::getSingleton()->where('healthyLevel', 'eq', 4)->limit(6)->select();
+        $y_foodlist = FoodModel::getSingleton()->where('healthyLevel', 'eq', 4)->order('rand()')->limit(6)->select();
         $this->assign('y_list', $y_foodlist);
 
-        $l_foodlist = FoodModel::getSingleton()->where('healthyLevel', 'eq', 3)->limit(6)->select();
+        $l_foodlist = FoodModel::getSingleton()->where('healthyLevel', 'eq', 3)->order('rand()')->limit(6)->select();
         $this->assign('l_list', $l_foodlist);
         return $this->fetch();
     }
@@ -383,41 +388,17 @@ class User extends Base
         if (empty($user_info)) {
             return false;
         }
-        $mail = new PHPMailer(true);                    // Passing `true` enables exceptions
-        try {
-            //Server settings
-            $mail->SMTPDebug = 2;                                 // Enable verbose debug output
-            $mail->isSMTP();                                      // Set mailer to use SMTP
-            $mail->Host = 'smtp-mail.outlook.com';  // Specify main and backup SMTP servers
-            $mail->SMTPAuth = true;                               // Enable SMTP authentication
-            $mail->Username = 'kris7i@outlook.com';                 // SMTP username
-            $mail->Password = 'Huang89814';                           // SMTP password
-            $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-            $mail->Port = 587;                                    // TCP port to connect to
-
-            //Recipients
-            $mail->setFrom('kris7i@outlook.com', 'kris wong');
-            $mail->addAddress($user_info['email'], $user_info['user_name']);     // Add a recipient
-//            $mail->addAddress('120025737@qq.com');               // Name is optional
-//            $mail->addReplyTo('120025737@qq.com', 'Information');
-//            $mail->addCC('120025737@qq.com');
-//            $mail->addBCC('120025737@qq.com');
-
-            //Attachments
-//            $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-//            $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-
-            //Content
-            $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = 'Fit Kidz Tips';
-            $mail->Body = 'Your child ' . $user_info['user_name'] . ' has chosen ' . $foods . ' for the next meal. Fit-kidz is always helping children to choose the healthiest food they want.';
-            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-            $mail->send();
-            echo 'Message has been sent';
-        } catch (Exception $e) {
-            echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+    
+        $toemail= $user_info['email'];
+        $name=$user_info['user_name'];
+        $subject='Fit Kidz Tips';
+        $content = 'Your child ' .  $user_info['user_name']  . ' has chosen ' . $foods . ' for the next meal. Fit-kidz is always helping children to choose the healthiest food they want.';
+        if(null !== $this->request->param('msg') && !empty($this->request->param('msg') ))
+        {
+            $content =$this->request->param('msg');
         }
+        $this->send_mail($toemail,$name,$subject,$content);
+        echo "";
     }
 
     /**
@@ -425,29 +406,81 @@ class User extends Base
      */
     public function getUserlevel($points=100)
     {
-        if(10 <= $points &&  $points < 90){
-            return ['level'=>1,'display'=>'1'];
-        }elseif(100 <= $points &&  $points < 190){
-            return ['level'=>2,'display'=>'2'];
-        }elseif(200 <= $points &&  $points < 290){
-            return ['level'=>3,'display'=>'3'];
-        }elseif(300 <= $points &&  $points < 390){
-            return ['level'=>4,'display'=>'4'];
-        }elseif(400 <= $points &&  $points < 490){
-            return ['level'=>5,'display'=>'5'];
-        }elseif(500 <= $points &&  $points < 590){
-            return ['level'=>6,'display'=>'6'];
-        }elseif(600 <= $points &&  $points < 690){
-            return ['level'=>7,'display'=>'7'];
-        }elseif(700 <= $points &&  $points < 790){
-            return ['level'=>8,'display'=>'8'];
-        }elseif(800 <= $points &&  $points < 890){
-            return ['level'=>9,'display'=>'9'];
-        }elseif(900 <= $points &&  $points < 990){
-            return ['level'=>10,'display'=>'10'];
+
+        if(10 <= $points &&  $points <= 90){
+            $needpoints = 100-$points;
+            return ['level'=>1,'needpoints'=>$needpoints];
+        }elseif(100 <= $points &&  $points <= 190){
+            $needpoints = 200-$points;
+            return ['level'=>2,'needpoints'=>$needpoints];
+        }elseif(200 <= $points &&  $points <= 290){
+            $needpoints = 300-$points;
+            return ['level'=>3,'needpoints'=>$needpoints];
+        }elseif(300 <= $points &&  $points <= 390){
+            $needpoints = 400-$points;
+            return ['level'=>4,'needpoints'=>$needpoints];
+        }elseif(400 <= $points &&  $points <= 490){
+            $needpoints = 500-$points;
+            return ['level'=>5,'needpoints'=>$needpoints];
+        }elseif(500 <= $points &&  $points <= 590){
+            $needpoints = 600-$points;
+            return ['level'=>6,'needpoints'=>$needpoints];
+        }elseif(600 <= $points &&  $points <= 690){
+            $needpoints = 700-$points;
+            return ['level'=>7,'needpoints'=>$needpoints];
+        }elseif(700 <= $points &&  $points <= 790){
+            $needpoints = 800-$points;
+            return ['level'=>8,'needpoints'=>$needpoints];
+        }elseif(800 <= $points &&  $points <= 890){
+            $needpoints = 900-$points;
+            return ['level'=>9,'needpoints'=>$needpoints];
+        }elseif(900 <= $points &&  $points <= 990){
+            $needpoints = 0;
+            return ['level'=>10,'needpoints'=>$needpoints];
+        }else{
+            $needpoints = 10-$points;
+            return ['level'=>0,'needpoints'=>$needpoints];
         }
 
 
+    }
+
+
+    /**
+     * 系统邮件发送函数
+     * @param string $tomail 接收邮件者邮箱
+     * @param string $name 接收邮件者名称
+     * @param string $subject 邮件主题
+     * @param string $body 邮件内容
+     * @param string $attachment 附件列表
+     * @return boolean
+     * @author static7 <static7@qq.com>
+     */
+    function send_mail($tomail, $name, $subject = '', $body = '', $attachment = null) {
+
+        $mail = new PHPMailer();           //实例化PHPMailer对象
+        $mail->CharSet = 'UTF-8';           //设定邮件编码，默认ISO-8859-1，如果发中文此项必须设置，否则乱码
+        $mail->IsSMTP();                    // 设定使用SMTP服务
+        $mail->SMTPDebug = 1;               // SMTP调试功能 0=关闭 1 = 错误和消息 2 = 消息
+        $mail->SMTPAuth = true;             // 启用 SMTP 验证功能
+        $mail->SMTPSecure = 'ssl';          // 使用安全协议
+        $mail->Host = "smtp.qq.com"; // SMTP 服务器
+        $mail->Port = 465;                  // SMTP服务器的端口号
+        $mail->Username = "120025737@qq.com";    // SMTP服务器用户名
+        $mail->Password = "Huang89814!!qy";     // SMTP服务器密码
+        $mail->SetFrom('120025737@qq.com', 'Kids Fit');
+        $replyEmail = '';                   //留空则为发件人EMAIL
+        $replyName = '';                    //回复名称（留空则为发件人名称）
+        $mail->AddReplyTo($replyEmail, $replyName);
+        $mail->Subject = $subject;
+        $mail->MsgHTML($body);
+        $mail->AddAddress($tomail, $name);
+        if (is_array($attachment)) { // 添加附件
+            foreach ($attachment as $file) {
+                is_file($file) && $mail->AddAttachment($file);
+            }
+        }
+        return $mail->Send() ? true : $mail->ErrorInfo;
     }
 
 }
