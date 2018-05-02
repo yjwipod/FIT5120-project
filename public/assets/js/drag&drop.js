@@ -65,22 +65,29 @@
             // alert(33);
             // window.location.reload();
             // };
-            if (i === 4) {
-                $.post("/index/user/ajaxGetpoints",{points:10},function(result){});    
-                layer.msg('You have ranked the food level correctly and got 10 points! Congratulations!  \nYou can try this again!', {
+            if (i === 4 ) {
+                if(times > 7){
+                    var msg ='Good Job!';
+                }else{
+                    var msg ='You have ranked the food level correctly and got 10 points! Congratulations!  \nYou can try this again!';
+                }
+                if(user_id != 0){
+                    $.post("/index/user/ajaxGetpoints", {points: 10}, function (result) {
+                        // $.post( "/index/user/sendEmail",{msg:msg},function(){ });
+                    });
+                }
+
+                layer.msg(msg, {
                   time: 0 //不自动关闭
                   ,btn: ['ok']
                   ,yes: function(index){
+
                     layer.close(index);
                     setTimeout(window.location.href = '/health', 3000);
                   }
                 });
 
-                // layer.alert("You have ranked the food level correctly and got 10 points! Congratulations!  \nYou can try this again!", {icon: 6});
-                // $.post("/index/user/ajaxGetpoints",{points:10},function(result){});
-                // layer.alert('Good JOb !!! ', {icon: 6});
-                // setTimeout(window.location.href = '/health', 3000);
-                // window.location.reload();
+
             }
 
         }
@@ -93,11 +100,11 @@
             scroll: false
         }));
 
-        if (user_id == 0) {
-            layer.msg('Please login !');
-            $('.foodImg').draggable('disable');
-            return false;
-        } else {
+        // if (user_id == 0) {
+            // layer.msg('Please login !');
+            // $('.foodImg').draggable('disable');
+        //     return false;
+        // } else {
             $('.foodImg').draggable({
                 start: function (event, ui) {
                     if (num == 0) {
@@ -123,7 +130,7 @@
                     }
                 }
             });
-        }
+        // }
 
         // $("#foodLevel").on("dragover", function(event) {
         //     event.preventDefault();

@@ -28,31 +28,36 @@ class CommonService extends Service
 
     public function ranktime($user_id)
     {
+
         if ($user_id) {
             $sign = 'ranktime_' . $user_id;
 
+            $t = time();
+            $start = mktime(0,0,0,date("m",$t),date("d",$t),date("Y",$t));
+            $end = mktime(23,59,59,date("m",$t),date("d",$t),date("Y",$t));
             $map['type'] = 0;
             $map['userId'] = $user_id;
             $map['is_frist'] = 1;
-            $check_is_frist = PointLogModel::getSingleton()->where($map)->find();
 
-            if (Cache::get($sign) == 7 && empty($check_is_frist)) {
+            $check_is_frist = PointLogModel::getSingleton()->where($map)->whereTime('createtime','between',[$start,$end])->find();
+
+            if (Cache::get($sign) == 6 && empty($check_is_frist)) {
 
                 $num = Cache::get($sign) + 1;
-                Cache::set($sign, $num, 3600);
+                Cache::set($sign, $num, 86400);
                 return 3;
                 exit();
             }
             if (false === Cache::get($sign)) {
                 $num = 1;
-                Cache::set($sign, $num, 3600);
+                Cache::set($sign, $num, 86400);
             } else {
                 $num = intval(Cache::get($sign)) + 1;
-                Cache::set($sign, $num, 3600);
+                Cache::set($sign, $num, 86400);
             }
             return 1;
 
-        }else{
+        } else {
             return false;
         }
     }
