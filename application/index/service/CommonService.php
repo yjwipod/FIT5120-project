@@ -44,16 +44,16 @@ class CommonService extends Service
             if (Cache::get($sign) == 6 && empty($check_is_frist)) {
 
                 $num = Cache::get($sign) + 1;
-                Cache::set($sign, $num, 3600);
+                Cache::set($sign, $num, 86400);
                 return 3;
                 exit();
             }
             if (false === Cache::get($sign)) {
                 $num = 1;
-                Cache::set($sign, $num, 3600);
+                Cache::set($sign, $num, 86400);
             } else {
                 $num = intval(Cache::get($sign)) + 1;
-                Cache::set($sign, $num, 3600);
+                Cache::set($sign, $num, 86400);
             }
             return 1;
 
