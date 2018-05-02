@@ -6,6 +6,7 @@ namespace app\index\controller;
 use app\index\service\CommonService;
 use cms\facade\Response;
 use core\db\index\model\PlanModel;
+use core\db\index\model\PointLogModel;
 use core\db\manage\model\MemberUserModel;
 use joshtronic\GooglePlaces;
 use SKAgarwal\GoogleApi\PlacesApi;
@@ -25,6 +26,8 @@ class Index extends Base
         '3' => 'imgHeal',
         '4' => 'imgHest',
     );
+
+    protected $times = 8;
 
     public function initialize()
     {
@@ -145,12 +148,18 @@ class Index extends Base
         return $this->fetch();
     }
 
+    public function clear()
+    {
+        Cache::rm('ranktime_' . $this->user_id);
+        PointLogModel::getSingleton()->where(['userId' => $this->user_id])->delete();
+        die;
+    }
+
     public function health()
     {
-//        Cache::rm('ranktime_' . $this->user_id);
-////        die;
+
         if ($this->user_id != 0) {
-             $rs = CommonService::getSingleton()->ranktime($this->user_id);
+            $rs = CommonService::getSingleton()->ranktime($this->user_id);
             if ($rs == 3) {
 //                $this->success('Jump to Test', 'index/user/foodRankTest');
                 return redirect('index/user/foodRankTest');
@@ -183,10 +192,19 @@ class Index extends Base
             }
 
             $this->assign('num', $num);
+
             $this->assign('round', Cache::get('ranktime_' . $this->user_id));
         }
 //        $this->assign('round', 111);
 
+        echo Cache::get('ranktime_' . $this->user_id);
+        if(Cache::get('ranktime_' . $this->user_id)){
+            $times = Cache::get('ranktime_' . $this->user_id);
+        }else{
+            $times =$this->times ;
+        }
+        
+        $this->assign('times', $times);
         $res = [];
         $one = Db::name("food")->limit(1)->order('rand()')->find();
         $one['top'] = 180 + rand(10, 200);
@@ -286,7 +304,8 @@ class Index extends Base
         return $this->fetch();
     }
 
-    public function introduction(){
+    public function introduction()
+    {
 
         return $this->fetch();
     }
