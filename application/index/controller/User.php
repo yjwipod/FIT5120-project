@@ -7,7 +7,6 @@ use core\db\index\model\FoodModel;
 use core\db\index\model\PlanModel;
 use core\db\index\model\PointLogModel;
 use core\db\manage\model\MemberUserModel;
-use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use think\captcha\Captcha;
 use think\Db;
