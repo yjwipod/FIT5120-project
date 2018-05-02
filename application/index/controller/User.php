@@ -390,13 +390,13 @@ class User extends Base
             $mail->isSMTP();                                      // Set mailer to use SMTP
             $mail->Host = 'smtp-mail.outlook.com';  // Specify main and backup SMTP servers
             $mail->SMTPAuth = true;                               // Enable SMTP authentication
-            $mail->Username = 'kris7i@outlook.com';                 // SMTP username
-            $mail->Password = 'Huang89814';                           // SMTP password
+            $mail->Username = '****@outlook.com';                 // SMTP username
+            $mail->Password = 'password';                           // SMTP password
             $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
             $mail->Port = 587;                                    // TCP port to connect to
 
             //Recipients
-            $mail->setFrom('kris7i@outlook.com', 'kris wong');
+            $mail->setFrom('****@outlook.com', '****');
             $mail->addAddress($user_info['email'], $user_info['user_name']);     // Add a recipient
 //            $mail->addAddress('120025737@qq.com');               // Name is optional
 //            $mail->addReplyTo('120025737@qq.com', 'Information');
