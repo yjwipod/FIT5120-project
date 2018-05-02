@@ -150,9 +150,8 @@ class Index extends Base
 //        Cache::rm('ranktime_' . $this->user_id);
 //        die;
         if ($this->user_id != 0) {
-            $rs = CommonService::getSingleton()->ranktime($this->user_id);
+             $rs = CommonService::getSingleton()->ranktime($this->user_id);
             if ($rs == 3) {
-//
 //                $this->success('Jump to Test', 'index/user/foodRankTest');
                 return redirect('index/user/foodRankTest');
             }

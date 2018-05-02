@@ -1,4 +1,4 @@
-<?php /*a:5:{s:85:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\user\foodranktest.html";i:1524162561;s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\base.html";i:1522856435;s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\toper.html";i:1522856435;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\header.html";i:1524151899;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1524074187;}*/ ?>
+<?php /*a:5:{s:85:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\user\foodranktest.html";i:1525097041;s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\base.html";i:1522856435;s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\toper.html";i:1522856435;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\header.html";i:1524151899;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1524074187;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -76,7 +76,7 @@
             <p style="font-size: 18px ; font-weight: bold">Healthiest</p>
             <ul class="select_food">
                 <?php if(is_array($l_list) || $l_list instanceof \think\Collection || $l_list instanceof \think\Paginator): $i = 0; $__LIST__ = $l_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
-                <li  data-id="<?php echo $vo['foodId']; ?>" class="item"><img src="/<?php echo $vo['picpath']; ?>"/></li>
+                <li  data-id="<?php echo $vo['foodId']; ?>" class="item" data-name="<?php echo $vo['foodName']; ?>" ><img src="/<?php echo $vo['picpath']; ?>"/></li>
                 <?php endforeach; endif; else: echo "" ;endif; ?>
                 <div class="clearfix"></div>
             </ul>
@@ -85,14 +85,14 @@
             <p style="font-size: 18px ; font-weight: bold">Healthy</p>
             <ul class="select_food" >
                 <?php if(is_array($y_list) || $y_list instanceof \think\Collection || $y_list instanceof \think\Paginator): $i = 0; $__LIST__ = $y_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
-                <li data-id="<?php echo $vo['foodId']; ?>" class="item"><img src="/<?php echo $vo['picpath']; ?>"/></li>
+                <li data-id="<?php echo $vo['foodId']; ?>" class="item" data-name="<?php echo $vo['foodName']; ?>"><img src="/<?php echo $vo['picpath']; ?>"/></li>
                 <?php endforeach; endif; else: echo "" ;endif; ?>
                 <div class="clearfix"></div>
             </ul>
         </div>
         <div>
             <button type="button" id="select" class="am-btn am-btn-primary am-radius">OK</button>
-            <button type="button" class="am-btn  am-btn-warning  am-radius">Cancel</button>
+            <!--<button type="button" class="am-btn  am-btn-warning  am-radius">Cancel</button>-->
         </div>
     </div>
 </div>
@@ -148,6 +148,7 @@
 
 
 <script>
+
     // $(".item").click(function(){
     //     var ids = [] ;
     //     $(".selected").each(function(i,v){
@@ -161,19 +162,29 @@
     // });
 
     $("#select").click(function(){
-        var ids = [],strid = ' ' ;
+        var ids = [],strid = ' ' ,foodname = ' ' ;
         $(".selected").each(function(i,v){
             // ids[i] = $(this).data('id');
             if(i == 0) {
                 strid = $(this).data('id');
+                foodname = $(this).data('name');
             }else{
                 strid =  $(this).data('id')+','+strid;
+                foodname =  $(this).data('name')+','+foodname;
             }
         });
-        // if(ids.length > 2){
-        //     layer.msg('Can not choose more than two');
-        //     return false;
-        // }
+
+        if($('li.selected').length == 0 ){
+            layer.msg('You did not choose any food you want.', {
+                time: 0 //不自动关闭
+                ,btn: ['ok']
+                ,yes: function(index){
+                    setTimeout(window.location.href = '/health', 3000);
+                    layer.close(index);
+                }
+            });
+            return false;
+        }
 
         $.post(
             "<?php echo url('index/user/plan_eat'); ?>",
@@ -182,14 +193,30 @@
                 // layer.msg(result.msg);
                 if(result.code == 20){
                     if(result.data == 0){
+                        $.post( "<?php echo url('index/user/sendEmail'); ?>",{foodname:foodname},function(){});
                         //There is an email will be sent to your parents
-                        layer.alert('There is an email will be sent to your parents', {icon: 6});
+                        // layer.alert('The details of your choosing has sent to your parents by email.', {icon: 6});
+                        layer.msg('The details of your choosing has sent to your parents by email.', {
+                            time: 0 //不自动关闭
+                            ,btn: ['ok']
+                            ,yes: function(index){
+                                layer.close(index);
+                                setTimeout(window.location.href = '/health', 3000);
+                            }
+                        });
                         // layer.alert('You got some points in this times ', {icon: 6});
                     }else{
-                        layer.alert('Prefer Job ', {icon: 6});
+                        // layer.alert('Prefer Job ', {icon: 6});
+                        layer.msg('Prefer Job', {
+                            time: 0 //不自动关闭
+                            ,btn: ['ok']
+                            ,yes: function(index){
+                                layer.close(index);
+                                setTimeout(window.location.href = '/health', 3000);
+                            }
+                        });
                     }
-                    setTimeout( window.location.href='/index/index/health' , 3000);
-
+                    // setTimeout( window.location.href='/health' , 3000);
                     return false;
 
                 }

@@ -1,4 +1,4 @@
-<?php /*a:6:{s:83:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\user\point_logs.html";i:1523436107;s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\base.html";i:1522856435;s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\toper.html";i:1522856435;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\header.html";i:1524151899;s:82:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\user\rightmenu.html";i:1523436089;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1524074187;}*/ ?>
+<?php /*a:6:{s:83:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\user\point_logs.html";i:1523436107;s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\base.html";i:1522856435;s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\toper.html";i:1522856435;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\header.html";i:1524151899;s:82:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\user\rightmenu.html";i:1524241705;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1524074187;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -115,7 +115,7 @@
     <h2 class="font_green am-margin-bottom-xs">Manage Control</h2>
     <p class="am-margin-vertical-xs"><a href="<?php echo url('/user/'.$user_id); ?>">Home </a></p>
     <?php if($user_id == 1): ?>
-    <p class="am-margin-vertical-xs"><a href="<?php echo url('/index/user/food_manage/'); ?>">Food </a></p>
+    <p class="am-margin-vertical-xs"><a href="<?php echo url('/index/user/foods'); ?>">Food </a></p>
     <?php endif; ?>
     <p class="am-margin-vertical-xs"><a href="<?php echo url('/index/user/point_logs/user_id/'.$user_id); ?>">Point Log </a></p>
     <p class="am-margin-vertical-xs"><a href="<?php echo url('/logout'); ?>">Log out</a></p>

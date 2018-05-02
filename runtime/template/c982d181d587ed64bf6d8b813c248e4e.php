@@ -1,4 +1,4 @@
-<?php /*a:6:{s:78:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\user\index.html";i:1524152359;s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\base.html";i:1522856435;s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\toper.html";i:1522856435;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\header.html";i:1524151899;s:82:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\user\rightmenu.html";i:1523436089;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1524074187;}*/ ?>
+<?php /*a:6:{s:78:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\user\index.html";i:1524999070;s:79:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\base.html";i:1522856435;s:80:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\toper.html";i:1522856435;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\header.html";i:1524151899;s:82:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\user\rightmenu.html";i:1524241705;s:81:"C:\phpStudy\PHPTutorial\WWW\ChildHealth\application/index/view\layout\footer.html";i:1524074187;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -92,6 +92,8 @@
                             <li class="font_green am-padding-vertical-sm">Sex：<a><?php if($user_info['sex'] == 0): ?>Boy<?php else: ?>Girl <?php endif; ?></a></li>
                             <li class="font_green am-padding-vertical-xs">Point：<a><?php echo $user_info['point']; ?></a></li>
                             <li class="font_green am-padding-vertical-xs">Last Login：<a><?php echo date("Y-m-d H:i:s",$user_info['login_time']);?></a></li>
+                            <li class="font_green am-padding-vertical-xs">Current Leve：<?php if($level['level'] != 0): ?><img src="/assets/image/<?php echo $level['level']; ?>.png"><?php else: ?> -- <?php endif; ?></li>
+                            <li class="font_green am-padding-vertical-xs">You need <?php echo $level['needpoints']; ?> points to next level：<img src="/assets/image/<?php echo $level['level']+1; ?>.png"></li>
                         </ul>
                     </div>
                 </div>
@@ -141,7 +143,7 @@
     <h2 class="font_green am-margin-bottom-xs">Manage Control</h2>
     <p class="am-margin-vertical-xs"><a href="<?php echo url('/user/'.$user_id); ?>">Home </a></p>
     <?php if($user_id == 1): ?>
-    <p class="am-margin-vertical-xs"><a href="<?php echo url('/index/user/food_manage/'); ?>">Food </a></p>
+    <p class="am-margin-vertical-xs"><a href="<?php echo url('/index/user/foods'); ?>">Food </a></p>
     <?php endif; ?>
     <p class="am-margin-vertical-xs"><a href="<?php echo url('/index/user/point_logs/user_id/'.$user_id); ?>">Point Log </a></p>
     <p class="am-margin-vertical-xs"><a href="<?php echo url('/logout'); ?>">Log out</a></p>

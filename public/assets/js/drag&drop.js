@@ -66,11 +66,16 @@
             // window.location.reload();
             // };
             if (i === 4) {
-                $.post("/index/user/ajaxGetpoints",{points:10},function(result){});    
-                layer.msg('You have ranked the food level correctly and got 10 points! Congratulations!  \nYou can try this again!', {
+                var msg ='You have ranked the food level correctly and got 10 points! Congratulations!  \nYou can try this again!';
+                $.post("/index/user/ajaxGetpoints",{points:10},function(result){
+                    // $.post( "/index/user/sendEmail",{msg:msg},function(){ });
+                });
+
+                layer.msg(msg, {
                   time: 0 //不自动关闭
                   ,btn: ['ok']
                   ,yes: function(index){
+
                     layer.close(index);
                     setTimeout(window.location.href = '/health', 3000);
                   }

@@ -66,12 +66,19 @@
                 foodname = $(this).data('name');
             }else{
                 strid =  $(this).data('id')+','+strid;
-                foodname =  $(this).data('name')+','+name;
+                foodname =  $(this).data('name')+','+foodname;
             }
         });
 
         if($('li.selected').length == 0 ){
-            layer.msg('You did not choose any food you want.');
+            layer.msg('You did not choose any food you want.', {
+                time: 0 //不自动关闭
+                ,btn: ['ok']
+                ,yes: function(index){
+                    setTimeout(window.location.href = '/health', 3000);
+                    layer.close(index);
+                }
+            });
             return false;
         }
 
@@ -84,14 +91,28 @@
                     if(result.data == 0){
                         $.post( "{:url('index/user/sendEmail')}",{foodname:foodname},function(){});
                         //There is an email will be sent to your parents
-                        layer.alert('The details of your choosing has sent to your parents by email.', {icon: 6});
+                        // layer.alert('The details of your choosing has sent to your parents by email.', {icon: 6});
+                        layer.msg('The details of your choosing has sent to your parents by email.', {
+                            time: 0 //不自动关闭
+                            ,btn: ['ok']
+                            ,yes: function(index){
+                                layer.close(index);
+                                setTimeout(window.location.href = '/health', 3000);
+                            }
+                        });
                         // layer.alert('You got some points in this times ', {icon: 6});
                     }else{
-                        layer.alert('Prefer Job ', {icon: 6});
+                        // layer.alert('Prefer Job ', {icon: 6});
+                        layer.msg('Prefer Job', {
+                            time: 0 //不自动关闭
+                            ,btn: ['ok']
+                            ,yes: function(index){
+                                layer.close(index);
+                                setTimeout(window.location.href = '/health', 3000);
+                            }
+                        });
                     }
-
-                    setTimeout( window.location.href='/health' , 3000);
-
+                    // setTimeout( window.location.href='/health' , 3000);
                     return false;
 
                 }
