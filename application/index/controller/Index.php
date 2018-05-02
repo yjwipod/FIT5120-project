@@ -197,13 +197,13 @@ class Index extends Base
         }
 //        $this->assign('round', 111);
 
-        echo Cache::get('ranktime_' . $this->user_id);
+//        echo Cache::get('ranktime_' . $this->user_id);
         if(Cache::get('ranktime_' . $this->user_id)){
             $times = Cache::get('ranktime_' . $this->user_id);
         }else{
             $times =$this->times ;
         }
-        
+
         $this->assign('times', $times);
         $res = [];
         $one = Db::name("food")->limit(1)->order('rand()')->find();

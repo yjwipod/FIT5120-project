@@ -2,3 +2,7 @@
 composer.lock
 *.log
 thinkphp
+<<<<<<< HEAD
+=======
+runtime
+>>>>>>> 507125993c741a32ce9f6b6afe97ce3693ce791e
