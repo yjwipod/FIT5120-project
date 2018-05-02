@@ -1,4 +1,4 @@
-<?php /*a:5:{s:65:"/www/wwwroot/ChildHealth/application/index/view/index/health.html";i:1525254444;s:64:"/www/wwwroot/ChildHealth/application/index/view/layout/base.html";i:1525253868;s:65:"/www/wwwroot/ChildHealth/application/index/view/layout/toper.html";i:1525253868;s:66:"/www/wwwroot/ChildHealth/application/index/view/layout/header.html";i:1525253868;s:66:"/www/wwwroot/ChildHealth/application/index/view/layout/footer.html";i:1525253868;}*/ ?>
+<?php /*a:5:{s:65:"/www/wwwroot/ChildHealth/application/index/view/index/health.html";i:1525274595;s:64:"/www/wwwroot/ChildHealth/application/index/view/layout/base.html";i:1525253868;s:65:"/www/wwwroot/ChildHealth/application/index/view/layout/toper.html";i:1525253868;s:66:"/www/wwwroot/ChildHealth/application/index/view/layout/header.html";i:1525253868;s:66:"/www/wwwroot/ChildHealth/application/index/view/layout/footer.html";i:1525253868;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -241,6 +241,7 @@
 <script src="/assets/js/drag&drop.js"></script>
 <script>
 var user_id = "<?php echo $user_id; ?>";
+var times = "<?php echo $times; ?>";
 
 </script>
 
