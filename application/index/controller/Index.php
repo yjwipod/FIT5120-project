@@ -5,6 +5,7 @@ namespace app\index\controller;
 
 use app\index\service\CommonService;
 use cms\facade\Response;
+use core\db\index\model\FoodModel;
 use core\db\index\model\PlanModel;
 use core\db\index\model\PointLogModel;
 use core\db\manage\model\MemberUserModel;
@@ -190,31 +191,39 @@ class Index extends Base
                     $num = Cache::get('ranktime_' . $this->user_id);
                     break;
             }
-
             $this->assign('num', $num);
-
             $this->assign('round', Cache::get('ranktime_' . $this->user_id));
         }
-//        $this->assign('round', 111);
 
-//        echo Cache::get('ranktime_' . $this->user_id);
-        if(Cache::get('ranktime_' . $this->user_id)){
+        if (Cache::get('ranktime_' . $this->user_id)) {
             $times = Cache::get('ranktime_' . $this->user_id);
-        }else{
-            $times =$this->times ;
+        } else {
+            $times = $this->times;
         }
 
         $this->assign('times', $times);
+        $level_info = $this->checkLevel();
+        if($level_info['level']<=6 ){
+            $res = $this->getList();
+            $this->assign('list', $res);
+        }
+        return $this->fetch();
+    }
+
+
+    public function getList()
+    {
+        $level_info = $this->checkLevel();
         $res = [];
-        $one = Db::name("food")->limit(1)->order('rand()')->find();
+        $one = Db::name("grade")->alias('g')->join('food f', 'f.foodId = g.food_id')->limit(1)->where(['g.grade'=>$level_info['level']])->order('rand()')->find();
         $one['top'] = 180 + rand(10, 200);
         $res[] = $one;
+
         for ($i = 1; $i <= 3; $i++) {
             $res[$i] = $this->getDiffData($res);
         }
 
-        $this->assign('list', $res);
-        return $this->fetch();
+        return $res;
     }
 
     public function getDiffData($arr)
@@ -223,14 +232,55 @@ class Index extends Base
             return false;
         } else {
             $matchid = [];
+
             foreach ($arr as $vo) {
-                $matchid[] = $vo['healthyLevel'];
+                $food_info = FoodModel::getInstance()->where(['foodId'=>$vo['food_id']])->find();
+                $matchid[] = $food_info['healthyLevel'];
             }
-            $rs = Db::name("food")->limit(1)->where('healthyLevel', 'not in', $matchid)->order('rand()')->find();
+            $level_info = $this->checkLevel();
+            $rs = Db::name("grade")
+                ->alias('g')->join('food f', 'f.foodId = g.food_id')
+                ->limit(1)
+                ->where(['g.grade'=>$level_info['level']])
+                ->where('f.healthyLevel', 'not in', $matchid)
+
+                ->order('rand()')->find();
+
             $rs['top'] = 180 + rand(10, 200);
             return $rs;
         }
     }
+//
+//    public function getList()
+//    {
+//
+//        echo 111;
+//        print_r($this->checkLevel());
+//        $level_info =
+//        $res = [];
+//        $one = Db::name("current_level")->limit(1)->where()->order('rand()')->find();
+//        $one['top'] = 180 + rand(10, 200);
+//        $res[] = $one;
+//        for ($i = 1; $i <= 3; $i++) {
+//            $res[$i] = $this->getDiffData($res);
+//        }
+//
+//    }
+//
+//    public function getDiffData($arr)
+//    {
+//        if (!is_array($arr) && empty($arr)) {
+//            return false;
+//        } else {
+//            $matchid = [];
+//            foreach ($arr as $vo) {
+//                $matchid[] = $vo['healthyLevel'];
+//            }
+//            $rs = Db::name("food")->limit(1)->where('healthyLevel', 'not in', $matchid)->order('rand()')->find();
+//            $rs['top'] = 180 + rand(10, 200);
+//            return $rs;
+//        }
+//    }
 
     public function getWeather()
     {

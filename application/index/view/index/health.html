@@ -33,7 +33,7 @@
 
                 <p>You can get points </p>
                 <p>in the next <span style="color: red">{:$num}</span> Round(s) </p>
-
+                <p><span style="font-weight: bold">Current difficulty level is {:$level['level']}</span></p>
                 <?php }else{?>
                 <p>Just for Fun ! </p>
                 <?php } }else{ ?>
@@ -42,7 +42,7 @@
             </div>
             <div class="am-form-group am-form-icon" style="position:absolute; z-index:10000; right:10px; top:100px">
                 <p>You can try </p>
-                <p><span class="times" style="color: red">10</span> times left</p>
+                <p><span class="times" style="color: red">{:$level['wrong_times']}</span> times left</p>
                 <p>in this round</p>
             </div>
             <div id="foodRankingPlayground"  class="foodRankingPlayground">
@@ -138,6 +138,7 @@
 <script>
 var user_id = "{:$user_id}";
 var times = "{:$times}";
+var wrong_times = "{:$level['wrong_times']}";
 
 </script>
 {/block}

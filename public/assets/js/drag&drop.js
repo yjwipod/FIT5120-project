@@ -58,7 +58,7 @@
     //});
 
     $(document).ready(function () {
-        var i = 0, num = 10;
+        var i = 0, num = wrong_times;
 
         function checkCorrect() {
             // if ($("#hec").css("visibility") === "visible") {
@@ -69,7 +69,7 @@
                 if(times > 7){
                     var msg ='Good Job!';
                 }else{
-                    var msg ='You have ranked the food level correctly and got 10 points! Congratulations!  \nYou can try this again!';
+                    var msg ='Difficulty level up !! </br>You have ranked the food level correctly and got 10 points! Congratulations!  </br>You can try this again!';
                 }
                 if(user_id != 0){
                     $.post("/index/user/ajaxGetpoints", {points: 10}, function (result) {

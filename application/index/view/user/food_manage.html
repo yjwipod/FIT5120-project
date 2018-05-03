@@ -80,8 +80,10 @@
                                     <input type="file"  name="file" id="attachment" style="display:none;width:268px; *height:22px;" onchange="jQuery('#path').val(jQuery('#attachment').val())" />
                                     <input type="text" name="path" id="path" onfocus="jQuery('#attachment').click()" />
                                     <input type="button" value="Upload" onclick="jQuery('#attachment').click()" />
-
-                                    <input name="picpath" value="{$info.picpath|default=''}" type="hidden" />
+                                    {if condition="$info['picpath'] neq '' "}
+                                        <!--<img src="/{$info.picpath|default=''}" width="100" />-->
+                                        <input name="picpath" value="{$info.picpath|default=''}" type="hidden" />
+                                    {/if}
                                     (Support JPG, GIF, png)<br>
                                 </td>
                             </tr>

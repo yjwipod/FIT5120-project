@@ -3,6 +3,7 @@
 namespace app\index\controller;
 
 
+use core\db\index\model\CurrentLevelModel;
 use core\db\index\model\EatplanModel;
 use core\db\index\model\FoodModel;
 use core\db\index\model\GradeModel;
@@ -42,9 +43,6 @@ class User extends Base
 
     public function index()
     {
-//        echo "<pre>";
-//        print_r(MemberUserModel::getSingleton()->where(['id'=>$this->user_id])->find());
-//        print_r(Session::get('user_info'));
 
         if ($this->request->param('id') == 0) {
             return redirect('/login');
@@ -52,19 +50,12 @@ class User extends Base
         $list = PlanModel::getSingleton()->where(['userId' => Session::get('user_id')])->select();
 //        print_r(count($list));
         $this->assign('list', $list);
-
-        $this->assign('level', $this->getUserlevel(Session::get('user_info')['point']));
+        $this->assign('level', $this->getUserlevel($this->user_info['point']));
 //        $this->assign('needpoints', $this->getUserlevel(Session::get('user_info')['point']));
         return $this->fetch();
     }
 
-    public function test()
-    {
-//        $list = PlanModel::getSingleton()->where(['userId'=>Session::get('user_id')])->select();
-////        print_r(count($list));
-//        $this->assign('list',$list);
-        return $this->fetch();
-    }
+
 
     public function getpoints($points, $type, $is_frist = 0)
     {
@@ -93,6 +84,17 @@ class User extends Base
                 if (PointLogModel::getSingleton()->save($data)) {
                     Session::set('user_info', MemberUserModel::getSingleton()->where(['id' => $this->user_id])->find());
                     MemberUserModel::getSingleton()->where(['id' => $this->user_id])->setInc('point', $this->request->param('points'));
+                    $startime = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
+                    $endtime = mktime(0, 0, 0, date('m'), date('d') + 1, date('Y')) - 1;
+                    $res = Db::table('current_level')
+                        ->where('userid', 'eq', $this->user_id)
+                        ->where(function ($query) use ($startime, $endtime) {
+                            $query->where('time', ['<', $endtime], ['>', $startime], 'and');
+                        })
+                        ->find();
+                    $map['id'] = $res['id'];
+                    CurrentLevelModel::getSingleton()->where($map)->setInc('level', 1);
+
                 }
             }
 
@@ -102,9 +104,6 @@ class User extends Base
 
     public function foods()
     {
-//        $list = FoodModel::getSingleton()->order('foodId desc')->select();
-//        $this->assign('list', $list);
-
         $menu_model = new FoodModel();
         $lists = $menu_model::paginate(13);
         $page = $lists->render();
@@ -143,7 +142,6 @@ class User extends Base
                     return $this->error('Save error', 'index/user/food_manage');
                 }
             }
-//            print_r($this->request->post());
         }
         if ($this->request->isGet()) {
             $food_id = $this->request->param('foodId');
@@ -152,7 +150,7 @@ class User extends Base
             } else {
                 $food_info['healthyLevel'] = 0;
             }
-            $grade_info = GradeModel::getSingleton()->where(['food_id'=>$food_id])->select()->toArray();
+            $grade_info = GradeModel::getSingleton()->where(['food_id' => $food_id])->select()->toArray();
 
 
             $this->assign('grade_info', $this->gradetoarray($grade_info));
@@ -508,23 +506,26 @@ class User extends Base
     public function editGrade($foodid, $grade)
     {
 
-        if(!empty($foodid)){
+        if (!empty($foodid)) {
             $data['food_id'] = $foodid;
-            GradeModel::getInstance()->where(['food_id'=>$foodid])->delete();
-            foreach ($grade as $item){
+            GradeModel::getInstance()->where(['food_id' => $foodid])->delete();
+            foreach ($grade as $item) {
                 $data['grade'] = $item;
                 GradeModel::getInstance()->save($data);
             }
         }
     }
 
-    public function gradetoarray($gradeArr){
-
-        foreach ($gradeArr as $item){
+    public function gradetoarray($gradeArr)
+    {
+        $re_arr = [];
+        foreach ($gradeArr as $item) {
             $re_arr[] = $item['grade'];
         }
 
         return $re_arr;
     }
+
+
 
 }
