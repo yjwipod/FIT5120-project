@@ -3,6 +3,7 @@
 namespace app\index\controller;
 
 
+use core\db\index\model\MemberUserModel;
 use think\Controller;
 use think\facade\Env;
 use think\facade\Session;
@@ -27,7 +28,8 @@ class Base extends Controller
             'logout_url' => Url::build('index/index/logout'),
         ];
         $this->user_id = Session::get('user_id') == "" ? "0" : Session::get('user_id');
-        $this->user_info = Session::get('user_info') == "" ? "" : Session::get('user_info');
+        //Session::get('user_info') == "" ? "" : Session::get('user_info');
+        $this->user_info = MemberUserModel::getSingleton()->where(['id'=>$this->user_id])->find();
         $this->assign('site_info', $siteInfo);
 //        echo $this->request->action();
         $this->assign('user_id', $this->user_id);
