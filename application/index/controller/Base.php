@@ -3,6 +3,7 @@
 namespace app\index\controller;
 
 
+
 use core\db\index\model\CurrentLevelModel;
 use core\db\index\model\MemberUserModel;
 use think\Controller;
@@ -32,6 +33,7 @@ class Base extends Controller
         ];
         $this->user_id = Session::get('user_id') == "" ? "0" : Session::get('user_id');
         //Session::get('user_info') == "" ? "" : Session::get('user_info');
+
         $this->user_info = MemberUserModel::getSingleton()->where(['id' => $this->user_id])->find();
 
         $this->assign('site_info', $siteInfo);
