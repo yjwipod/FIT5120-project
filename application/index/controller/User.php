@@ -1,13 +1,14 @@
 <?php
+
 namespace app\index\controller;
 
 
 use core\db\index\model\EatplanModel;
 use core\db\index\model\FoodModel;
+use core\db\index\model\GradeModel;
 use core\db\index\model\PlanModel;
 use core\db\index\model\PointLogModel;
 use core\db\manage\model\MemberUserModel;
-use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use think\captcha\Captcha;
 use think\Db;
@@ -22,6 +23,14 @@ class User extends Base
         '2' => 'Unhealthy',
         '3' => 'Healthy',
         '4' => 'Healthiest',
+    );
+    protected $foodgrade = array(
+        '1' => 'level 1',
+        '2' => 'level 2',
+        '3' => 'level 3',
+        '4' => 'level 4',
+        '5' => 'level 5',
+        '6' => 'level 6',
     );
 
     public function initialize()
@@ -43,7 +52,7 @@ class User extends Base
         $list = PlanModel::getSingleton()->where(['userId' => Session::get('user_id')])->select();
 //        print_r(count($list));
         $this->assign('list', $list);
-        
+
         $this->assign('level', $this->getUserlevel(Session::get('user_info')['point']));
 //        $this->assign('needpoints', $this->getUserlevel(Session::get('user_info')['point']));
         return $this->fetch();
@@ -65,7 +74,7 @@ class User extends Base
         $data['userId'] = $this->user_id;
         $data['createtime'] = time();
         if (PointLogModel::getSingleton()->save($data)) {
-            Session::set('user_info', MemberUserModel::getSingleton()->where(['id'=>$this->user_id])->find());
+            Session::set('user_info', MemberUserModel::getSingleton()->where(['id' => $this->user_id])->find());
             MemberUserModel::getSingleton()->where(['id' => $this->user_id])->setInc('point', $points);
         }
 //        return json(['code' => '22']);
@@ -82,7 +91,7 @@ class User extends Base
             $data['createtime'] = time();
             if (Cache::get('ranktime_' . $this->user_id) < 7) {
                 if (PointLogModel::getSingleton()->save($data)) {
-                    Session::set('user_info', MemberUserModel::getSingleton()->where(['id'=>$this->user_id])->find());
+                    Session::set('user_info', MemberUserModel::getSingleton()->where(['id' => $this->user_id])->find());
                     MemberUserModel::getSingleton()->where(['id' => $this->user_id])->setInc('point', $this->request->param('points'));
                 }
             }
@@ -110,18 +119,25 @@ class User extends Base
     {
         if ($this->request->post()) {
             $data = $this->request->post();
+
             $data['time'] = time();
             if ($_FILES['file']['error'] != 4)
                 $data['picpath'] = $this->uploadImage();
 
+            $foodgrade = $data['foodgrade'];
+            unset($data['foodgrade']);
+
             if (!empty($data['foodId'])) {
-                if (FoodModel::getSingleton()->save($data, ['foodId' => $data])) {
+                if (FoodModel::getSingleton()->save($data, ['foodId' => $data['foodId']])) {
+                    $this->editGrade($data['foodId'], $foodgrade);
                     return $this->success('Update Success', 'index/user/foods');
                 } else {
                     return $this->error('Update error', 'index/user/food_manage');
                 }
             } else {
-                if (FoodModel::getSingleton()->save($data)) {
+
+                if ($food_id = FoodModel::getSingleton()->save($data)) {
+                    $this->editGrade(FoodModel::getSingleton()->getLastInsID(), $foodgrade);
                     return $this->success('Save Success', 'index/user/foods');
                 } else {
                     return $this->error('Save error', 'index/user/food_manage');
@@ -136,8 +152,13 @@ class User extends Base
             } else {
                 $food_info['healthyLevel'] = 0;
             }
+            $grade_info = GradeModel::getSingleton()->where(['food_id'=>$food_id])->select()->toArray();
+
+
+            $this->assign('grade_info', $this->gradetoarray($grade_info));
             $this->assign('info', $food_info);
         }
+        $this->assign('foodgrade', $this->foodgrade);
         return $this->fetch();
     }
 
@@ -388,58 +409,57 @@ class User extends Base
         if (empty($user_info)) {
             return false;
         }
-    
-        $toemail= $user_info['email'];
-        $name=$user_info['user_name'];
-        $subject='Fit Kidz Tips';
-        $content = 'Your child ' .  $user_info['user_name']  . ' has chosen ' . $foods . ' for the next meal. Fit-kidz is always helping children to choose the healthiest food they want.';
-        if(null !== $this->request->param('msg') && !empty($this->request->param('msg') ))
-        {
-            $content =$this->request->param('msg');
+
+        $toemail = $user_info['email'];
+        $name = $user_info['user_name'];
+        $subject = 'Fit Kidz Tips';
+        $content = 'Your child ' . $user_info['user_name'] . ' has chosen ' . $foods . ' for the next meal. Fit-kidz is always helping children to choose the healthiest food they want.';
+        if (null !== $this->request->param('msg') && !empty($this->request->param('msg'))) {
+            $content = $this->request->param('msg');
         }
-        $this->send_mail($toemail,$name,$subject,$content);
+        $this->send_mail($toemail, $name, $subject, $content);
         echo "";
     }
 
     /**
      * 获取用户等级
      */
-    public function getUserlevel($points=100)
+    public function getUserlevel($points = 100)
     {
 
-        if(10 <= $points &&  $points <= 90){
-            $needpoints = 100-$points;
-            return ['level'=>1,'needpoints'=>$needpoints];
-        }elseif(100 <= $points &&  $points <= 190){
-            $needpoints = 200-$points;
-            return ['level'=>2,'needpoints'=>$needpoints];
-        }elseif(200 <= $points &&  $points <= 290){
-            $needpoints = 300-$points;
-            return ['level'=>3,'needpoints'=>$needpoints];
-        }elseif(300 <= $points &&  $points <= 390){
-            $needpoints = 400-$points;
-            return ['level'=>4,'needpoints'=>$needpoints];
-        }elseif(400 <= $points &&  $points <= 490){
-            $needpoints = 500-$points;
-            return ['level'=>5,'needpoints'=>$needpoints];
-        }elseif(500 <= $points &&  $points <= 590){
-            $needpoints = 600-$points;
-            return ['level'=>6,'needpoints'=>$needpoints];
-        }elseif(600 <= $points &&  $points <= 690){
-            $needpoints = 700-$points;
-            return ['level'=>7,'needpoints'=>$needpoints];
-        }elseif(700 <= $points &&  $points <= 790){
-            $needpoints = 800-$points;
-            return ['level'=>8,'needpoints'=>$needpoints];
-        }elseif(800 <= $points &&  $points <= 890){
-            $needpoints = 900-$points;
-            return ['level'=>9,'needpoints'=>$needpoints];
-        }elseif(900 <= $points &&  $points <= 990){
+        if (10 <= $points && $points <= 90) {
+            $needpoints = 100 - $points;
+            return ['level' => 1, 'needpoints' => $needpoints];
+        } elseif (100 <= $points && $points <= 190) {
+            $needpoints = 200 - $points;
+            return ['level' => 2, 'needpoints' => $needpoints];
+        } elseif (200 <= $points && $points <= 290) {
+            $needpoints = 300 - $points;
+            return ['level' => 3, 'needpoints' => $needpoints];
+        } elseif (300 <= $points && $points <= 390) {
+            $needpoints = 400 - $points;
+            return ['level' => 4, 'needpoints' => $needpoints];
+        } elseif (400 <= $points && $points <= 490) {
+            $needpoints = 500 - $points;
+            return ['level' => 5, 'needpoints' => $needpoints];
+        } elseif (500 <= $points && $points <= 590) {
+            $needpoints = 600 - $points;
+            return ['level' => 6, 'needpoints' => $needpoints];
+        } elseif (600 <= $points && $points <= 690) {
+            $needpoints = 700 - $points;
+            return ['level' => 7, 'needpoints' => $needpoints];
+        } elseif (700 <= $points && $points <= 790) {
+            $needpoints = 800 - $points;
+            return ['level' => 8, 'needpoints' => $needpoints];
+        } elseif (800 <= $points && $points <= 890) {
+            $needpoints = 900 - $points;
+            return ['level' => 9, 'needpoints' => $needpoints];
+        } elseif (900 <= $points && $points <= 990) {
             $needpoints = 0;
-            return ['level'=>10,'needpoints'=>$needpoints];
-        }else{
-            $needpoints = 10-$points;
-            return ['level'=>0,'needpoints'=>$needpoints];
+            return ['level' => 10, 'needpoints' => $needpoints];
+        } else {
+            $needpoints = 10 - $points;
+            return ['level' => 0, 'needpoints' => $needpoints];
         }
 
 
@@ -456,7 +476,8 @@ class User extends Base
      * @return boolean
      * @author static7 <static7@qq.com>
      */
-    function send_mail($tomail, $name, $subject = '', $body = '', $attachment = null) {
+    function send_mail($tomail, $name, $subject = '', $body = '', $attachment = null)
+    {
 
         $mail = new PHPMailer();           //实例化PHPMailer对象
         $mail->CharSet = 'UTF-8';           //设定邮件编码，默认ISO-8859-1，如果发中文此项必须设置，否则乱码
@@ -481,6 +502,29 @@ class User extends Base
             }
         }
         return $mail->Send() ? true : $mail->ErrorInfo;
+    }
+
+
+    public function editGrade($foodid, $grade)
+    {
+
+        if(!empty($foodid)){
+            $data['food_id'] = $foodid;
+            GradeModel::getInstance()->where(['food_id'=>$foodid])->delete();
+            foreach ($grade as $item){
+                $data['grade'] = $item;
+                GradeModel::getInstance()->save($data);
+            }
+        }
+    }
+
+    public function gradetoarray($gradeArr){
+
+        foreach ($gradeArr as $item){
+            $re_arr[] = $item['grade'];
+        }
+
+        return $re_arr;
     }
 
 }

@@ -12,6 +12,7 @@ class Base extends Controller
 {
     public $user_id = 0;
     public $user_info = '';
+    public $level = 0;
 
     public function initialize()
     {
