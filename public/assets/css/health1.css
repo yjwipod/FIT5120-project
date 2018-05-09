@@ -1,0 +1,261 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.box-wrapper {
+    height: 500px;
+    width: 100%;
+    /* background-color: #e69e9e; */
+}
+
+.wrapper {
+    margin: 0 auto;
+    width: 480px;
+    height: 100px;
+    /* position: relative; */
+}
+
+.wrapper .box {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    font-size: 20px;
+    position: absolute;
+}
+
+.wrapper .box:hover {
+    z-index: 10;
+    transform: rotate(0);
+}
+
+.line-wrapper {
+    height: 168px;
+}
+
+.line-box {
+    margin: 0 auto;
+    width: 545px;
+}
+
+.line-box p {
+    text-align: center;
+}
+
+.line-box .box {
+    width: 100px;
+    height: 100px;
+    float: left;
+}
+
+.line-box .box .box {
+    transform: rotate(0deg) !important;
+}
+
+#b1 {
+    left: 60%;
+    top: 50px;
+    transform: rotate(48deg);
+    background-color: #ecc5c5;
+}
+
+#b2 {
+    left: 38%;
+    top: 50px;
+    transform: rotate(20deg);
+    background-color: #da9b9b;
+}
+
+#b3 {
+    left: 46%;
+    top: 65px;
+    transform: rotate(-24deg);
+    background-color: #b5e4f3;
+}
+
+#b4 {
+    left: 55%;
+    top: 100px;
+    transform: rotate(14deg);
+    background-color: #6dc3de;
+}
+
+#b5 {
+    left: 40%;
+    top: 145px;
+    transform: rotate(5deg);
+    background-color: #c2efbc;
+}
+
+#b6 {
+    left: 51%;
+    top: 145px;
+    transform: rotate(-5deg);
+    background-color: #c5c5e2;
+}
+
+.box {
+    margin: 10px;
+}
+
+.line-box li {
+    float: left;
+    list-style-type: none;
+}
+
+.detail_bg {
+    border: solid 1px #000000;
+    padding-top: 10px;
+    background: #99d5ca
+}
+
+#tips {
+    height: 70px;
+    border: none;
+    background: transparent;
+    margin: 0 15px 10px 15px;
+}
+
+#tips p {
+    text-align: center;
+    line-height: 70px;
+}
+
+.game_zoom {
+    margin: 0 15px;
+}
+
+.foodImg {
+    width: 150px;
+    height: 150px;
+    padding: .5em;
+    position: absolute;
+    margin: 10px 10px 10px 0;
+    z-index: 100
+}
+
+.foodRankingTarget {
+}
+
+.correctdiv {
+    top: 0;
+    font-size: 30px;
+    color: #90ee90;
+    font-weight: bold;
+    visibility: hidden
+}
+
+.foodRankingPlayground {
+    width: 100%;
+    /*height: 900px;*/
+    height: 740px;
+    /*background: #faebd7*/
+}
+
+#images li {
+    float: left;
+    background: #fff;
+    border: 1px solid #ccc;
+    margin: 10px;
+    width: 162px;
+    padding: 5px;
+    overflow: hidden
+}
+
+#images li div {
+    overflow: hidden
+}
+
+.tableDrop {
+    position: relative;
+    margin: auto;
+    /*top: 500px;*/
+    top: 365px;
+    text-align: center;
+    z-index: 1
+}
+
+.tableDropSlotRow {
+    vertical-align: middle;
+    height: 175px
+}
+
+.tableDropSlot {
+    width: 190px;
+    height: 132px;
+    top: 5px;
+    background: url(../../assets/image/plate11.png) no-repeat
+}
+
+/*3D logo*/
+
+
+.moving-zone {
+    position: absolute;
+    top:0%; left:50%;
+    width:300px; height:120px;
+    margin: -60px 0 0 -150px;
+    perspective: 800px;
+}
+.popup {
+    position: absolute;
+    width:300px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 20px 0 20px 0;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    background: -webkit-linear-gradient(top left, white 50%, coral 50%);
+    background:    -moz-linear-gradient(top left, white 50%, coral 50%);
+    background:     -ms-linear-gradient(top left, white 50%, coral 50%);
+    background:      -o-linear-gradient(top left, white 50%, coral 50%);
+    background:         linear-gradient(top left, white 50%, coral 50%);
+}
+.popup:before {
+    content: '';
+    position: absolute;
+    left:5%; top:5%;
+    width:90%; height:90%;
+    border-radius: inherit;
+    background: rgba(0,0,0,.1);
+    box-shadow: 0 0 40px 20px rgba(0,0,0,.1);
+    transform: translateZ(-100px);
+}
+.popup-content {
+    background: #444;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px 0 10px 0;
+}
+.popup-text {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    line-height: 30px;
+    font-weight: 100;
+    text-align: center;
+    transform: translateZ(15px);
+}
+.popup-text b {
+    color: coral;
+    font-weight: 300;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
