@@ -30,6 +30,7 @@ class Base extends Controller
             'reg_url' => Url::build('index/index/reg'),
             'go_trip_url' => Url::build('index/index/go_trip'),
             'logout_url' => Url::build('index/index/logout'),
+            'about_url' => Url::build('index/index/about'),
         ];
         $this->user_id = Session::get('user_id') == "" ? "0" : Session::get('user_id');
         //Session::get('user_info') == "" ? "" : Session::get('user_info');

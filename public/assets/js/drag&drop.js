@@ -1,24 +1,24 @@
 ﻿window.onload = function () {
     function initPos() {
         $("#imgHest").animate({
-            left: '+=' + Math.random() * 600,
-            top: '+=' + Math.random() * 300
+            left: '+=' + Math.random() * 1200,
+            top: '+=' + Math.random() * 120
         });
         $("#imgHeal").animate({
-            left: '+=' + Math.random() * 600,
-            top: '+=' + Math.random() * 300
+            left: '+=' + Math.random() * 1200,
+            top: '+=' + Math.random() * 120
         });
-        $("#imgNorm").animate({
-            left: '+=' + Math.random() * 600,
-            top: '+=' + Math.random() * 300
-        });
+        // $("#imgNorm").animate({
+        //     left: '+=' + Math.random() * 1200,
+        //     top: '+=' + Math.random() * -120
+        // });
         $("#imgUnh").animate({
-            left: '+=' + Math.random() * 600,
-            top: '+=' + Math.random() * 300
+            left: '+=' + Math.random() * 1200,
+            top: '+=' + Math.random() * 120
         });
         $("#imgUnhest").animate({
-            left: '+=' + Math.random() * 600,
-            top: '+=' + Math.random() * 300
+            left: '+=' + Math.random() * 1200,
+            top: '+=' + Math.random() * 120
         });
 
     };

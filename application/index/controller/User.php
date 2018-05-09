@@ -55,8 +55,6 @@ class User extends Base
         return $this->fetch();
     }
 
-
-
     public function getpoints($points, $type, $is_frist = 0)
     {
         $data['point'] = $points;
@@ -93,8 +91,9 @@ class User extends Base
                         })
                         ->find();
                     $map['id'] = $res['id'];
-                    CurrentLevelModel::getSingleton()->where($map)->setInc('level', 1);
-
+                    if ($res['level'] < 6) {
+                        CurrentLevelModel::getSingleton()->where($map)->setInc('level', 1);
+                    }
                 }
             }
 
@@ -150,10 +149,11 @@ class User extends Base
             } else {
                 $food_info['healthyLevel'] = 0;
             }
-            $grade_info = GradeModel::getSingleton()->where(['food_id' => $food_id])->select()->toArray();
+            if (null != $food_id) {
+                $grade_info = GradeModel::getSingleton()->where(['food_id' => $food_id])->select()->toArray();
+                $this->assign('grade_info', $this->gradetoarray($grade_info));
+            }
 
-
-            $this->assign('grade_info', $this->gradetoarray($grade_info));
             $this->assign('info', $food_info);
         }
         $this->assign('foodgrade', $this->foodgrade);
@@ -288,7 +288,6 @@ class User extends Base
         return redirect(url('/index'));
     }
 
-
     public function addplan()
     {
         if ($this->request->isAjax()) {
@@ -382,7 +381,6 @@ class User extends Base
         return $this->fetch();
     }
 
-
     public function point_logs()
     {
         $user_id = $this->request->param('user_id');
@@ -463,7 +461,6 @@ class User extends Base
 
     }
 
-
     /**
      * 系统邮件发送函数
      * @param string $tomail 接收邮件者邮箱
@@ -502,7 +499,6 @@ class User extends Base
         return $mail->Send() ? true : $mail->ErrorInfo;
     }
 
-
     public function editGrade($foodid, $grade)
     {
 
@@ -525,7 +521,6 @@ class User extends Base
 
         return $re_arr;
     }
-
 
 
 }

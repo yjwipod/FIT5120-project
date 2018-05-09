@@ -38,7 +38,6 @@ class Index extends Base
 
     }
 
-
     /**
      * 首页
      *
@@ -61,7 +60,6 @@ class Index extends Base
         echo "<pre>";
         print_r($response);
     }
-
 
     public function go_trip()
     {
@@ -203,13 +201,13 @@ class Index extends Base
 
         $this->assign('times', $times);
         $level_info = $this->checkLevel();
+
         if($level_info['level']<=6 ){
             $res = $this->getList();
             $this->assign('list', $res);
         }
         return $this->fetch();
     }
-
 
     public function getList()
     {
@@ -250,37 +248,6 @@ class Index extends Base
             return $rs;
         }
     }
-//
-//    public function getList()
-//    {
-//
-//        echo 111;
-//        print_r($this->checkLevel());
-//        $level_info =
-//        $res = [];
-//        $one = Db::name("current_level")->limit(1)->where()->order('rand()')->find();
-//        $one['top'] = 180 + rand(10, 200);
-//        $res[] = $one;
-//        for ($i = 1; $i <= 3; $i++) {
-//            $res[$i] = $this->getDiffData($res);
-//        }
-//
-//    }
-//
-//    public function getDiffData($arr)
-//    {
-//        if (!is_array($arr) && empty($arr)) {
-//            return false;
-//        } else {
-//            $matchid = [];
-//            foreach ($arr as $vo) {
-//                $matchid[] = $vo['healthyLevel'];
-//            }
-//            $rs = Db::name("food")->limit(1)->where('healthyLevel', 'not in', $matchid)->order('rand()')->find();
-//            $rs['top'] = 180 + rand(10, 200);
-//            return $rs;
-//        }
-//    }
 
     public function getWeather()
     {
@@ -315,7 +282,6 @@ class Index extends Base
         return $captcha->entry();
     }
 
-
     public function logout()
     {
         Session::delete('user_id');
@@ -323,7 +289,6 @@ class Index extends Base
         Cookie::delete('user_id');
         return redirect(url('/index'));
     }
-
 
     /**
      * 下载
@@ -360,4 +325,9 @@ class Index extends Base
         return $this->fetch();
     }
 
+    public function about()
+    {
+
+        return $this->fetch();
+    }
 }
