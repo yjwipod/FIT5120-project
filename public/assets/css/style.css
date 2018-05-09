@@ -2139,6 +2139,7 @@ font header .navbar-default .navbar-nav li a:hover {
 .bg-23 {
   background: url("/assets/image/foodGame.png") no-repeat;
   background-size: cover;
+  /*padding: 100px 0 280px 0;*/
   /*background-attachment: fixed;*/
 }
 
