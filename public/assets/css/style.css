@@ -2116,11 +2116,25 @@ font header .navbar-default .navbar-nav li a:hover {
   background-attachment: fixed;
 }
 
+.bg-11 {
+  background-image: url("/assets/image/homeFoodGame.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  /*background-attachment: fixed;*/
+}
+
 .bg-2 {
   background: url("/assets/image/featue-bg.jpg");
   background-size: cover;
   background-attachment: fixed;
 }
+
+.bg-22 {
+  background: url("/assets/image/3333.jpg") no-repeat;
+  /*background-size: cover;*/
+  /*background-attachment: fixed;*/
+}
+
 
 .widget {
   margin-bottom: 30px;
