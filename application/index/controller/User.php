@@ -43,7 +43,6 @@ class User extends Base
 
     public function index()
     {
-
         if ($this->request->param('id') == 0) {
             return redirect('/login');
         }
@@ -55,6 +54,7 @@ class User extends Base
         return $this->fetch();
     }
 
+    //Award points to user
     public function getpoints($points, $type, $is_frist = 0)
     {
         $data['point'] = $points;
@@ -66,7 +66,6 @@ class User extends Base
             Session::set('user_info', MemberUserModel::getSingleton()->where(['id' => $this->user_id])->find());
             MemberUserModel::getSingleton()->where(['id' => $this->user_id])->setInc('point', $points);
         }
-//        return json(['code' => '22']);
     }
 
     public function ajaxGetpoints()
@@ -96,9 +95,7 @@ class User extends Base
                     }
                 }
             }
-
         }
-
     }
 
     public function foods()
@@ -420,6 +417,7 @@ class User extends Base
     /**
      * 获取用户等级
      */
+    //User Level
     public function getUserlevel($points = 100)
     {
 

@@ -154,18 +154,14 @@ class Index extends Base
         die;
     }
 
+    //Main backend logic of food ranking game
     public function health()
     {
-
         if ($this->user_id != 0) {
             $rs = CommonService::getSingleton()->ranktime($this->user_id);
             if ($rs == 3) {
-//                $this->success('Jump to Test', 'index/user/foodRankTest');
                 return redirect('index/user/foodRankTest');
             }
-//            $this->ranktime($this->user_id);
-
-
             switch (Cache::get('ranktime_' . $this->user_id)) {
                 case 1;
                     $num = 6;
@@ -209,6 +205,7 @@ class Index extends Base
         return $this->fetch();
     }
 
+    //Get Food Information and Pictures
     public function getList()
     {
         $level_info = $this->checkLevel();
@@ -224,13 +221,13 @@ class Index extends Base
         return $res;
     }
 
+    //Game Difficulty
     public function getDiffData($arr)
     {
         if (!is_array($arr) && empty($arr)) {
             return false;
         } else {
             $matchid = [];
-
             foreach ($arr as $vo) {
                 $food_info = FoodModel::getInstance()->where(['foodId'=>$vo['food_id']])->find();
                 $matchid[] = $food_info['healthyLevel'];
@@ -241,9 +238,7 @@ class Index extends Base
                 ->limit(1)
                 ->where(['g.grade'=>$level_info['level']])
                 ->where('f.healthyLevel', 'not in', $matchid)
-
                 ->order('rand()')->find();
-
             $rs['top'] = 180 + rand(10, 200);
             return $rs;
         }
