@@ -46,9 +46,10 @@ var Tools = {
                 console.log(this);
             },
             error: function () {
-                layer.alert('error output', {
+                layer.alert('User name exists.', {
+                    title: "Error",
                     skin: 'layui-layer-molv'
-                    , closeBtn: 0
+                    , btn: 'OK'
                     , shift: 4 //动画类型
                 });
             }

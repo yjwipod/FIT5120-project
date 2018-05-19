@@ -67,7 +67,7 @@
             // };
             if (i === 4 ) {
                 if(times > 7){
-                    var msg ='Good Job!';
+                    var msg ='Congratulations!! </br> You have successfully ranked the foods! </br> You can play again';
                 }else{
                     var msg ='Difficulty level up !! </br>You have ranked the food level correctly and got 10 points! Congratulations!  </br>You can try this again!';
                 }
@@ -110,6 +110,7 @@
                     if (num == 0) {
 
                         layer.confirm('Use out of times, you will not get points. Please try again!', {
+                            title: 'Oops',
                             btn: ['Ok'] //按钮
                         }, function(){
                             window.location.href = '/health';

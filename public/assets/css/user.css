@@ -31,3 +31,10 @@
 
 .font_bold{font-weight: bold;}
 .font_normal{ font-weight: normal;}
+
+.point_table td, th
+{
+    border:1px solid #058CEB;
+    padding:2%;
+
+}

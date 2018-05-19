@@ -405,8 +405,8 @@ class User extends Base
 
         $toemail = $user_info['email'];
         $name = $user_info['user_name'];
-        $subject = 'Fit Kidz Tips';
-        $content = 'Your child ' . $user_info['user_name'] . ' has chosen ' . $foods . ' for the next meal. Fit-kidz is always helping children to choose the healthiest food they want.';
+        $subject = 'Nutri-Kidz Tips';
+        $content = 'Your child ' . $user_info['user_name'] . ' has chosen ' . $foods . ' for the next meal. Nutri-Kidz is always helping children to choose the healthiest food they want.';
         if (null !== $this->request->param('msg') && !empty($this->request->param('msg'))) {
             $content = $this->request->param('msg');
         }
@@ -472,13 +472,13 @@ class User extends Base
     function send_mail($tomail, $name, $subject = '', $body = '', $attachment = null)
     {
 
-        $mail = new PHPMailer();           //实例化PHPMailer对象
-        $mail->CharSet = 'UTF-8';           //设定邮件编码，默认ISO-8859-1，如果发中文此项必须设置，否则乱码
-        $mail->IsSMTP();                    // 设定使用SMTP服务
-        $mail->SMTPDebug = 1;               // SMTP调试功能 0=关闭 1 = 错误和消息 2 = 消息
-        $mail->SMTPAuth = true;             // 启用 SMTP 验证功能
-        $mail->SMTPSecure = 'ssl';          // 使用安全协议
-        $mail->Host = "smtp.qq.com"; // SMTP 服务器
+        $mail = new PHPMailer();
+        $mail->CharSet = 'UTF-8';
+        $mail->IsSMTP();
+        $mail->SMTPDebug = 1;
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = 'ssl';
+        $mail->Host = "smtp.qq.com";
         $mail->Port = 465;                  // SMTP服务器的端口号
         $mail->Username = "120025737@qq.com";    // SMTP服务器用户名
         $mail->Password = "Huang89814!!qy";     // SMTP服务器密码
