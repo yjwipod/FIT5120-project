@@ -256,7 +256,15 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
 }
 
 .section-title {
+   margin-bottom: 70px;
+ }
+
+.section-title1 {
+  position:absolute;
+  top: 20%;
   margin-bottom: 70px;
+  height: 130px;
+  width: 600px;
 }
 
 .section-title h2 {
@@ -269,6 +277,7 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
   font-style: italic;
   color: #666;
   font-family: "Volkhov", serif;
+  font-size: 20px;
 }
 
 .section-subtitle {

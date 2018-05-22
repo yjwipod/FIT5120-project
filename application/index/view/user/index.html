@@ -34,7 +34,7 @@
                         <ul class="am-avg-lg-2 am-avg-sm-2 am-padding-top-xs">
                             <li class="font_green am-padding-vertical-sm">Email：<a>{:$user_info['email']}</a></li>
                             <li class="font_green am-padding-vertical-sm">Sex：<a>{if condition="$user_info['sex'] eq 0"}Boy{else /}Girl {/if}</a></li>
-                            <li class="font_green am-padding-vertical-xs">Point：<a>{:$user_info['point']}</a></li>
+                            <li class="font_green am-padding-vertical-xs">Points：<a>{:$user_info['point']}</a></li>
                             <li class="font_green am-padding-vertical-xs">Last Login：<a><?php echo date("Y-m-d H:i:s",$user_info['login_time']);?></a></li>
                             <li class="font_green am-padding-vertical-xs">Current Level：{if condition="$level['level'] neq 0"}<img src="/assets/image/{:$level['level']}.png">{else /} -- {/if}</li>
                             <li class="font_green am-padding-vertical-xs">You need {:$level['needpoints']} points to next level：<img src="/assets/image/{:$level['level']+1}.png"></li>

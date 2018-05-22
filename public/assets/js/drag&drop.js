@@ -68,8 +68,29 @@
             if (i === 4 ) {
                 if(times > 7){
                     var msg ='Congratulations!! </br> You have successfully ranked the foods! </br> You can play again';
+                    layer.msg(msg, {
+                      time: 0 //不自动关闭
+                      ,btn: ['ok']
+                      ,yes: function(index){
+
+                        layer.close(index);
+                        setTimeout(window.location.href = '/health', 3000);
+                      }
+                    });
+
                 }else{
-                    var msg ='Difficulty level up !! </br>You have ranked the food level correctly and got 10 points! Congratulations!  </br>You can try this again!';
+                    layer.open({
+                        type: 1,
+                        title: false,
+                        btn: ['Try Again!'],
+                        yes: function(index){
+                            layer.close(index);
+                            setTimeout(window.location.href = '/health', 3000);
+                        },
+                        area: '560px',
+                        content: $('#congrat')
+                    });
+                    // var msg ='Difficulty level up !! </br>You have ranked the food level correctly and got 10 points! Congratulations!  </br>You can try this again!';
                 }
                 if(user_id != 0){
                     $.post("/index/user/ajaxGetpoints", {points: 10}, function (result) {
@@ -77,15 +98,15 @@
                     });
                 }
 
-                layer.msg(msg, {
-                  time: 0 //不自动关闭
-                  ,btn: ['ok']
-                  ,yes: function(index){
-
-                    layer.close(index);
-                    setTimeout(window.location.href = '/health', 3000);
-                  }
-                });
+                // layer.msg(msg, {
+                //   time: 0 //不自动关闭
+                //   ,btn: ['ok']
+                //   ,yes: function(index){
+                //
+                //     layer.close(index);
+                //     setTimeout(window.location.href = '/health', 3000);
+                //   }
+                // });
 
 
             }
@@ -96,7 +117,7 @@
 
         $("#foodLevel").droppable($("#imgHest, #imgHeal, #imgNorm, #imgUnh, #imgUnhest").draggable({
             revert: "valid",
-            containment: "#foodRankingPlayground",
+            containment: "#constraint",
             scroll: false
         }));
 
