@@ -82,6 +82,7 @@
                     layer.open({
                         type: 1,
                         title: false,
+                        closeBtn:0,
                         btn: ['Try Again!'],
                         yes: function(index){
                             layer.close(index);
